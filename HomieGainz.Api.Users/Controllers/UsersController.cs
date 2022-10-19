@@ -67,6 +67,27 @@ namespace HomieGainz.Api.Application.Controllers
             return NoContent();
 
         }
-        
+
+        [HttpPut()]
+        public async Task<IActionResult> UpdateUserAsync([FromBody] User user)
+        {
+            var result = await userService.UpdateUserAsync(user);
+            if (result.IsSuccess)
+            {
+                return Ok(result.User);
+            }
+            return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUserAsync(int id)
+        {
+            var result = await userService.DeleteUserAsync(id);
+            if (result.IsSuccess)
+            {
+                return NoContent();
+            }
+            return NotFound();
+        }
     }
 }
