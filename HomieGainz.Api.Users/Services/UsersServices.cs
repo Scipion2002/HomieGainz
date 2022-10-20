@@ -34,7 +34,7 @@ namespace HomieGainz.Api.Users.Services
                 var users = await this.dbContext.Users.ToListAsync();
                 if(users != null && users.Any())
                 {
-                    logger?.LogInformation($"{users.Count} customer(s) found");
+                    logger?.LogInformation($"{users} customer(s) found");
                     return (true, users, null);
                 }
                 return (false, null, "Not Found");
@@ -50,7 +50,7 @@ namespace HomieGainz.Api.Users.Services
         {
             try
             {
-                logger?.LogInformation("Querying users");
+                logger?.LogInformation("Querying user");
                 var user = await this.dbContext.Users.Where(u => id == u.Id).FirstOrDefaultAsync();
                 if (user != null)
                 {

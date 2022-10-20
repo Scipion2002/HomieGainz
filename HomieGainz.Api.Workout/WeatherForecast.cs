@@ -1,4 +1,4 @@
-namespace HomieGainz.Api.Workout
+namespace HomieGainz.Api.Workouts
 {
     public class WeatherForecast
     {

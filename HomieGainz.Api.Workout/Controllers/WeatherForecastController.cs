@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomieGainz.Api.Workout.Controllers
+namespace HomieGainz.Api.Workouts.Controllers
 {
     [ApiController]
     [Route("[controller]")]

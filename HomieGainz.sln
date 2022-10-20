@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.Api.Meals", "Hom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.ApplicationDb", "HomieGainz.UserMeals\HomieGainz.ApplicationDb.csproj", "{4A4CCAE1-9AA8-440E-8385-25B9B665CFF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Workout", "HomieGainz.Api.Workout\HomieGainz.Api.Workout.csproj", "{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Workouts", "HomieGainz.Api.Workout\HomieGainz.Api.Workouts.csproj", "{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
