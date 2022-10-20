@@ -17,7 +17,7 @@ namespace HomieGainz.Api.Workouts.Services
             SeedData();
         }
 
-        public async Task<(bool? IsSuccess, IEnumerable<Workout>? Workouts, string? ErrorMessage)> GetWorkoutsAsync()
+        public async Task<(bool IsSuccess, IEnumerable<Workout>? Workouts, string? ErrorMessage)> GetWorkoutsAsync()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace HomieGainz.Api.Workouts.Services
                 return (false, null, ex.Message);
             }
         }
-        public async Task<(bool? IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutByIdAsync(int id)
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutByIdAsync(int id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace HomieGainz.Api.Workouts.Services
             }
         }
 
-        public async Task<(bool? IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutAsync(string name)
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutByNameAsync(string name)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace HomieGainz.Api.Workouts.Services
             }
         }
 
-        public async Task<(bool? IsSuccess, Workout? Workout, string? ErrorMessage)> CreateWorkoutAsync(Workout newWorkout)
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> CreateWorkoutAsync(Workout newWorkout)
         {
             try
             {
@@ -85,10 +85,10 @@ namespace HomieGainz.Api.Workouts.Services
                 {
                     await this.dbContext.AddAsync(newWorkout);
                     dbContext.SaveChanges();
-                    logger?.LogInformation("User created");
+                    logger?.LogInformation("Workout created!");
                     return (true, newWorkout, null);
                 }
-                return (false, null, "User not created");
+                return (false, null, "Workout not created");
             }
             catch (Exception ex)
             {
@@ -98,14 +98,52 @@ namespace HomieGainz.Api.Workouts.Services
             }
         }
 
-        public Task<(bool? IsSuccess, Workout? Workout, string? ErrorMessage)> UpdateWorkoutAsync(Workout updatedWorkout)
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> UpdateWorkoutAsync(Workout updatedWorkout)
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger?.LogInformation("Finding workout");
+                var oldWorkout = await GetWorkoutByIdAsync(updatedWorkout.Id);
+                if (oldWorkout.IsSuccess)
+                {
+                    logger?.LogInformation("found Workout, updating now");
+                    oldWorkout.Workout.Name = updatedWorkout.Name;
+                    oldWorkout.Workout.WorkoutPlans = updatedWorkout.WorkoutPlans;
+                    oldWorkout.Workout.Exercises = updatedWorkout.Exercises;
+                    dbContext.SaveChanges();
+                    logger?.LogInformation("Workout Updated");
+                    return(true, updatedWorkout, null);
+                }
+                return (false, null, "Workout not Found");
+            } 
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
         }
 
-        public Task<(bool? IsSuccess, Workout? Workout, string? ErrorMessage)> DeleteWorkoutAsync(int id)
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> DeleteWorkoutAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger?.LogInformation("Finding workout");
+                var oldWorkout = await GetWorkoutByIdAsync(id);
+                if (oldWorkout.IsSuccess)
+                {
+                    logger?.LogInformation("found Workout, deleting now");
+                    this.dbContext.Remove(oldWorkout.Workout);
+                    dbContext.SaveChanges();
+                    logger?.LogInformation("Workout deleted");
+                    return (true, null, null);
+                }
+                return (false, null, "Workout not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
         }
 
         private void SeedData()

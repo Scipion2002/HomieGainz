@@ -34,7 +34,7 @@ namespace HomieGainz.Api.Users.Services
                 var users = await this.dbContext.Users.ToListAsync();
                 if(users != null && users.Any())
                 {
-                    logger?.LogInformation($"{users} customer(s) found");
+                    logger?.LogInformation($"{users.Count} customer(s) found");
                     return (true, users, null);
                 }
                 return (false, null, "Not Found");
