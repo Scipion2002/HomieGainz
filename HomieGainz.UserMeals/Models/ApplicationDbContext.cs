@@ -20,7 +20,6 @@ namespace HomieGainz.UserMeals.Db
         public DbSet<User> Users { get; set; }
         public DbSet<MealPlan> MealPlans { get; set; }
         public DbSet<Meal> Meals { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<Exercise> Exercises { get; set; }

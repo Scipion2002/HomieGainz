@@ -2,7 +2,7 @@
 
 namespace HomieGainz.ApplicationDb.Migrations
 {
-    public partial class Dbcreated : Migration
+    public partial class Addeduserdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,21 +22,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exercises", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ingredients",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Measurement = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +46,9 @@ namespace HomieGainz.ApplicationDb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: true),
-                    ImgLink = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImgLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IngredientList = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Directions = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,30 +80,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Workouts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IngredientMeal",
-                columns: table => new
-                {
-                    IngredientsId = table.Column<int>(type: "int", nullable: false),
-                    MealsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IngredientMeal", x => new { x.IngredientsId, x.MealsId });
-                    table.ForeignKey(
-                        name: "FK_IngredientMeal_Ingredients_IngredientsId",
-                        column: x => x.IngredientsId,
-                        principalTable: "Ingredients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IngredientMeal_Meals_MealsId",
-                        column: x => x.MealsId,
-                        principalTable: "Meals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,11 +191,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                 column: "WorkoutsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientMeal_MealsId",
-                table: "IngredientMeal",
-                column: "MealsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MealMealPlan_MealsId",
                 table: "MealMealPlan",
                 column: "MealsId");
@@ -259,9 +217,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                 name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
-                name: "IngredientMeal");
-
-            migrationBuilder.DropTable(
                 name: "MealMealPlan");
 
             migrationBuilder.DropTable(
@@ -272,9 +227,6 @@ namespace HomieGainz.ApplicationDb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Exercises");
-
-            migrationBuilder.DropTable(
-                name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "Meals");

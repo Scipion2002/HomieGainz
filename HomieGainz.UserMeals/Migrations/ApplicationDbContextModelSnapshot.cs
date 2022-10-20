@@ -34,31 +34,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.ToTable("ExerciseWorkout");
                 });
 
-            modelBuilder.Entity("HomieGainz.ApplicationDb.Db.MealDb.Ingredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Measurement")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ingredients");
-                });
-
             modelBuilder.Entity("HomieGainz.ApplicationDb.Db.MealDb.Meal", b =>
                 {
                     b.Property<int>("Id")
@@ -70,7 +45,13 @@ namespace HomieGainz.ApplicationDb.Migrations
                         .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Directions")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImgLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IngredientList")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -215,21 +196,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.ToTable("WorkoutPlans");
                 });
 
-            modelBuilder.Entity("IngredientMeal", b =>
-                {
-                    b.Property<int>("IngredientsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MealsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IngredientsId", "MealsId");
-
-                    b.HasIndex("MealsId");
-
-                    b.ToTable("IngredientMeal");
-                });
-
             modelBuilder.Entity("MealMealPlan", b =>
                 {
                     b.Property<int>("MealPlansId")
@@ -288,21 +254,6 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.Navigation("MealPlan");
 
                     b.Navigation("WorkoutPlan");
-                });
-
-            modelBuilder.Entity("IngredientMeal", b =>
-                {
-                    b.HasOne("HomieGainz.ApplicationDb.Db.MealDb.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HomieGainz.ApplicationDb.Db.MealDb.Meal", null)
-                        .WithMany()
-                        .HasForeignKey("MealsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MealMealPlan", b =>

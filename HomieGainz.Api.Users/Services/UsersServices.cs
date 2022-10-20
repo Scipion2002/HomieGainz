@@ -2,6 +2,7 @@
 using HomieGainz.Api.Application.Interfaces;
 using HomieGainz.ApplicationDb.Db.MealDb;
 using HomieGainz.ApplicationDb.Db.UserDb;
+using HomieGainz.ApplicationDb.Db.WorkoutDb;
 using HomieGainz.UserMeals.Db;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -160,7 +161,7 @@ namespace HomieGainz.Api.Users.Services
         {
             if (!dbContext.Users.Any())
             {
-                dbContext.Users.Add(new User() { Username = "Scipion2002", Password = "TestPass", Age = 19, Weight = 164, Height = 6.1 });
+                dbContext.Users.Add(new User() { Username = "Scipion2002", Password = "TestPass", Age = 19, Weight = 164, Height = 6.1, WorkoutPlan =  new WorkoutPlan() { Name = "Move", Description = "ur mooom"} });
                 dbContext.Users.Add(new User() { Username = "DNgo-Neumont", Password = "DavidPass", Age = 20, Weight = 156, Height = 6 });
                 dbContext.Users.Add(new User() { Username = "Rxittles", Password = "RobPass", Age = 21, Weight = 135, Height = 6 });
                 dbContext.SaveChanges();

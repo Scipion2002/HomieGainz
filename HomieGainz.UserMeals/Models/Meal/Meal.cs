@@ -14,7 +14,10 @@ namespace HomieGainz.ApplicationDb.Db.MealDb
         public string Description { get; set; }
         public string ImgLink { get; set; }
 
+        public string IngredientList { get; set; }
+
+        public string Directions { get; set; }
+
         public ICollection<MealPlan> MealPlans { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set; }
     }
 }
