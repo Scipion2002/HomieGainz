@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace HomieGainz.ApplicationDb.Migrations
 {
-    public partial class Addeduserdb : Migration
+    public partial class Addeddb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -127,14 +129,12 @@ namespace HomieGainz.ApplicationDb.Migrations
                         name: "FK_Users_MealPlans_MealPlanId",
                         column: x => x.MealPlanId,
                         principalTable: "MealPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_WorkoutPlans_WorkoutPlanId",
                         column: x => x.WorkoutPlanId,
                         principalTable: "WorkoutPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -184,6 +184,21 @@ namespace HomieGainz.ApplicationDb.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "MealPlans",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, "This Meal plan will have a lot of veggies and will have a tons of low calorie food", "Low Calories" });
+
+            migrationBuilder.InsertData(
+                table: "Meals",
+                columns: new[] { "Id", "Description", "Directions", "ImgLink", "IngredientList", "Name" },
+                values: new object[] { 1, "This is a simple meal that will give you enough proteins to hit that gym hard!", "First, get that salmon going, add a little of lemon pepper and that is all you need", null, "Salmon, spices", "Salmon" });
+
+            migrationBuilder.InsertData(
+                table: "Meals",
+                columns: new[] { "Id", "Description", "Directions", "ImgLink", "IngredientList", "Name" },
+                values: new object[] { 2, "Nice and easy salad that will make you want to have every day", "First, cut those veggies and then finish it up with putting everything together", null, "Lettuce, Tomato, Broccoli, Carrot", "Salad" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseWorkout_WorkoutsId",

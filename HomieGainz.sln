@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.ApplicationDb", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Workouts", "HomieGainz.Api.Workout\HomieGainz.Api.Workouts.csproj", "{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.MealPan", "HomieGainz.Api.MealPan\HomieGainz.Api.MealPan.csproj", "{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

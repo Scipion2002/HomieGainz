@@ -1,14 +1,14 @@
-using HomieGainz.Api.Workouts.Interfaces;
-using HomieGainz.Api.Workouts.Services;
+using HomieGainz.Api.MealPan;
+using HomieGainz.Api.MealPan.Interfaces;
 using HomieGainz.ApplicationDb.Db;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IWorkoutService, WorkoutService>();
-builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddScoped<IMealPlanService, MealPlanService>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

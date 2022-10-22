@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomieGainz.UserMeals
+namespace HomieGainz.ApplicationDb
 {
     public class Program
     {

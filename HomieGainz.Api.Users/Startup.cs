@@ -1,6 +1,6 @@
 using HomieGainz.Api.Application.Interfaces;
 using HomieGainz.Api.Users.Services;
-using HomieGainz.UserMeals.Db;
+using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

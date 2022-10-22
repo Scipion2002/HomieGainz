@@ -1,6 +1,6 @@
 ﻿using HomieGainz.Api.Workouts.Interfaces;
 using HomieGainz.ApplicationDb.Db.WorkoutDb;
-using HomieGainz.UserMeals.Db;
+using HomieGainz.ApplicationDb.Db;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomieGainz.Api.Workouts.Services

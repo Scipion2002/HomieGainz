@@ -5,7 +5,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using HomieGainz.Api.Application.Interfaces;
 using HomieGainz.ApplicationDb.Db.UserDb;
-using HomieGainz.UserMeals.Db;
+using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
