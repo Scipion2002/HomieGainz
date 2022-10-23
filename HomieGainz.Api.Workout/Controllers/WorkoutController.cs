@@ -17,7 +17,7 @@ namespace HomieGainz.Api.Workouts.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsersAsync()
+        public async Task<IActionResult> GetWorkoutsAsync()
         {
             var result = await workoutService.GetWorkoutsAsync();
             if (result.IsSuccess)
