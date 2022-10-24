@@ -188,17 +188,29 @@ namespace HomieGainz.ApplicationDb.Migrations
             migrationBuilder.InsertData(
                 table: "MealPlans",
                 columns: new[] { "Id", "Description", "Name" },
-                values: new object[] { 1, "This Meal plan will have a lot of veggies and will have a tons of low calorie food", "Low Calories" });
+                values: new object[,]
+                {
+                    { 1, "This Meal plan will have a lot of veggies and will have a tons of low calorie food", "Low Calories" },
+                    { 2, "This mealplan is to bulk up and also be in shape", "High Calories" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Meals",
                 columns: new[] { "Id", "Description", "Directions", "ImgLink", "IngredientList", "Name" },
-                values: new object[] { 1, "This is a simple meal that will give you enough proteins to hit that gym hard!", "First, get that salmon going, add a little of lemon pepper and that is all you need", null, "Salmon, spices", "Salmon" });
+                values: new object[,]
+                {
+                    { 1, "This is a simple meal that will give you enough proteins to hit that gym hard!", "First, get that salmon going, add a little of lemon pepper and that is all you need", null, "Salmon, spices", "Salmon" },
+                    { 2, "Nice and easy salad that will make you want to have every day", "First, cut those veggies and then finish it up with putting everything together", null, "Lettuce, Tomato, Broccoli, Carrot", "Salad" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Meals",
-                columns: new[] { "Id", "Description", "Directions", "ImgLink", "IngredientList", "Name" },
-                values: new object[] { 2, "Nice and easy salad that will make you want to have every day", "First, cut those veggies and then finish it up with putting everything together", null, "Lettuce, Tomato, Broccoli, Carrot", "Salad" });
+                table: "WorkoutPlans",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them", "Bulk up" },
+                    { 2, "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises", "Tune up" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseWorkout_WorkoutsId",

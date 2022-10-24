@@ -52,6 +52,18 @@ namespace HomieGainz.ApplicationDb.Db
                 IngredientList = "Lettuce, Tomato, Broccoli, Carrot",
                 Directions = "First, cut those veggies and then finish it up with putting everything together"
             });
+
+            modelBuilder.Entity<WorkoutPlan>().HasData(new WorkoutPlan 
+            { 
+                Id = 1, 
+                Name = "Bulk up",
+                Description = "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them"
+            }, new WorkoutPlan 
+            { 
+                Id = 2,
+                Name = "Tune up",
+                Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
+            });
             
 
         }

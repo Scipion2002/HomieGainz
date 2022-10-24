@@ -113,6 +113,12 @@ namespace HomieGainz.ApplicationDb.Migrations
                             Id = 1,
                             Description = "This Meal plan will have a lot of veggies and will have a tons of low calorie food",
                             Name = "Low Calories"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "This mealplan is to bulk up and also be in shape",
+                            Name = "High Calories"
                         });
                 });
 
@@ -229,6 +235,20 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WorkoutPlans");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them",
+                            Name = "Bulk up"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises",
+                            Name = "Tune up"
+                        });
                 });
 
             modelBuilder.Entity("MealMealPlan", b =>
