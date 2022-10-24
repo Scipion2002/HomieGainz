@@ -24,7 +24,8 @@ namespace HomieGainz.ApplicationDb.Db
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<MealPlan>().HasData(new MealPlan
+            modelBuilder.Entity<MealPlan>().HasData(
+               new MealPlan
             {
                 Id = 1,
                 Name = "Low Calories",
@@ -37,7 +38,8 @@ namespace HomieGainz.ApplicationDb.Db
                 Description = "This mealplan is to bulk up and also be in shape"
             });
 
-            modelBuilder.Entity<Meal>().HasData(new Meal
+            modelBuilder.Entity<Meal>().HasData(
+               new Meal
             {
                 Id = 1,
                 Name = "Salmon",
@@ -53,7 +55,8 @@ namespace HomieGainz.ApplicationDb.Db
                 Directions = "First, cut those veggies and then finish it up with putting everything together"
             });
 
-            modelBuilder.Entity<WorkoutPlan>().HasData(new WorkoutPlan 
+            modelBuilder.Entity<WorkoutPlan>().HasData(
+               new WorkoutPlan 
             { 
                 Id = 1, 
                 Name = "Bulk up",
@@ -65,7 +68,8 @@ namespace HomieGainz.ApplicationDb.Db
                 Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
             });
 
-            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            modelBuilder.Entity<Exercise>().HasData(
+               new Exercise
             {
                 Id = 1,
                 Name = "Push ups",
@@ -81,6 +85,47 @@ namespace HomieGainz.ApplicationDb.Db
                 SetAmt = 3,
                 RepAmt = 10,
                 Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
+            });
+
+            modelBuilder.Entity<User>().HasData(
+            new User() 
+            { 
+                Id = 1,
+                Username = "Scipion2002", 
+                Password = "TestPass", 
+                Age = 19, 
+                Weight = 164, 
+                Height = 6.1
+            },
+            new User() 
+            {
+                Id = 2,
+                Username = "DNgo-Neumont", 
+                Password = "DavidPass", 
+                Age = 20, 
+                Weight = 156, 
+                Height = 6 
+            },
+            new User() 
+            {
+                Id = 3,
+                Username = "Rxittles", 
+                Password = "RobPass", 
+                Age = 21, 
+                Weight = 135, 
+                Height = 6 
+            });
+
+            modelBuilder.Entity<Workout>().HasData(
+            new Workout()
+            {
+                Id = 1,
+                Name = "Upper Body" 
+            },
+            new Workout() 
+            {
+                Id = 2,
+                Name = "Lower Body" 
             });
 
         }

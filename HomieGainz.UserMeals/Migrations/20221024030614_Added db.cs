@@ -213,12 +213,31 @@ namespace HomieGainz.ApplicationDb.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Age", "Height", "MealPlanId", "Password", "Username", "Weight", "WorkoutPlanId" },
+                values: new object[,]
+                {
+                    { 1, 19, 6.0999999999999996, null, "TestPass", "Scipion2002", 164, null },
+                    { 2, 20, 6.0, null, "DavidPass", "DNgo-Neumont", 156, null },
+                    { 3, 21, 6.0, null, "RobPass", "Rxittles", 135, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "WorkoutPlans",
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
                     { 1, "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them", "Bulk up" },
                     { 2, "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises", "Tune up" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Workouts",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Upper Body" },
+                    { 2, "Lower Body" }
                 });
 
             migrationBuilder.CreateIndex(

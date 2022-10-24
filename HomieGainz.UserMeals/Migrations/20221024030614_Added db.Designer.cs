@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomieGainz.ApplicationDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221024012552_Added db")]
+    [Migration("20221024030614_Added db")]
     partial class Addeddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,35 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.HasIndex("WorkoutPlanId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Age = 19,
+                            Height = 6.0999999999999996,
+                            Password = "TestPass",
+                            Username = "Scipion2002",
+                            Weight = 164
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Age = 20,
+                            Height = 6.0,
+                            Password = "DavidPass",
+                            Username = "DNgo-Neumont",
+                            Weight = 156
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Age = 21,
+                            Height = 6.0,
+                            Password = "RobPass",
+                            Username = "Rxittles",
+                            Weight = 135
+                        });
                 });
 
             modelBuilder.Entity("HomieGainz.ApplicationDb.Db.WorkoutDb.Exercise", b =>
@@ -235,6 +264,18 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Workouts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Upper Body"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Lower Body"
+                        });
                 });
 
             modelBuilder.Entity("HomieGainz.ApplicationDb.Db.WorkoutDb.WorkoutPlan", b =>

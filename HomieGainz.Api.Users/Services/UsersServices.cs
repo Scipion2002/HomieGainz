@@ -161,10 +161,7 @@ namespace HomieGainz.Api.Users.Services
         {
             if (!dbContext.Users.Any())
             {
-                dbContext.Users.Add(new User() { Username = "Scipion2002", Password = "TestPass", Age = 19, Weight = 164, Height = 6.1 });
-                dbContext.Users.Add(new User() { Username = "DNgo-Neumont", Password = "DavidPass", Age = 20, Weight = 156, Height = 6 });
-                dbContext.Users.Add(new User() { Username = "Rxittles", Password = "RobPass", Age = 21, Weight = 135, Height = 6 });
-                dbContext.SaveChanges();
+                
             }
         }
 

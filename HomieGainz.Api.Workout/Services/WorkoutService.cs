@@ -150,10 +150,7 @@ namespace HomieGainz.Api.Workouts.Services
         {
             if (!dbContext.Workouts.Any())
             {
-                dbContext.Workouts.Add(new Workout() { Name = "Upper Body"});
-                dbContext.Workouts.Add(new Workout() { Name = "Lower Body" });
-
-                dbContext.SaveChanges();
+                
             }
         }
     }
