@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomieGainz.ApplicationDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221024000937_Added db")]
+    [Migration("20221024012552_Added db")]
     partial class Addeddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,6 +197,26 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Exercises");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!",
+                            Name = "Push ups",
+                            RepAmt = 10,
+                            SetAmt = 3,
+                            TargetMuscle = "biceps/triceps"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!",
+                            Name = "Push ups",
+                            RepAmt = 10,
+                            SetAmt = 3,
+                            TargetMuscle = "biceps/triceps"
+                        });
                 });
 
             modelBuilder.Entity("HomieGainz.ApplicationDb.Db.WorkoutDb.Workout", b =>

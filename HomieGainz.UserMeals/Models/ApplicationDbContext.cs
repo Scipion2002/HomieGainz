@@ -64,7 +64,24 @@ namespace HomieGainz.ApplicationDb.Db
                 Name = "Tune up",
                 Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
             });
-            
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 1,
+                Name = "Push ups",
+                TargetMuscle = "biceps/triceps",
+                SetAmt = 3,
+                RepAmt = 10,
+                Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
+            }, new Exercise 
+            {
+                Id = 2,
+                Name = "Push ups",
+                TargetMuscle = "biceps/triceps",
+                SetAmt = 3,
+                RepAmt = 10,
+                Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
+            });
 
         }
         public DbSet<User> Users { get; set; }

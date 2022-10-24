@@ -186,6 +186,15 @@ namespace HomieGainz.ApplicationDb.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Exercises",
+                columns: new[] { "Id", "Description", "Name", "RepAmt", "SetAmt", "TargetMuscle", "Video" },
+                values: new object[,]
+                {
+                    { 1, "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!", "Push ups", 10, 3, "biceps/triceps", null },
+                    { 2, "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!", "Push ups", 10, 3, "biceps/triceps", null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "MealPlans",
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
