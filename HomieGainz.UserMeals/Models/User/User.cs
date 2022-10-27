@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HomieGainz.ApplicationDb.Db.MealDb;
+using HomieGainz.ApplicationDb.Db.WorkoutDb;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomieGainz.ApplicationDb.Db.UserDb
 {
@@ -19,7 +22,7 @@ namespace HomieGainz.ApplicationDb.Db.UserDb
         [Required]
         [Range(0, 8.9)]
         public double Height { get; set; }
-        public MealDb.MealPlan MealPlan { get; set; }
-        public WorkoutDb.WorkoutPlan WorkoutPlan { get; set; }
+        public MealPlan MealPlan { get; set; }
+        public WorkoutPlan WorkoutPlan { get; set; }
     }
 }

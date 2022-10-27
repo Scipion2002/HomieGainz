@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.ApplicationDb", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Workouts", "HomieGainz.Api.Workout\HomieGainz.Api.Workouts.csproj", "{BC30B5B2-1B5D-498F-B85D-573FBA8DF8B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.MealPans", "HomieGainz.Api.MealPan\HomieGainz.Api.MealPans.csproj", "{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.MealPlans", "HomieGainz.Api.MealPan\HomieGainz.Api.MealPlans.csproj", "{5220BDB1-6BDD-4A0A-AE8F-2A85D008F58A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.WorkoutPlans", "HomieGainz.Api.WorkoutPlan\HomieGainz.Api.WorkoutPlans.csproj", "{3FDF8328-B0FA-426F-B0B4-ABF15BF2FF66}"
 EndProject

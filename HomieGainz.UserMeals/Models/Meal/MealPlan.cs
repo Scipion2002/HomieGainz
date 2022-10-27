@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using HomieGainz.ApplicationDb.Db.UserDb;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomieGainz.ApplicationDb.Db.MealDb
 {
@@ -13,8 +15,8 @@ namespace HomieGainz.ApplicationDb.Db.MealDb
         [MaxLength(10000)]
         public string Description { get; set; }
 
-        public ICollection<Meal> Meals { get; set; }
+        public virtual ICollection<Meal> Meals { get; set; }
 
-        public ICollection<UserDb.User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NuGet.Protocol;
 
 namespace HomieGainz.Api.Users.Services
 {
@@ -51,7 +52,7 @@ namespace HomieGainz.Api.Users.Services
             try
             {
                 logger?.LogInformation("Querying user");
-                var user = await this.dbContext.Users.Where(u => id == u.Id).FirstOrDefaultAsync();
+                var user = await this.dbContext.Users.Where(u => id == u.Id).Include(m => m.MealPlan).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     logger?.LogInformation("User found");
@@ -66,13 +67,13 @@ namespace HomieGainz.Api.Users.Services
             }
         }
 
-        public async Task<(bool IsSuccess, User User, string ErrorMessage)> GetUserAsync(string username, string password)
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> GetUserAsync(string username)
         {
             try
             {
                 logger?.LogInformation("Querying user");
-                var user = await this.dbContext.Users.Where(u => username == u.Username && u.Password == password).FirstOrDefaultAsync();
-                if (user != null && user.Password.Equals(password))
+                var user = await this.dbContext.Users.Where(u => username == u.Username).FirstOrDefaultAsync();
+                if (user != null)
                 {
                     logger?.LogInformation("User found");
                     return (true, user, null);
@@ -157,14 +158,76 @@ namespace HomieGainz.Api.Users.Services
             }
         }
 
-        private void SeedData()
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> GetQuestionaireTotalAsync(int id, int total)
         {
-            if (!dbContext.Users.Any())
+            try
             {
-                
+                logger?.LogInformation("Finding user");
+                var user = await GetUserByIdAsync(id);
+                if (user.IsSuccess)
+                {
+                    logger?.LogInformation("Found User, getting total");
+                    switch (total)
+                    {
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            logger?.LogInformation("Slim down WorkoutPlan getting added to the user");
+                            user.User.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 3).FirstOrDefaultAsync();
+                            logger?.LogInformation("Workout Plan added");
+
+                            logger?.LogInformation("Low calories MealPlan getting added to the user");
+                            user.User.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 1).FirstOrDefaultAsync();
+                            logger?.LogInformation("Meal Plan added");
+                            break;
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                            logger?.LogInformation("Tune up WorkoutPlan getting added to the user");
+                            user.User.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 2).FirstOrDefaultAsync();
+                            logger?.LogInformation("Workout Plan added");
+
+                            logger?.LogInformation("Cut MealPlan getting added to the user");
+                            user.User.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 3).FirstOrDefaultAsync();
+                            logger?.LogInformation("Meal Plan added");
+                            break;
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                            logger?.LogInformation("Bulk up WorkoutPlan getting added to the user");
+                            WorkoutPlan bulkUpPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 1).FirstOrDefaultAsync();
+                            user.User.WorkoutPlan = bulkUpPlan;
+                            logger?.LogInformation("Workout Plan added");
+
+                            logger?.LogInformation("High calories MealPlan getting added to the user");
+                            MealPlan HighCaloriesPlan = await dbContext.MealPlans.Where(m => m.Id == 2).FirstOrDefaultAsync();
+                            user.User.MealPlan = HighCaloriesPlan;
+                            logger?.LogInformation("Meal Plan added");
+
+                            break;
+                    }
+                    dbContext?.SaveChanges();
+                    
+                    return (true, user.User, null);
+                }
+                return (false, null, "User not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
             }
         }
-
-        
+        private void SeedData()
+        {
+            var mealPlan = dbContext.MealPlans.Where(m => m.Id == 1).Include(m => m.Meals).FirstOrDefault();
+            var meal = dbContext.Meals.Where(m => m.Id == 1).FirstOrDefault();
+            mealPlan.Meals.Add(meal);
+           
+            this.dbContext.SaveChanges();
+        }
     }
 }

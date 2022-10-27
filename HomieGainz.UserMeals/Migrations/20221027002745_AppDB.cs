@@ -4,7 +4,7 @@
 
 namespace HomieGainz.ApplicationDb.Migrations
 {
-    public partial class Addeddb : Migration
+    public partial class AppDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

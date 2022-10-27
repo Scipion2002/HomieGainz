@@ -11,7 +11,7 @@ namespace HomieGainz.ApplicationDb.Db.WorkoutDb
         [MaxLength(100)]
         public string Name { get; set; }
 
-        public ICollection<WorkoutPlan> WorkoutPlans { get; set; }
-        public ICollection<Exercise> Exercises { get; set; }
+        public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

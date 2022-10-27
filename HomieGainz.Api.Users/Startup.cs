@@ -1,6 +1,8 @@
 using HomieGainz.Api.Application.Interfaces;
+using HomieGainz.Api.Users.Handler;
 using HomieGainz.Api.Users.Services;
 using HomieGainz.ApplicationDb.Db;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HomieGainz.Api.Application
@@ -29,6 +32,9 @@ namespace HomieGainz.Api.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"),
@@ -44,6 +50,8 @@ namespace HomieGainz.Api.Application
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomieGainz.Api.Users", Version = "v1" });
             });
+
+            services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuth>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +67,8 @@ namespace HomieGainz.Api.Application
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -18,6 +18,6 @@ namespace HomieGainz.ApplicationDb.Db.MealDb
 
         public string Directions { get; set; }
 
-        public ICollection<MealPlan> MealPlans { get; set; }
+        public virtual ICollection<MealPlan> MealPlans { get; set; }
     }
 }

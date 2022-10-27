@@ -9,9 +9,11 @@ using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomieGainz.Api.Application.Controllers
 {
+    
     [ApiController]
     [Route("/users")]
     public class UsersController : ControllerBase
@@ -45,10 +47,10 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpPost("GetUser")]
-        public async Task<IActionResult> GetUserAsync([FromBody] JsonObject jsonBody)
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUserAsync(string username)
         {
-            var result = await userService.GetUserAsync(jsonBody["Username"].ToString(), jsonBody["Password"].ToString());
+            var result = await userService.GetUserAsync(username);
             if (result.IsSuccess)
             {
                 return Ok(result.User);
@@ -56,6 +58,7 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody] User user)
         {
@@ -68,6 +71,7 @@ namespace HomieGainz.Api.Application.Controllers
 
         }
 
+        [Authorize]
         [HttpPut()]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User user)
         {
@@ -79,6 +83,7 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
@@ -86,6 +91,17 @@ namespace HomieGainz.Api.Application.Controllers
             if (result.IsSuccess)
             {
                 return NoContent();
+            }
+            return NotFound();
+        }
+
+        [HttpGet("/questionaireTotal/{id}/{total}")]
+        public async Task<IActionResult> AddMealPlanAndWorkoutPlan(int id, int total)
+        {
+            var result = await userService.GetQuestionaireTotalAsync(id, total);
+            if(result.IsSuccess)
+            {
+                return Ok(result.User);
             }
             return NotFound();
         }

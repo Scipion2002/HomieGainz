@@ -29,7 +29,7 @@ namespace HomieGainz.ApplicationDb.Db
             {
                 Id = 1,
                 Name = "Low Calories",
-                Description = "This Meal plan will have a lot of veggies and will have a tons of low calorie food"
+                Description = "This Meal plan will have a lot of veggies and will have a tons of low calorie food",
 
             }, new MealPlan
             {
@@ -38,7 +38,7 @@ namespace HomieGainz.ApplicationDb.Db
                 Description = "This mealplan is to bulk up and also be in shape"
             });
 
-            modelBuilder.Entity<Meal>().HasData(
+            var meals = modelBuilder.Entity<Meal>().HasData(
                new Meal
             {
                 Id = 1,
@@ -95,7 +95,8 @@ namespace HomieGainz.ApplicationDb.Db
                 Password = "TestPass", 
                 Age = 19, 
                 Weight = 164, 
-                Height = 6.1
+                Height = 6.1,
+
             },
             new User() 
             {
@@ -127,7 +128,7 @@ namespace HomieGainz.ApplicationDb.Db
                 Id = 2,
                 Name = "Lower Body" 
             });
-
+            
         }
         public DbSet<User> Users { get; set; }
         public DbSet<MealPlan> MealPlans { get; set; }
