@@ -36,7 +36,8 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpGet("/{id}")]
+        [Authorize]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
             var result = await userService.GetUserByIdAsync(id);
@@ -47,7 +48,7 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpGet("/GetUser")]
+        [HttpGet("GetUser")]
         public async Task<IActionResult> GetUserAsync(string username)
         {
             var result = await userService.GetUserAsync(username);
@@ -58,7 +59,6 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody] User user)
         {
@@ -84,7 +84,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
             var result = await userService.DeleteUserAsync(id);
@@ -95,10 +95,11 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpPost("/questionaireTotal/{total}")]
-        public async Task<IActionResult> AddMealPlanAndWorkoutPlan([FromBody]User user, int total)
+        [Authorize]
+        [HttpGet("/questionaireTotal/{id}/{total}")]
+        public async Task<IActionResult> AddMealPlanAndWorkoutPlan(int id, int total)
         {
-            var result = await userService.GetQuestionaireTotalAsync(user, total);
+            var result = await userService.GetQuestionaireTotalAsync(id, total);
             if(result.IsSuccess)
             {
                 return Ok(result.User);
@@ -106,10 +107,11 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpPost("/changeMealPlan")]
-        public async Task<IActionResult> ChangeMealPlan([FromBody]User user, int mealPlanId)
+        [Authorize]
+        [HttpGet("changeMealPlan/{userId}/{mealPlanId}")]
+        public async Task<IActionResult> ChangeMealPlan(int userId, int mealPlanId)
         {
-            var result = await userService.ChangeMealPlanAsync(user, mealPlanId);
+            var result = await userService.ChangeMealPlanAsync(userId, mealPlanId);
             if (result.IsSuccess)
             {
                 return Ok(result.User);
@@ -117,10 +119,10 @@ namespace HomieGainz.Api.Application.Controllers
             return NotFound();
         }
 
-        [HttpPost("/changeWorkoutPlan")]
-        public async Task<IActionResult> ChangeWorkoutPlan([FromBody] User user, int workoutPlanId)
+        [HttpGet("changeWorkoutPlan/{userId}/{workoutPlanId}")]
+        public async Task<IActionResult> ChangeWorkoutPlan(int userId, int workoutPlanId)
         {
-            var result = await userService.ChangeWorkoutPlanAsync(user, workoutPlanId);
+            var result = await userService.ChangeWorkoutPlanAsync(userId, workoutPlanId);
             if (result.IsSuccess)
             {
                 return Ok(result.User);

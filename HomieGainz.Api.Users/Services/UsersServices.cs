@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NuGet.Protocol;
+using NuGet.Packaging;
 
 namespace HomieGainz.Api.Users.Services
 {
@@ -160,10 +161,15 @@ namespace HomieGainz.Api.Users.Services
 
 
 
-        public async Task<(bool IsSuccess, User User, string ErrorMessage)> GetQuestionaireTotalAsync(User user, int total)
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> GetQuestionaireTotalAsync(int id, int total)
         {
             try
             {
+                logger?.LogInformation("Finding user");
+                var user = await GetUserByIdAsync(id);
+                if (user.IsSuccess)
+                {
+                    logger?.LogInformation("Found User, getting total");
                     switch (total)
                     {
                         case 0:
@@ -171,11 +177,11 @@ namespace HomieGainz.Api.Users.Services
                         case 2:
                         case 3:
                             logger?.LogInformation("Slim down WorkoutPlan getting added to the user");
-                            user.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 3).FirstOrDefaultAsync();
+                            user.User.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 3).FirstOrDefaultAsync();
                             logger?.LogInformation("Workout Plan added");
 
                             logger?.LogInformation("Low calories MealPlan getting added to the user");
-                            user.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 1).FirstOrDefaultAsync();
+                            user.User.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 1).FirstOrDefaultAsync();
                             logger?.LogInformation("Meal Plan added");
                             break;
                         case 4:
@@ -183,11 +189,11 @@ namespace HomieGainz.Api.Users.Services
                         case 6:
                         case 7:
                             logger?.LogInformation("Tune up WorkoutPlan getting added to the user");
-                            user.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 2).FirstOrDefaultAsync();
+                            user.User.WorkoutPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 2).FirstOrDefaultAsync();
                             logger?.LogInformation("Workout Plan added");
 
                             logger?.LogInformation("Cut MealPlan getting added to the user");
-                            user.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 3).FirstOrDefaultAsync();
+                            user.User.MealPlan = await dbContext.MealPlans.Where(m => m.Id == 3).FirstOrDefaultAsync();
                             logger?.LogInformation("Meal Plan added");
                             break;
                         case 8:
@@ -196,19 +202,21 @@ namespace HomieGainz.Api.Users.Services
                         case 11:
                             logger?.LogInformation("Bulk up WorkoutPlan getting added to the user");
                             WorkoutPlan bulkUpPlan = await dbContext.WorkoutPlans.Where(w => w.Id == 1).FirstOrDefaultAsync();
-                            user.WorkoutPlan = bulkUpPlan;
+                            user.User.WorkoutPlan = bulkUpPlan;
                             logger?.LogInformation("Workout Plan added");
 
                             logger?.LogInformation("High calories MealPlan getting added to the user");
                             MealPlan HighCaloriesPlan = await dbContext.MealPlans.Where(m => m.Id == 2).FirstOrDefaultAsync();
-                            user.MealPlan = HighCaloriesPlan;
+                            user.User.MealPlan = HighCaloriesPlan;
                             logger?.LogInformation("Meal Plan added");
 
                             break;
                     }
                     dbContext?.SaveChanges();
                     
-                    return (true, user, null);
+                    return (true, user.User, null);
+                }
+                return (false, null, "User not found");
             }
             catch (Exception ex)
             {
@@ -216,19 +224,25 @@ namespace HomieGainz.Api.Users.Services
                 return (false, null, ex.Message);
             }
         }
-        public async Task<(bool IsSuccess, User User, string ErrorMessage)> ChangeMealPlanAsync(User user, int mealPlanId)
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> ChangeMealPlanAsync(int userId, int mealPlanId)
         {
             try
             {
+                logger?.LogInformation("Finding user");
+                var user = await GetUserByIdAsync(userId);
+                if (user.IsSuccess)
+                {
                     logger?.LogInformation("found user, getting mealplan");
                     var mealPlan = await dbContext.MealPlans.Where(m => m.Id == mealPlanId).FirstOrDefaultAsync();
 
                     logger?.LogInformation("found mealPlan, changing now");
-                    user.MealPlan = mealPlan;
+                    user.User.MealPlan = mealPlan;
 
-                    logger?.LogInformation($"mealplan added to user {user.MealPlan}");
+                    logger?.LogInformation($"mealplan added to user {user.User.MealPlan}");
                     dbContext?.SaveChanges();
-                    return (true, user, null);
+                    return (true, user.User, null);
+            }
+                return (false, null, "User not found");
             }
             catch (Exception ex)
             {
@@ -236,19 +250,25 @@ namespace HomieGainz.Api.Users.Services
                 return (false, null, ex.Message);
             }
         }
-        public async Task<(bool IsSuccess, User User, string ErrorMessage)> ChangeWorkoutPlanAsync(User user, int workoutPlanId)
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> ChangeWorkoutPlanAsync(int userId, int workoutPlanId)
         {
             try
             {
+                logger?.LogInformation("Finding user");
+                var user = await GetUserByIdAsync(userId);
+                if (user.IsSuccess)
+                {
                 logger?.LogInformation("found user, getting workoutplan");
                 var workoutPlan = await dbContext.WorkoutPlans.Where(m => m.Id == workoutPlanId).FirstOrDefaultAsync();
 
                 logger?.LogInformation("found workoutPlan, changing now");
-                user.WorkoutPlan = workoutPlan;
+                user.User.WorkoutPlan = workoutPlan;
 
-                logger?.LogInformation($"workoutplan added to user {user.WorkoutPlan}");
+                logger?.LogInformation($"workoutplan added to user {user.User.WorkoutPlan}");
                 dbContext?.SaveChanges();
-                return (true, user, null);
+                return (true, user.User, null);
+            }
+                return (false, null, "User not found");
             }
             catch (Exception ex)
             {
@@ -258,9 +278,11 @@ namespace HomieGainz.Api.Users.Services
         }
         private void SeedData()
         {
-            var mealPlan = dbContext.MealPlans.Where(m => m.Id == 1).Include(m => m.Meals).FirstOrDefault();
-            var meal = dbContext.Meals.Where(m => m.Id == 1).FirstOrDefault();
-            mealPlan.Meals.Add(meal);
+            var lowCaloriePlan = dbContext.MealPlans.Where(m => m.Id == 1).Include(m => m.Meals).FirstOrDefault();
+            var salmonMeal = dbContext.Meals.Where(m => m.Id == 1).FirstOrDefault();
+            var saladMeal = dbContext.Meals.Where(m => m.Id == 2).FirstOrDefault();
+            lowCaloriePlan.Meals.Add(salmonMeal);
+            lowCaloriePlan.Meals.Add(saladMeal);
            
             this.dbContext.SaveChanges();
         }
