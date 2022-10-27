@@ -107,9 +107,20 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [HttpPost("/changeMealPlan")]
-        public async Task<IActionResult> changeMealPlan([FromBody]User user, int mealPlanId)
+        public async Task<IActionResult> ChangeMealPlan([FromBody]User user, int mealPlanId)
         {
             var result = await userService.ChangeMealPlanAsync(user, mealPlanId);
+            if (result.IsSuccess)
+            {
+                return Ok(result.User);
+            }
+            return NotFound();
+        }
+
+        [HttpPost("/changeWorkoutPlan")]
+        public async Task<IActionResult> ChangeWorkoutPlan([FromBody] User user, int workoutPlanId)
+        {
+            var result = await userService.ChangeWorkoutPlanAsync(user, workoutPlanId);
             if (result.IsSuccess)
             {
                 return Ok(result.User);

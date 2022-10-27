@@ -236,6 +236,26 @@ namespace HomieGainz.Api.Users.Services
                 return (false, null, ex.Message);
             }
         }
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> ChangeWorkoutPlanAsync(User user, int workoutPlanId)
+        {
+            try
+            {
+                logger?.LogInformation("found user, getting workoutplan");
+                var workoutPlan = await dbContext.WorkoutPlans.Where(m => m.Id == workoutPlanId).FirstOrDefaultAsync();
+
+                logger?.LogInformation("found workoutPlan, changing now");
+                user.WorkoutPlan = workoutPlan;
+
+                logger?.LogInformation($"workoutplan added to user {user.WorkoutPlan}");
+                dbContext?.SaveChanges();
+                return (true, user, null);
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
         private void SeedData()
         {
             var mealPlan = dbContext.MealPlans.Where(m => m.Id == 1).Include(m => m.Meals).FirstOrDefault();
@@ -245,6 +265,5 @@ namespace HomieGainz.Api.Users.Services
             this.dbContext.SaveChanges();
         }
 
-        
     }
 }
