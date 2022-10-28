@@ -33,11 +33,11 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.Users);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("/{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
             var result = await userService.GetUserByIdAsync(id);
@@ -45,10 +45,10 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet("/GetUser")]
         public async Task<IActionResult> GetUserAsync(string username)
         {
             var result = await userService.GetUserAsync(username);
@@ -56,7 +56,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
         [HttpPost]
@@ -72,7 +72,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpPut()]
+        [HttpPut]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User user)
         {
             var result = await userService.UpdateUserAsync(user);
@@ -80,11 +80,11 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
         [Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("/{id}")]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
             var result = await userService.DeleteUserAsync(id);
@@ -92,7 +92,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return NoContent();
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
         [Authorize]
@@ -104,11 +104,23 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
         [Authorize]
-        [HttpGet("changeMealPlan/{userId}/{mealPlanId}")]
+        [HttpGet("/sendFriendRequest/{fromUserId}/{toUserId}")]
+        public async Task<IActionResult> SendFriendRequestAsync(int fromUserId, int toUserId)
+        {
+            var result = await userService.SendFriendRequestAsync(fromUserId, toUserId);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Friendship);
+            }
+            return NotFound(result.ErrorMessage);
+        }
+
+        [Authorize]
+        [HttpGet("/changeMealPlan/{userId}/{mealPlanId}")]
         public async Task<IActionResult> ChangeMealPlan(int userId, int mealPlanId)
         {
             var result = await userService.ChangeMealPlanAsync(userId, mealPlanId);
@@ -116,10 +128,10 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
 
-        [HttpGet("changeWorkoutPlan/{userId}/{workoutPlanId}")]
+        [HttpGet("/changeWorkoutPlan/{userId}/{workoutPlanId}")]
         public async Task<IActionResult> ChangeWorkoutPlan(int userId, int workoutPlanId)
         {
             var result = await userService.ChangeWorkoutPlanAsync(userId, workoutPlanId);
@@ -127,7 +139,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound();
+            return NotFound(result.ErrorMessage);
         }
     }
 }

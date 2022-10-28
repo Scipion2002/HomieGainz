@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NuGet.Protocol;
 using NuGet.Packaging;
+using HomieGainz.ApplicationDb.Models.Users;
 
 namespace HomieGainz.Api.Users.Services
 {
@@ -287,5 +288,33 @@ namespace HomieGainz.Api.Users.Services
             this.dbContext.SaveChanges();
         }
 
+        public async Task<(bool IsSuccess, Friendship Friendship, string ErrorMessage)> SendFriendRequestAsync(int fromUserId, int toUserId)
+        {
+            try
+            {
+                logger?.LogInformation("Finding fromUser");
+                var fromUser = await GetUserByIdAsync(fromUserId);
+                if (fromUser.IsSuccess)
+                {
+                    logger?.LogInformation("found fromUser, finding toUser");
+                    var toUser = await GetUserByIdAsync(toUserId);
+                    if (toUser.IsSuccess)
+                    {
+                        logger?.LogInformation("found toUser, sending request...");
+                        var friendRequest = dbContext.Friendships.Add(new Friendship() { FromUser = fromUser.User, ToFriend = toUser.User });
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("Request has been sent!");                       
+                        return (true, friendRequest.Entity, null);
+                    }
+                    return (false, null, "toUser not found");
+                }
+                return (false, null, "fromUser not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
     }
 }

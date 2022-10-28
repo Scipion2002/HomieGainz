@@ -1,6 +1,7 @@
 ﻿using HomieGainz.ApplicationDb.Db.MealDb;
 using HomieGainz.ApplicationDb.Db.UserDb;
 using HomieGainz.ApplicationDb.Db.WorkoutDb;
+using HomieGainz.ApplicationDb.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -95,8 +96,7 @@ namespace HomieGainz.ApplicationDb.Db
                 Password = "TestPass", 
                 Age = 19, 
                 Weight = 164, 
-                Height = 6.1,
-
+                Height = 6.1
             },
             new User() 
             {
@@ -128,8 +128,10 @@ namespace HomieGainz.ApplicationDb.Db
                 Id = 2,
                 Name = "Lower Body" 
             });
-            
+            modelBuilder.Entity<User>().HasMany(u => u.Friends);
         }
+
+        public DbSet<Friendship> Friendships { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MealPlan> MealPlans { get; set; }
         public DbSet<Meal> Meals { get; set; }

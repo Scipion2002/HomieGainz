@@ -120,7 +120,8 @@ namespace HomieGainz.ApplicationDb.Migrations
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Height = table.Column<double>(type: "float", nullable: false),
                     MealPlanId = table.Column<int>(type: "int", nullable: true),
-                    WorkoutPlanId = table.Column<int>(type: "int", nullable: true)
+                    WorkoutPlanId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -129,6 +130,11 @@ namespace HomieGainz.ApplicationDb.Migrations
                         name: "FK_Users_MealPlans_MealPlanId",
                         column: x => x.MealPlanId,
                         principalTable: "MealPlans",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Users_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_WorkoutPlans_WorkoutPlanId",
@@ -185,6 +191,31 @@ namespace HomieGainz.ApplicationDb.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Friendships",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromUserId = table.Column<int>(type: "int", nullable: true),
+                    ToFriendId = table.Column<int>(type: "int", nullable: true),
+                    Accepted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friendships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_FromUserId",
+                        column: x => x.FromUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_ToFriendId",
+                        column: x => x.ToFriendId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Exercises",
                 columns: new[] { "Id", "Description", "Name", "RepAmt", "SetAmt", "TargetMuscle", "Video" },
@@ -214,12 +245,12 @@ namespace HomieGainz.ApplicationDb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Age", "Height", "MealPlanId", "Password", "Username", "Weight", "WorkoutPlanId" },
+                columns: new[] { "Id", "Age", "Height", "MealPlanId", "Password", "UserId", "Username", "Weight", "WorkoutPlanId" },
                 values: new object[,]
                 {
-                    { 1, 19, 6.0999999999999996, null, "TestPass", "Scipion2002", 164, null },
-                    { 2, 20, 6.0, null, "DavidPass", "DNgo-Neumont", 156, null },
-                    { 3, 21, 6.0, null, "RobPass", "Rxittles", 135, null }
+                    { 1, 19, 6.0999999999999996, null, "TestPass", null, "Scipion2002", 164, null },
+                    { 2, 20, 6.0, null, "DavidPass", null, "DNgo-Neumont", 156, null },
+                    { 3, 21, 6.0, null, "RobPass", null, "Rxittles", 135, null }
                 });
 
             migrationBuilder.InsertData(
@@ -246,6 +277,16 @@ namespace HomieGainz.ApplicationDb.Migrations
                 column: "WorkoutsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Friendships_FromUserId",
+                table: "Friendships",
+                column: "FromUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friendships_ToFriendId",
+                table: "Friendships",
+                column: "ToFriendId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MealMealPlan_MealsId",
                 table: "MealMealPlan",
                 column: "MealsId");
@@ -254,6 +295,11 @@ namespace HomieGainz.ApplicationDb.Migrations
                 name: "IX_Users_MealPlanId",
                 table: "Users",
                 column: "MealPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserId",
+                table: "Users",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_WorkoutPlanId",
@@ -272,10 +318,10 @@ namespace HomieGainz.ApplicationDb.Migrations
                 name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
-                name: "MealMealPlan");
+                name: "Friendships");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "MealMealPlan");
 
             migrationBuilder.DropTable(
                 name: "WorkoutWorkoutPlan");
@@ -284,16 +330,19 @@ namespace HomieGainz.ApplicationDb.Migrations
                 name: "Exercises");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Meals");
+
+            migrationBuilder.DropTable(
+                name: "Workouts");
 
             migrationBuilder.DropTable(
                 name: "MealPlans");
 
             migrationBuilder.DropTable(
                 name: "WorkoutPlans");
-
-            migrationBuilder.DropTable(
-                name: "Workouts");
         }
     }
 }
