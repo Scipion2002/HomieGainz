@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomieGainz.ApplicationDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221027233829_AppDB")]
-    partial class AppDB
+    [Migration("20221101012702_Added db")]
+    partial class Addeddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

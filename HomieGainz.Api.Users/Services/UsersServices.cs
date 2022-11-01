@@ -54,7 +54,8 @@ namespace HomieGainz.Api.Users.Services
             try
             {
                 logger?.LogInformation("Querying user");
-                var user = await this.dbContext.Users.Where(u => id == u.Id).Include(m => m.MealPlan).FirstOrDefaultAsync();
+                var user = await this.dbContext.Users.Where(u => id == u.Id)
+                    .Include(m => m.MealPlan).Include(w => w.WorkoutPlan).Include(f => f.Friends).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     logger?.LogInformation("User found");
@@ -309,6 +310,78 @@ namespace HomieGainz.Api.Users.Services
                     return (false, null, "toUser not found");
                 }
                 return (false, null, "fromUser not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Friendship Friendship, string ErrorMessage)> AcceptFriendRequestAsync(int toUserId, int fromUserId)
+        {
+            try
+            {
+                logger?.LogInformation("Finding toUser");
+                var toUser = await GetUserByIdAsync(toUserId);
+                if (toUser.IsSuccess)
+                {
+                    logger?.LogInformation("found toUser, finding fromUser");
+                    var fromUser = await GetUserByIdAsync(fromUserId);
+                    if (fromUser.IsSuccess)
+                    {
+                        logger?.LogInformation("found fromUser");
+                        Friendship pendingFriendship = await dbContext.Friendships
+                            .Where(u => u.FromUser.Id == fromUserId && u.ToFriend.Id == toUserId).FirstOrDefaultAsync();
+
+                        logger?.LogInformation("found pending friendship, accepting now");
+                        pendingFriendship.Accepted = true;
+
+                        logger?.LogInformation("friendship accepted, adding to friends");
+                        toUser.User.Friends.Add(fromUser.User);
+                        fromUser.User.Friends.Add(toUser.User);
+
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("done");
+                        return (true, pendingFriendship, null);
+                    }
+                    return (false, null, "fromUser not found");
+                }
+                return (false, null, "toUser not found");
+            }
+            catch(Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Friendship Friendship, string ErrorMessage)> RejectFriendRequestAsync(int toUserId, int fromUserId)
+        {
+            try
+            {
+                logger?.LogInformation("Finding toUser");
+                var toUser = await GetUserByIdAsync(toUserId);
+                if (toUser.IsSuccess)
+                {
+                    logger?.LogInformation("found toUser, finding fromUser");
+                    var fromUser = await GetUserByIdAsync(fromUserId);
+                    if (fromUser.IsSuccess)
+                    {
+                        logger?.LogInformation("found fromUser");
+                        Friendship pendingFriendship = await dbContext.Friendships
+                            .Where(u => u.FromUser.Id == fromUserId && u.ToFriend.Id == toUserId).FirstOrDefaultAsync();
+
+                        logger?.LogInformation("found pending friendship, rejecting now");
+                        dbContext.Friendships.Remove(pendingFriendship);
+
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("done");
+                        return (true, pendingFriendship, null);
+                    }
+                    return (false, null, "fromUser not found");
+                }
+                return (false, null, "toUser not found");
             }
             catch (Exception ex)
             {

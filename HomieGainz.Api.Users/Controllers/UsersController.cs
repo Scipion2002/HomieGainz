@@ -33,11 +33,11 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.Users);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [Authorize]
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
             var result = await userService.GetUserByIdAsync(id);
@@ -45,7 +45,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [HttpGet("/GetUser")]
@@ -56,7 +56,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [HttpPost]
@@ -80,7 +80,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [Authorize]
@@ -92,7 +92,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return NoContent();
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [Authorize]
@@ -104,19 +104,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
-        }
-
-        [Authorize]
-        [HttpGet("/sendFriendRequest/{fromUserId}/{toUserId}")]
-        public async Task<IActionResult> SendFriendRequestAsync(int fromUserId, int toUserId)
-        {
-            var result = await userService.SendFriendRequestAsync(fromUserId, toUserId);
-            if (result.IsSuccess)
-            {
-                return Ok(result.Friendship);
-            }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
         [Authorize]
@@ -128,9 +116,10 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet("/changeWorkoutPlan/{userId}/{workoutPlanId}")]
         public async Task<IActionResult> ChangeWorkoutPlan(int userId, int workoutPlanId)
         {
@@ -139,7 +128,7 @@ namespace HomieGainz.Api.Application.Controllers
             {
                 return Ok(result.User);
             }
-            return NotFound(result.ErrorMessage);
+            return BadRequest(result.ErrorMessage);
         }
     }
 }

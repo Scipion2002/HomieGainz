@@ -1,5 +1,6 @@
 ﻿using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace HomieGainz.Api.Users.Handler
+namespace HomieGainz.Api.ApplicationDb.Handler
 {
     public class BasicAuth : AuthenticationHandler<AuthenticationSchemeOptions>
     {
@@ -34,7 +35,7 @@ namespace HomieGainz.Api.Users.Handler
                 string[] array = credentials.Split(":");
                 string username = array[0];
                 string password = array[1];
-                var user = this.DbContext.Users.FirstOrDefault(user => user.Username == username && user.Password == password);
+                var user = await this.DbContext.Users.FirstOrDefaultAsync(user => user.Username == username && user.Password == password);
                 if (user == null)
                     return AuthenticateResult.Fail("Unauthorized");
 
