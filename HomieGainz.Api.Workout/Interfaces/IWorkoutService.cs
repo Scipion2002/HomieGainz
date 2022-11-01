@@ -8,6 +8,7 @@ namespace HomieGainz.Api.Workouts.Interfaces
     {
         Task<(bool IsSuccess, IEnumerable<Workout>? Workouts, string? ErrorMessage)> GetWorkoutsAsync();
         Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutByIdAsync(int id);
+        Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> AddExerciseToWorkoutAsync(int exerciseId, int workoutId);
         Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> GetWorkoutByNameAsync(string name);
         Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> CreateWorkoutAsync(Workout newWorkout);
         Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> UpdateWorkoutAsync(Workout updatedWorkout);

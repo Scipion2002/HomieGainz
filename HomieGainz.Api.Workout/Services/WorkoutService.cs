@@ -2,6 +2,7 @@
 using HomieGainz.ApplicationDb.Db.WorkoutDb;
 using HomieGainz.ApplicationDb.Db;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace HomieGainz.Api.Workouts.Services
 {
@@ -68,6 +69,34 @@ namespace HomieGainz.Api.Workouts.Services
                     return (true, workout, null);
                 }
                 return (false, null, "Not Found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+        public async Task<(bool IsSuccess, Workout? Workout, string? ErrorMessage)> AddExerciseToWorkoutAsync(int exerciseId, int workoutId)
+        {
+            try
+            {
+                logger?.LogInformation("Querying workout");
+                var workout = await dbContext.Workouts.Include(e => e.Exercises).FirstOrDefaultAsync(w => w.Id == workoutId);
+                if (workout != null)
+                {
+                    logger?.LogInformation("found workout, getting exercise");
+                    var exercise = await dbContext.Exercises.FirstOrDefaultAsync(x => x.Id == exerciseId);
+                    if (exercise != null)
+                    {
+                        logger?.LogInformation("found exercise, adding exercise to workout");
+                        workout.Exercises.Add(exercise);
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("Done");
+                        return (true, workout, null);
+                    }
+                    return (false, null, "exercise not found");
+                }
+                return (false, null, "workout not found");
             }
             catch (Exception ex)
             {
@@ -153,5 +182,7 @@ namespace HomieGainz.Api.Workouts.Services
                 
             }
         }
+
+        
     }
 }
