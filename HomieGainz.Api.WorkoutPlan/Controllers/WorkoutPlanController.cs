@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.WorkoutPlans.Controllers
 {
     [ApiController]
-    [Route("/WorkoutPlans")]
+    [Route("/WorkoutPlans/")]
     public class WorkoutPlanController : ControllerBase
     {
         private readonly IWorkoutPlanService workoutPlanService;
@@ -41,6 +41,17 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
         public async Task<IActionResult> GetWorkoutPlanByNameAsync(string name)
         {
             var result = await workoutPlanService.GetWorkoutPlanByNameAsync(name);
+            if (result.IsSuccess)
+            {
+                return Ok(result.WorkoutPlan);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("addWorkoutToPlan/{workoutId}/{workoutPlanId}")]
+        public async Task<IActionResult> AddWorkoutToWorkoutPlanAsync(int workoutId, int workoutPlanId)
+        {
+            var result = await workoutPlanService.AddWorkoutToWorkoutPlanAsync(workoutId, workoutPlanId);
             if (result.IsSuccess)
             {
                 return Ok(result.WorkoutPlan);

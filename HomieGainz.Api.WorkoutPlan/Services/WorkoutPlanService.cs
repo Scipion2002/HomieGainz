@@ -55,7 +55,35 @@ namespace HomieGainz.Api.WorkoutPlans.Services
                 return (false, null, ex.Message);
             }
         }
-        
+
+        public async Task<(bool IsSuccess, WorkoutPlan? WorkoutPlan, string? ErrorMessage)> AddWorkoutToWorkoutPlanAsync(int workoutId, int workoutPlanId)
+        {
+            try
+            {
+                logger?.LogInformation("Querying workoutPlan");
+                var workoutPlan = await dbContext.WorkoutPlans.Include(w => w.Workouts).FirstOrDefaultAsync(x => x.Id == workoutPlanId);
+                if (workoutPlan != null)
+                {
+                    logger?.LogInformation("found workoutPlan, getting workout to add");
+                    var workout = await dbContext.Workouts.Where(x => x.Id == workoutId).FirstOrDefaultAsync();
+                    if (workout != null)
+                    {
+                        logger?.LogInformation("found workout, adding workout to workout plan");
+                        workoutPlan.Workouts.Add(workout);
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("Done");
+                    }
+                    return (false, null, "workout not found");
+                }
+                return (false, null, "workout plan not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+
         public async Task<(bool IsSuccess, WorkoutPlan? WorkoutPlan, string? ErrorMessage)> GetWorkoutPlanByNameAsync(string name)
         {
             try
@@ -123,7 +151,7 @@ namespace HomieGainz.Api.WorkoutPlans.Services
                 return (false, null, ex.Message);
             }
         }
-        
+
         public async Task<(bool IsSuccess, WorkoutPlan? WorkoutPlan, string? ErrorMessage)> DeleteWorkoutPlanAsync(int id)
         {
             try

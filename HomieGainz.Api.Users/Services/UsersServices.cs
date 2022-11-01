@@ -278,6 +278,24 @@ namespace HomieGainz.Api.Users.Services
                 return (false, null, ex.Message);
             }
         }
+        public async Task<(bool IsSuccess, IEnumerable<User> Users, string ErrorMessage)> GetAllFriendsAsync(int id)
+        {
+            try
+            {
+                logger?.LogInformation("Finding user");
+                var user = await dbContext.Users.Include(f => f.Friends).Where(u => u.Id == id).FirstOrDefaultAsync();
+                if (user != null)
+                {
+                        return (true, user.Friends, null);
+                }
+                return (false, null, "User not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
         private void SeedData()
         {
             var lowCaloriePlan = dbContext.MealPlans.Where(m => m.Id == 1).Include(m => m.Meals).FirstOrDefault();
@@ -288,5 +306,7 @@ namespace HomieGainz.Api.Users.Services
            
             this.dbContext.SaveChanges();
         }
+
+        
     }
 }

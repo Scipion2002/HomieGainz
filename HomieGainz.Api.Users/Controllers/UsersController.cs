@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using HomieGainz.ApplicationDb.Db.WorkoutDb;
 
 namespace HomieGainz.Api.Application.Controllers
 {
@@ -127,6 +128,18 @@ namespace HomieGainz.Api.Application.Controllers
             if (result.IsSuccess)
             {
                 return Ok(result.User);
+            }
+            return BadRequest(result.ErrorMessage);
+        }
+
+        [Authorize]
+        [HttpGet("getFriendList/{id}")]
+        public async Task<IActionResult> GetFriendListAsync(int id)
+        {
+            var result = await userService.GetAllFriendsAsync(id);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Users);
             }
             return BadRequest(result.ErrorMessage);
         }
