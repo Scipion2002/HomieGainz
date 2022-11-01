@@ -1,5 +1,6 @@
 ﻿using HomieGainz.Api.WorkoutPlans.Interfaces;
 using HomieGainz.ApplicationDb.Db.WorkoutDb;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomieGainz.Api.WorkoutPlans.Controllers
@@ -26,6 +27,7 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWorkoutPlanByIdAsync(int id)
         {
@@ -48,6 +50,7 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpGet("addWorkoutToPlan/{workoutId}/{workoutPlanId}")]
         public async Task<IActionResult> AddWorkoutToWorkoutPlanAsync(int workoutId, int workoutPlanId)
         {
@@ -59,6 +62,7 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateWorkoutPlanAsync(WorkoutPlan newWorkoutPlan)
         {
@@ -70,6 +74,7 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateWorkoutAsync(WorkoutPlan updatedWorkoutPlan)
         {
@@ -81,6 +86,7 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteWorkoutPlanAsync(int id)
         {

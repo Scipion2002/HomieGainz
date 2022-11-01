@@ -15,6 +15,7 @@ namespace HomieGainz.Api.Friendships.Controllers
             this.friendshipService = friendshipService;
         }
 
+        [Authorize]
         [HttpGet("{UserId}")]
         public async Task<IActionResult> GetAllRequestsFromUser(int UserId)
         {

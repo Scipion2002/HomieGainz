@@ -72,6 +72,7 @@ namespace HomieGainz.Api.WorkoutPlans.Services
                         workoutPlan.Workouts.Add(workout);
                         dbContext.SaveChanges();
                         logger?.LogInformation("Done");
+                        return (true, workoutPlan, null);
                     }
                     return (false, null, "workout not found");
                 }
