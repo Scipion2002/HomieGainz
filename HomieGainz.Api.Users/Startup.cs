@@ -1,6 +1,5 @@
 using HomieGainz.Api.Application.Interfaces;
 using HomieGainz.Api.ApplicationDb.Handler;
-using HomieGainz.Api.Users.Handler;
 using HomieGainz.Api.Users.Services;
 using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Authentication;

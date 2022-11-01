@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.Friendships.Controllers
 {
     [ApiController]
-    [Route("Friendships")]
+    [Route("/friendships")]
     public class FriendshipsController : ControllerBase
     {
         private readonly IFriendshipService friendshipService;

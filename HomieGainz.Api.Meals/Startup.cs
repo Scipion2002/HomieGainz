@@ -1,6 +1,8 @@
+using HomieGainz.Api.ApplicationDb.Handler;
 using HomieGainz.Api.Meals.Interfaces;
 using HomieGainz.Api.Meals.Services;
 using HomieGainz.ApplicationDb.Db;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,8 @@ namespace HomieGainz.Api.Meals
             services.AddScoped<IMealService, MealService>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuth>("BasicAuthentication", null);
 
             services.AddControllers();
 
