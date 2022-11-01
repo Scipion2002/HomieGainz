@@ -148,9 +148,30 @@ namespace HomieGainz.Api.Friendships.Services
             }
         }
 
-        public Task<(bool IsSuccess, Friendship? Friendship, string? ErrorMessage)> GetAllFriendshipRequests()
+        public async Task<(bool IsSuccess, IEnumerable<Friendship>? Friendships, string? ErrorMessage)> GetAllFriendshipRequestsFromUser(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger?.LogInformation("Querying user");
+                var user = await GetUserByIdAsync(userId);
+                if (user.User != null)
+                {
+                    logger?.LogInformation("User found, getting friendship requests");
+                    var friendshipRequests = await dbContext.Friendships.Where(t => t.ToFriend.Id == userId && !t.Accepted).Include(f => f.FromUser).ToListAsync();
+                    if (friendshipRequests != null && friendshipRequests.Any())
+                    {
+                        logger?.LogInformation($"{friendshipRequests.Count} request(s) found");
+                        return (true, friendshipRequests, null);
+                    }
+                    return (false, null, "Not Found");
+                }
+                return (false, null, "Not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HomieGainz.Api.Application.Controllers
 {
     
     [ApiController]
-    [Route("/users")]
+    [Route("/users/")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
@@ -48,7 +48,7 @@ namespace HomieGainz.Api.Application.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
-        [HttpGet("/GetUser")]
+        [HttpGet("GetUser")]
         public async Task<IActionResult> GetUserAsync(string username)
         {
             var result = await userService.GetUserAsync(username);
@@ -84,7 +84,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
             var result = await userService.DeleteUserAsync(id);
@@ -96,7 +96,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpGet("/questionaireTotal/{id}/{total}")]
+        [HttpGet("questionaireTotal/{id}/{total}")]
         public async Task<IActionResult> AddMealPlanAndWorkoutPlan(int id, int total)
         {
             var result = await userService.GetQuestionaireTotalAsync(id, total);
@@ -108,7 +108,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpGet("/changeMealPlan/{userId}/{mealPlanId}")]
+        [HttpGet("changeMealPlan/{userId}/{mealPlanId}")]
         public async Task<IActionResult> ChangeMealPlan(int userId, int mealPlanId)
         {
             var result = await userService.ChangeMealPlanAsync(userId, mealPlanId);
@@ -120,7 +120,7 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
-        [HttpGet("/changeWorkoutPlan/{userId}/{workoutPlanId}")]
+        [HttpGet("changeWorkoutPlan/{userId}/{workoutPlanId}")]
         public async Task<IActionResult> ChangeWorkoutPlan(int userId, int workoutPlanId)
         {
             var result = await userService.ChangeWorkoutPlanAsync(userId, workoutPlanId);
