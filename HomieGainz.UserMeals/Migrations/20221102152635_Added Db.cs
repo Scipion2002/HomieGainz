@@ -4,7 +4,7 @@
 
 namespace HomieGainz.ApplicationDb.Migrations
 {
-    public partial class Addeddb : Migration
+    public partial class AddedDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -192,6 +192,37 @@ namespace HomieGainz.ApplicationDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Challenges",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromUserId = table.Column<int>(type: "int", nullable: true),
+                    ToUserId = table.Column<int>(type: "int", nullable: true),
+                    WorkoutId = table.Column<int>(type: "int", nullable: true),
+                    Accepted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Challenges", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Challenges_Users_FromUserId",
+                        column: x => x.FromUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Challenges_Users_ToUserId",
+                        column: x => x.ToUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Challenges_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Friendships",
                 columns: table => new
                 {
@@ -272,6 +303,21 @@ namespace HomieGainz.ApplicationDb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Challenges_FromUserId",
+                table: "Challenges",
+                column: "FromUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Challenges_ToUserId",
+                table: "Challenges",
+                column: "ToUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Challenges_WorkoutId",
+                table: "Challenges",
+                column: "WorkoutId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ExerciseWorkout_WorkoutsId",
                 table: "ExerciseWorkout",
                 column: "WorkoutsId");
@@ -314,6 +360,9 @@ namespace HomieGainz.ApplicationDb.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Challenges");
+
             migrationBuilder.DropTable(
                 name: "ExerciseWorkout");
 

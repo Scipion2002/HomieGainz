@@ -29,5 +29,7 @@ namespace HomieGainz.ApplicationDb.Db.UserDb
         public virtual ICollection<User> Friends { get; set; }
 
 
+
+
     }
 }

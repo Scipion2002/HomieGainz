@@ -1,6 +1,6 @@
 using HomieGainz.Api.ApplicationDb.Handler;
-using HomieGainz.Api.Friendships.Interfaces;
-using HomieGainz.Api.Friendships.Services;
+using HomieGainz.Api.Challenges.Interfaces;
+using HomieGainz.Api.Challenges.Services;
 using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-builder.Services.AddScoped<IFriendshipService, FriendshipsService>();
+builder.Services.AddScoped<IChallengeService, ChallengeService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
@@ -23,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuth>("BasicAuthentication", null);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.Api.WorkoutPlans
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.Api.Exercises", "HomieGainz.Api.Exercises\HomieGainz.Api.Exercises.csproj", "{52E5EDCB-09FB-4B28-B753-A9797CC7511A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Friendships", "HomieGainz.Api.Friendships\HomieGainz.Api.Friendships.csproj", "{09B6376F-1382-4B4B-82E6-4EE93FCA9D08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomieGainz.Api.Friendships", "HomieGainz.Api.Friendships\HomieGainz.Api.Friendships.csproj", "{09B6376F-1382-4B4B-82E6-4EE93FCA9D08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomieGainz.Api.Challenges", "HomieGainz.Api.Challenges\HomieGainz.Api.Challenges.csproj", "{93706A1A-9705-47B5-ACB1-746FF2CA17DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{09B6376F-1382-4B4B-82E6-4EE93FCA9D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09B6376F-1382-4B4B-82E6-4EE93FCA9D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09B6376F-1382-4B4B-82E6-4EE93FCA9D08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93706A1A-9705-47B5-ACB1-746FF2CA17DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93706A1A-9705-47B5-ACB1-746FF2CA17DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93706A1A-9705-47B5-ACB1-746FF2CA17DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93706A1A-9705-47B5-ACB1-746FF2CA17DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

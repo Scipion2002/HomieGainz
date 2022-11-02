@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomieGainz.ApplicationDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221101012702_Added db")]
-    partial class Addeddb
+    [Migration("20221102152635_Added Db")]
+    partial class AddedDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -319,6 +319,37 @@ namespace HomieGainz.ApplicationDb.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HomieGainz.ApplicationDb.Models.Users.Challenge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("FromUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ToUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromUserId");
+
+                    b.HasIndex("ToUserId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("Challenges");
+                });
+
             modelBuilder.Entity("HomieGainz.ApplicationDb.Models.Users.Friendship", b =>
                 {
                     b.Property<int>("Id")
@@ -407,6 +438,27 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.Navigation("MealPlan");
 
                     b.Navigation("WorkoutPlan");
+                });
+
+            modelBuilder.Entity("HomieGainz.ApplicationDb.Models.Users.Challenge", b =>
+                {
+                    b.HasOne("HomieGainz.ApplicationDb.Db.UserDb.User", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("FromUserId");
+
+                    b.HasOne("HomieGainz.ApplicationDb.Db.UserDb.User", "ToUser")
+                        .WithMany()
+                        .HasForeignKey("ToUserId");
+
+                    b.HasOne("HomieGainz.ApplicationDb.Db.WorkoutDb.Workout", "Workout")
+                        .WithMany()
+                        .HasForeignKey("WorkoutId");
+
+                    b.Navigation("FromUser");
+
+                    b.Navigation("ToUser");
+
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("HomieGainz.ApplicationDb.Models.Users.Friendship", b =>

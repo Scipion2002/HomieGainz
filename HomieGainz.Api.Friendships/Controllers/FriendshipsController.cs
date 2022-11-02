@@ -27,6 +27,7 @@ namespace HomieGainz.Api.Friendships.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet("sendFriendRequest/{fromUserId}/{toUserId}")]
         public async Task<IActionResult> SendFriendRequestAsync(int fromUserId, int toUserId)
         {
@@ -38,6 +39,7 @@ namespace HomieGainz.Api.Friendships.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet("acceptRequest/{toUserId}/{fromUserId}")]
         public async Task<IActionResult> AcceptFriendRequestAsync(int toUserId, int fromUserId)
         {
@@ -49,6 +51,7 @@ namespace HomieGainz.Api.Friendships.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet("rejectRequest/{toUserId}/{fromUserId}")]
         public async Task<IActionResult> RejectFriendRequestAsync(int toUserId, int fromUserId)
         {

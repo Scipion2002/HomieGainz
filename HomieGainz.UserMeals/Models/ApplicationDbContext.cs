@@ -131,6 +131,7 @@ namespace HomieGainz.ApplicationDb.Db
             modelBuilder.Entity<User>().HasMany(u => u.Friends);
         }
 
+        public DbSet<Challenge> Challenges { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MealPlan> MealPlans { get; set; }
