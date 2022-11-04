@@ -109,8 +109,7 @@ namespace HomieGainz.Api.Challenges.Services
                 if (fromUser.IsSuccess)
                 {
                     logger?.LogInformation("found fromUser, finding toUser");
-                    var toUser = await dbContext.Users.Where(u => toUserId == u.Id)
-                    .Include(w => w.WorkoutPlan).Include(f => f.Friends).FirstOrDefaultAsync();
+                    var toUser = await dbContext.Users.Where(u => toUserId == u.Id).Include(w => w.WorkoutPlan).Include(w => w.WorkoutPlan.Workouts).FirstOrDefaultAsync();
                     if (toUser != null)
                     {
                         logger?.LogInformation("found fromUser, getting workout");
@@ -129,7 +128,9 @@ namespace HomieGainz.Api.Challenges.Services
                                 toUser.WorkoutPlan.Workouts.Add(workoutChallenge);
                                 dbContext.SaveChanges();
                                 logger?.LogInformation("Done");
+                                return (true, pendingChallenge, null);
                             }
+                            return (false, null, "pending challenge didn't got Accepted");
                         }
                         return (false, null, "workout not found");
                     }
@@ -153,7 +154,7 @@ namespace HomieGainz.Api.Challenges.Services
                 if (fromUser.IsSuccess)
                 {
                     logger?.LogInformation("found fromUser, finding toUser");
-                    var toUser = await dbContext.Users.Where(u => toUserId == u.Id)
+                    var toUser = await dbContext.Users.Where(u => toUserId == u.Id).Include(w => w.WorkoutPlan.Workouts)
                     .Include(w => w.WorkoutPlan).Include(f => f.Friends).FirstOrDefaultAsync();
                     if (toUser != null)
                     {
@@ -173,7 +174,9 @@ namespace HomieGainz.Api.Challenges.Services
 
                                 dbContext.SaveChanges();
                                 logger?.LogInformation("Done");
+                                return (true, pendingChallenge, null);
                             }
+                            return (false, null, "pending challenge didn't got Accepted");
                         }
                         return (false, null, "workout not found");
                     }
