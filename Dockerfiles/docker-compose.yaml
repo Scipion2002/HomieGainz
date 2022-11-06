@@ -1,0 +1,34 @@
+version: '3.9'
+services: 
+ applicationDb:
+  build: Docker/appdb
+  image: appdb-img:1.0
+  ports:
+  - "51172:80"
+  networks:
+  - homiegainz
+ 
+ user_service:
+  build: Docker/user-service
+  image: user-img:1.0
+  ports:
+   - "51173:80"
+  networks:
+   - homiegainz
+
+ HomiegainzDb:
+  image: "mcr.microsoft.com/mssql/server:2019-latest"
+  container_name: HomieGainzDb
+  environment:
+   - ACCEPT_EULA=Y
+   - MSSQL_SA_PASSWORD=abc123!!@
+  ports:
+    - "1432:1433"
+  networks:
+   - homiegainz
+
+
+
+networks:
+ homiegainz:
+  name: "homiegainz" 

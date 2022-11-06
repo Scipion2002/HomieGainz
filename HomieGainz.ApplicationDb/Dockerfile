@@ -6,4 +6,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY ./publish/ .
-ENTRYPOINT ["dotnet", "HomieGainz.Api.Users.dll"]
+CMD add-migration "added Db"
+CMD "update-database"
+ENTRYPOINT ["dotnet", "HomieGainz.ApplicationDb.dll"]

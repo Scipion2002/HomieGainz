@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <StartupObject></StartupObject>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomieGainz.UserMeals\HomieGainz.ApplicationDb.csproj" />
+    <ProjectReference Include="..\HomieGainz.ApplicationDb\HomieGainz.ApplicationDb.csproj" />
   </ItemGroup>
 
 </Project>

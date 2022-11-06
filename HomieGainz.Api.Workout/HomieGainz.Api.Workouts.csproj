@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomieGainz.UserMeals\HomieGainz.ApplicationDb.csproj" />
+    <ProjectReference Include="..\HomieGainz.ApplicationDb\HomieGainz.ApplicationDb.csproj" />
   </ItemGroup>
 
 </Project>

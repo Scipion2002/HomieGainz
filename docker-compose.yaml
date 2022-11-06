@@ -1,0 +1,21 @@
+version: '3.9'
+services: 
+ applicationDb:
+  build: Homiegainz.ApplicationDb
+  image: appdb-img:1.0
+  ports:
+  - "52600"
+  networks:
+  - homiegainz
+ 
+ user_service:
+  build: HomieGainz.Api.Users
+  image: user-img:1.0
+  ports:
+   - "60804"
+  networks:
+   - homiegainz
+
+networks:
+ homiegainz:
+  name: "homiegainz" 

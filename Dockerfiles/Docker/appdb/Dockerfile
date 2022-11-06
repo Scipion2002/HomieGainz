@@ -6,4 +6,4 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY ./publish/ .
-ENTRYPOINT ["dotnet", "HomieGainz.Api.Users.dll"]
+ENTRYPOINT ["dotnet", "HomieGainz.ApplicationDb.dll"]
