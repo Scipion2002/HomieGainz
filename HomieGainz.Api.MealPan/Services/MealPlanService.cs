@@ -104,7 +104,7 @@ namespace HomieGainz.Api.MealPan.Services
             {
                 logger?.LogInformation("Finding MealPlan");
                 var oldMealPlan = await GetMealPlanByIdAsync(updatedMealPlan.Id);
-                if (oldMealPlan.IsSuccess)
+                if (oldMealPlan.IsSuccess && oldMealPlan.MealPlan != null)
                 {
                     logger?.LogInformation("found Meal, updating now");
                     oldMealPlan.MealPlan.Name = updatedMealPlan.Name;
@@ -133,7 +133,7 @@ namespace HomieGainz.Api.MealPan.Services
                 if (oldMealPlan.IsSuccess)
                 {
                     logger?.LogInformation("found MealPlan, deleting now");
-                    this.dbContext.Remove(oldMealPlan.MealPlan);
+                    dbContext.Remove(oldMealPlan.MealPlan);
                     dbContext.SaveChanges();
                     logger?.LogInformation("MealPlan deleted");
                     return (true, null, null);

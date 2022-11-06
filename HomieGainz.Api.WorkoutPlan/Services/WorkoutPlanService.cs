@@ -133,7 +133,7 @@ namespace HomieGainz.Api.WorkoutPlans.Services
             {
                 logger?.LogInformation("Finding workoutPlan");
                 var oldWorkoutPlan = await GetWorkoutPlanByIdAsync(updatedWorkoutPlan.Id);
-                if (oldWorkoutPlan.IsSuccess)
+                if (oldWorkoutPlan.IsSuccess && oldWorkoutPlan.WorkoutPlan != null)
                 {
                     logger?.LogInformation("found Workout, updating now");
                     oldWorkoutPlan.WorkoutPlan.Name = updatedWorkoutPlan.Name;

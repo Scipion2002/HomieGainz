@@ -104,7 +104,7 @@ namespace HomieGainz.Api.Exercises.Services
             {
                 logger?.LogInformation("Finding exercise");
                 var oldExercise = await GetExerciseByIdAsync(updatedExercise.Id);
-                if (oldExercise.IsSuccess)
+                if (oldExercise.IsSuccess && oldExercise.Exercise != null)
                 {
                     logger?.LogInformation("found exercise, updating now");
                     oldExercise.Exercise.Name = updatedExercise.Name;
@@ -136,8 +136,8 @@ namespace HomieGainz.Api.Exercises.Services
                 if (oldExercise.IsSuccess)
                 {
                     logger?.LogInformation("found exercise, deleting now");
-                    this.dbContext.Remove(oldExercise.Exercise);
-                    dbContext.SaveChanges();
+                    dbContext?.Remove(oldExercise.Exercise);
+                    dbContext?.SaveChanges();
                     logger?.LogInformation("exercise deleted");
                     return (true, null, null);
                 }

@@ -133,7 +133,7 @@ namespace HomieGainz.Api.Workouts.Services
             {
                 logger?.LogInformation("Finding workout");
                 var oldWorkout = await GetWorkoutByIdAsync(updatedWorkout.Id);
-                if (oldWorkout.IsSuccess)
+                if (oldWorkout.IsSuccess && oldWorkout.Workout != null)
                 {
                     logger?.LogInformation("found Workout, updating now");
                     oldWorkout.Workout.Name = updatedWorkout.Name;
@@ -161,7 +161,7 @@ namespace HomieGainz.Api.Workouts.Services
                 if (oldWorkout.IsSuccess)
                 {
                     logger?.LogInformation("found Workout, deleting now");
-                    this.dbContext.Remove(oldWorkout.Workout);
+                    dbContext.Remove(oldWorkout.Workout);
                     dbContext.SaveChanges();
                     logger?.LogInformation("Workout deleted");
                     return (true, null, null);
