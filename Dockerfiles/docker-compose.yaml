@@ -12,7 +12,63 @@ services:
   build: Docker/user-service
   image: user-img:1.0
   ports:
-   - "51173:80"
+  - "51173:80"
+  networks:
+  - homiegainz
+
+ challenge_service:
+  build: Docker/challenge_service
+  image: challenge-img:1.0
+  ports:
+  - "51174:80"
+  networks:
+  - homiegainz
+
+ exercise-service:
+  build: Docker/exercise-service
+  image: exercise-img:1.0
+  ports:
+  - "51175:80"
+  networks:
+  - homiegainz
+
+ friendship-service:
+  build: Docker/friendship-service
+  image: friendship-img:1.0
+  ports:
+  - "51176:80"
+  networks:
+  - homiegainz
+
+ mealplan-service:
+  build: Docker/mealplan-service
+  image: mealplan-img:1.0
+  ports:
+  - "51177:80"
+  networks:
+   - homiegainz
+   
+ meal-service:
+  build: Docker/meal-service
+  image: meal-img:1.0
+  ports:
+  - "51178:80"
+  networks:
+   - homiegainz
+
+ workoutplan-service:
+  build: Docker/workoutplan-service
+  image: workoutplan-img:1.0
+  ports:
+  - "51179:80"
+  networks:
+   - homiegainz
+
+ workout-service:
+  build: Docker/workout-service
+  image: workout-img:1.0
+  ports:
+  - "51180:80"
   networks:
    - homiegainz
 
@@ -23,9 +79,9 @@ services:
    - ACCEPT_EULA=Y
    - MSSQL_SA_PASSWORD=abc123!!@
   ports:
-    - "1432:1433"
+  - "1432:1433"
   networks:
-   - homiegainz
+  - homiegainz
 
 
 
