@@ -17,7 +17,7 @@ services:
   - homiegainz
 
  challenge_service:
-  build: Docker/challenge_service
+  build: Docker/challenge-service
   image: challenge-img:1.0
   ports:
   - "51174:80"
