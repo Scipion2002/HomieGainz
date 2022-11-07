@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HomieGainz.Api.Meals.Controllers
 {
     [ApiController]
-    [Route("Meals")]
+    [Route("/Meals/")]
     public class MealController : ControllerBase
     {
         private readonly IMealService mealService;
