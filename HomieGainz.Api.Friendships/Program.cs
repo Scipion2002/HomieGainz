@@ -4,6 +4,8 @@ using HomieGainz.Api.Friendships.Services;
 using HomieGainz.ApplicationDb.Db;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Discovery.Eureka;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuth>("BasicAuthentication", null);
+builder.Services.AddServiceDiscovery(options => options.UseEureka());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

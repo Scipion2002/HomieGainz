@@ -6,57 +6,65 @@
   "Routes": [
     {
       "UpstreamPathTemplate": "/gateway/users",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamPathTemplate": "/api/users",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service",
       "DownstreamScheme": "http"
     },
     {
-      "UpstreamPathTemplate": "/gateway/writers/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/writers/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/writers",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/writers",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/articles",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/articles",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/articles/{id}",
+      "UpstreamPathTemplate": "/gateway/users/{id}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamPathTemplate": "/api/articles/{id}",
+      "DownstreamPathTemplate": "/api/users/{id}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ]
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
+      //"DownstreamHostAndPorts": [
+      //{
+      //"Host": "user-service",
+      //"Port": 51173
+      //}
+      //]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/GetUser/{username}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/users/GetUser/{username}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/questionareTotal/{id}/{total}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/users/questionareTotal/{id}/{total}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/changeMealPlan/{userId}/{mealPlanId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/users/changeMealPlan/{userId}/{mealPlanId}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/getFriendList/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/users/getFriendList/{id}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service"
     }
   ]
 }

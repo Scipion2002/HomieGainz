@@ -49,7 +49,7 @@ namespace HomieGainz.Api.Application.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet("GetUser/{username}")]
         public async Task<IActionResult> GetUserAsync(string username)
         {
             var result = await userService.GetUserAsync(username);
