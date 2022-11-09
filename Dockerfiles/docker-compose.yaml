@@ -90,6 +90,16 @@ services:
   depends_on:
   - eureka
 
+ gateway-api:
+  build: Docker/gateway-api
+  image: gateway-img:1.0
+  ports:
+  - "51181:80"
+  networks:
+  - homiegainz
+  depends_on:
+  - eureka
+
  eureka:
   container_name: eureka
   image: steeltoeoss/eureka-server

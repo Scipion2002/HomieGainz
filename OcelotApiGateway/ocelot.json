@@ -5,26 +5,20 @@
   },
   "Routes": [
     {
-      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamPathTemplate": "/users",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "DownstreamPathTemplate": "/api/users",
+      "DownstreamPathTemplate": "/users",
       "UseServiceDiscovery": true,
       "ServiceName": "user-service",
       "DownstreamScheme": "http"
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/{id}",
+      "UpstreamPathTemplate": "/users/{id}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamPathTemplate": "/users/{id}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
       "ServiceName": "user-service"
-      //"DownstreamHostAndPorts": [
-      //{
-      //"Host": "user-service",
-      //"Port": 51173
-      //}
-      //]
     },
     {
       "UpstreamPathTemplate": "/gateway/users/GetUser/{username}",
