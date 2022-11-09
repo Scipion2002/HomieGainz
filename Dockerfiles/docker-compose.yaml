@@ -62,7 +62,7 @@ services:
   ports:
   - "51179:80"
   networks:
-   - homiegainz
+  - homiegainz
 
  workout-service:
   build: Docker/workout-service
@@ -71,6 +71,14 @@ services:
   - "51180:80"
   networks:
    - homiegainz
+
+ eureka:
+  container_name: eureka
+  image: steeltoeoss/eureka-server
+  ports:
+  - "8761:8761"
+  networks:
+  - homiegainz
 
  HomiegainzDb:
   image: "mcr.microsoft.com/mssql/server:2019-latest"
