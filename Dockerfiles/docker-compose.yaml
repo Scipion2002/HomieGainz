@@ -7,6 +7,8 @@ services:
   - "51172:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
  
  user_service:
   build: Docker/user-service
@@ -15,6 +17,8 @@ services:
   - "51173:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
 
  challenge_service:
   build: Docker/challenge-service
@@ -23,6 +27,8 @@ services:
   - "51174:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
 
  exercise-service:
   build: Docker/exercise-service
@@ -31,6 +37,8 @@ services:
   - "51175:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
 
  friendship-service:
   build: Docker/friendship-service
@@ -39,6 +47,8 @@ services:
   - "51176:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
 
  mealplan-service:
   build: Docker/mealplan-service
@@ -47,6 +57,8 @@ services:
   - "51177:80"
   networks:
    - homiegainz
+   depends_on:
+  - eureka
    
  meal-service:
   build: Docker/meal-service
@@ -55,6 +67,8 @@ services:
   - "51178:80"
   networks:
    - homiegainz
+   depends_on:
+  - eureka
 
  workoutplan-service:
   build: Docker/workoutplan-service
@@ -63,6 +77,8 @@ services:
   - "51179:80"
   networks:
   - homiegainz
+  depends_on:
+  - eureka
 
  workout-service:
   build: Docker/workout-service
@@ -71,6 +87,8 @@ services:
   - "51180:80"
   networks:
    - homiegainz
+   depends_on:
+  - eureka
 
  eureka:
   container_name: eureka
