@@ -1,15 +1,5 @@
 version: '3.9'
 services: 
- applicationDb:
-  build: Docker/appdb
-  image: appdb-img:1.0
-  ports:
-  - "51172:80"
-  networks:
-  - homiegainz
-  depends_on:
-  - eureka
- 
  user_service:
   build: Docker/user-service
   image: user-img:1.0
@@ -56,8 +46,8 @@ services:
   ports:
   - "51177:80"
   networks:
-   - homiegainz
-   depends_on:
+  - homiegainz
+  depends_on:
   - eureka
    
  meal-service:
@@ -66,8 +56,8 @@ services:
   ports:
   - "51178:80"
   networks:
-   - homiegainz
-   depends_on:
+  - homiegainz
+  depends_on:
   - eureka
 
  workoutplan-service:
@@ -86,8 +76,18 @@ services:
   ports:
   - "51180:80"
   networks:
-   - homiegainz
-   depends_on:
+  - homiegainz
+  depends_on:
+  - eureka
+
+ applicationDb:
+  build: Docker/appdb
+  image: appdb-img:1.0
+  ports:
+  - "51172:80"
+  networks:
+  - homiegainz
+  depends_on:
   - eureka
 
  eureka:
@@ -108,8 +108,6 @@ services:
   - "1432:1433"
   networks:
   - homiegainz
-
-
 
 networks:
  homiegainz:
