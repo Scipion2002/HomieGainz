@@ -268,7 +268,7 @@
     {
       "UpstreamPathTemplate": "/workoutPlans",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "DownstreamPathTemplate": "/workoutsPlans",
+      "DownstreamPathTemplate": "/workoutPlans",
       "UseServiceDiscovery": true,
       "ServiceName": "workoutplan-service",
       "DownstreamScheme": "http",
@@ -279,7 +279,7 @@
     {
       "UpstreamPathTemplate": "/workoutPlans/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/workoutsPlans/{id}",
+      "DownstreamPathTemplate": "/workoutPlans/{id}",
       "UseServiceDiscovery": true,
       "ServiceName": "workoutplan-service",
       "DownstreamScheme": "http",
@@ -301,7 +301,7 @@
     {
       "UpstreamPathTemplate": "/workoutPlans/addWorkoutToPlan/{workoutId}/{workoutPlanId}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/workoutsPlans/addWorkoutToPlan/{workoutId}/{workoutPlanId}",
+      "DownstreamPathTemplate": "/workoutPlans/addWorkoutToPlan/{workoutId}/{workoutPlanId}",
       "UseServiceDiscovery": true,
       "ServiceName": "workoutplan-service",
       "DownstreamScheme": "http",
