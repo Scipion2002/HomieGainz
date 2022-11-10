@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.Challenges.Controllers
 {
     [ApiController]
-    [Route("/Challenges/")]
+    [Route("/challenges/")]
     public class ChallengesController : ControllerBase
     {
         private readonly IChallengeService challengeService;

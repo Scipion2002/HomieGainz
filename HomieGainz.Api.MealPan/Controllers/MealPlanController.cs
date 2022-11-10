@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.MealPan.Controllers
 {
     [ApiController]
-    [Route("MealPlans")]
+    [Route("/mealPlans/")]
     public class MealPlanController : ControllerBase
     {
         private readonly IMealPlanService mealPlanService;

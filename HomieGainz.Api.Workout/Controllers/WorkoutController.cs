@@ -7,7 +7,7 @@ using System.Xml.Linq;
 namespace HomieGainz.Api.Workouts.Controllers
 {
     [ApiController]
-    [Route("/Workouts/")]
+    [Route("/workouts/")]
     public class WorkoutController : ControllerBase
     {
         private readonly IWorkoutService workoutService;

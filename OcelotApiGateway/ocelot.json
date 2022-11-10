@@ -5,12 +5,20 @@
   },
   "Routes": [
     {
+
+      // ////////////////////////////////////////////////
+      //  USER
+      // ////////////////////////////////////////////////
+      
       "UpstreamPathTemplate": "/users",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamPathTemplate": "/users",
       "UseServiceDiscovery": true,
       "ServiceName": "user-service",
-      "DownstreamScheme": "http"
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
       "UpstreamPathTemplate": "/users/{id}",
@@ -18,47 +26,408 @@
       "DownstreamPathTemplate": "/users/{id}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/GetUser/{username}",
+      "UpstreamPathTemplate": "/users/login/{username}/{password}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/users/GetUser/{username}",
+      "DownstreamPathTemplate": "/users/login/{username}/{password}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/questionareTotal/{id}/{total}",
+      "UpstreamPathTemplate": "/users/GetUser/{username}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/users/questionareTotal/{id}/{total}",
+      "DownstreamPathTemplate": "/users/GetUser/{username}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/changeMealPlan/{userId}/{mealPlanId}",
+      "UpstreamPathTemplate": "/users/questionareTotal/{id}/{total}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/users/changeMealPlan/{userId}/{mealPlanId}",
+      "DownstreamPathTemplate": "/users/questionareTotal/{id}/{total}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
+      "UpstreamPathTemplate": "/users/changeMealPlan/{userId}/{mealPlanId}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
+      "DownstreamPathTemplate": "/users/changeMealPlan/{userId}/{mealPlanId}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
-      "UpstreamPathTemplate": "/gateway/users/getFriendList/{id}",
+      "UpstreamPathTemplate": "/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/users/getFriendList/{id}",
+      "DownstreamPathTemplate": "/users/changeWorkoutPlan/{userId}/{workoutPlanId}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
-      "ServiceName": "user-service"
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/users/getFriendList/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/users/getFriendList/{id}",
+      "DownstreamScheme": "http",
+      "UseServiceDiscovery": true,
+      "ServiceName": "user-service",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  EXERCISE
+    // ////////////////////////////////////////////////
+    
+    {
+      "UpstreamPathTemplate": "/exercises",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/exercises",
+      "UseServiceDiscovery": true,
+      "ServiceName": "exercise-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/exercises/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/exercises/{id}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "exercise-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/exercises/byName/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/exercises/byName/{name}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "exercise-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  MEAL PLAN
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/mealPlans",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/mealPlans",
+      "UseServiceDiscovery": true,
+      "ServiceName": "mealplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/mealPlans/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/Mealplans/{id}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "mealplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/mealPlans/byName/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/mealPlans/byName/{name}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "mealplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  MEAL
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/meals",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/meals",
+      "UseServiceDiscovery": true,
+      "ServiceName": "meal-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/meals/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/meals/{id}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "meal-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/meals/ByName/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/meals/ByName/{name}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "meal-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  WORKOUT
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/workouts",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/workouts",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workout-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workouts/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workouts/{id}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workout-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workouts/ByName/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workouts/ByName/{name}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workout-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workouts/addExercise/{exerciseId}/{workoutId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workouts/addExercise/{exerciseId}/{workoutId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workout-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  WORKOUT PLAN
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/workoutPlans",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/workoutsPlans",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workoutplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workoutPlans/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workoutsPlans/{id}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workoutplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workoutPlans/ByName/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workoutsPlans/ByName/{name}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workoutplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/workoutPlans/addWorkoutToPlan/{workoutId}/{workoutPlanId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workoutsPlans/addWorkoutToPlan/{workoutId}/{workoutPlanId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workoutplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  CHALLENGE
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/challenges",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/challenges",
+      "UseServiceDiscovery": true,
+      "ServiceName": "challenge-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/challenges/{UserId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/challenges/{UserId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "challenge-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/challenges/sendChallengeRequest/{fromUserId}/{toUserId}/{workoutId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/challenges/sendChallengeRequest/{fromUserId}/{toUserId}/{workoutId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "challenge-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/challenges/acceptRequest/{toUserId}/{fromUserId}/{workoutId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/challenges/acceptRequest/{toUserId}/{fromUserId}/{workoutId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "challenge-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/challenges/rejectRequest/{toUserId}/{fromUserId}/{workoutId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/challenges/rejectRequest/{toUserId}/{fromUserId}/{workoutId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "challenge-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
+    // ////////////////////////////////////////////////
+    //  FRIENDSHIP
+    // ////////////////////////////////////////////////
+
+    {
+      "UpstreamPathTemplate": "/friendships",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/friendships",
+      "UseServiceDiscovery": true,
+      "ServiceName": "friendship-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/friendships/{UserId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/friendships/{UserId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "friendship-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/friendships/sendFriendRequest/{fromUserId}/{toUserId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/friendships/sendFriendRequest/{fromUserId}/{toUserId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "friendship-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/friendships/acceptRequest/{toUserId}/{fromUserId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/friendships/acceptRequest/{toUserId}/{fromUserId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "friendship-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/friendships/rejectRequest/{toUserId}/{fromUserId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/friendships/rejectRequest/{toUserId}/{fromUserId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "friendship-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
   ]
 }

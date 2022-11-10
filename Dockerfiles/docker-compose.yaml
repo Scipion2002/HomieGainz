@@ -94,7 +94,7 @@ services:
   build: Docker/gateway-api
   image: gateway-img:1.0
   ports:
-  - "51181:80"
+  - "9000:80"
   networks:
   - homiegainz
   depends_on:

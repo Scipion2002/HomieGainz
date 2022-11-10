@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.WorkoutPlans.Controllers
 {
     [ApiController]
-    [Route("/WorkoutPlans/")]
+    [Route("/workoutPlans/")]
     public class WorkoutPlanController : ControllerBase
     {
         private readonly IWorkoutPlanService workoutPlanService;

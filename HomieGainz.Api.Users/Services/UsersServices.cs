@@ -286,7 +286,26 @@ namespace HomieGainz.Api.Users.Services
                 var user = await dbContext.Users.Include(f => f.Friends).Where(u => u.Id == id).FirstOrDefaultAsync();
                 if (user != null)
                 {
-                        return (true, user.Friends, null);
+                    return (true, user.Friends, null);
+                }
+                return (false, null, "User not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+        public async Task<(bool IsSuccess, User User, string ErrorMessage)> Login(string username, string password)
+        {
+            try
+            {
+                logger?.LogInformation("Finding user");
+                var user = await dbContext.Users
+                    .Where(user => user.Username.Equals(username) && user.Password.Equals(password)).FirstOrDefaultAsync();
+                if (user != null)
+                {
+                    return (true, user, null);
                 }
                 return (false, null, "User not found");
             }

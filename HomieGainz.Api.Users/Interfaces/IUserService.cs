@@ -8,7 +8,8 @@ namespace HomieGainz.Api.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<(bool IsSuccess, IEnumerable<User> Users, string ErrorMessage)> GetUsersAsync();    
+        Task<(bool IsSuccess, IEnumerable<User> Users, string ErrorMessage)> GetUsersAsync();
+        Task<(bool IsSuccess, User User, string ErrorMessage)> Login(string username, string password);
         Task<(bool IsSuccess, User User, string ErrorMessage)> GetUserByIdAsync(int id);
         Task<(bool IsSuccess, User User, string ErrorMessage)> GetUserAsync(string username);
         Task<(bool IsSuccess, User User, string ErrorMessage)> GetQuestionaireTotalAsync(int id, int total);

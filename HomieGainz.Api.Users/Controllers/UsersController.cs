@@ -38,6 +38,18 @@ namespace HomieGainz.Api.Application.Controllers
         }
 
         [Authorize]
+        [HttpGet("login/{username}/{password}")]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            var result = await userService.Login(username, password);
+            if (result.IsSuccess)
+            {
+                return Ok(result.IsSuccess);
+            }
+            return BadRequest(result.ErrorMessage);
+        }
+
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {

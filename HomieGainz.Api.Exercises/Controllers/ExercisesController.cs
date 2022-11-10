@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomieGainz.Api.Exercises.Controllers
 {
     [ApiController]
-    [Route("/Exercises/")]
+    [Route("/exercises/")]
     public class ExercisesController : ControllerBase
     {
         private readonly IExerciseService exerciseService;
@@ -37,7 +37,7 @@ namespace HomieGainz.Api.Exercises.Controllers
             return NotFound();
         }
 
-        [HttpGet("ByName/{name}")]
+        [HttpGet("byName/{name}")]
         public async Task<IActionResult> GetExerciseByNameAsync(string name)
         {
             var result = await exerciseService.GetExerciseByNameAsync(name);
