@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
+import 'create_account.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 25),
+              margin: const EdgeInsets.only(top: 55),
               child: const Image(
                   image: AssetImage("assets/images/HomieGainzImg.png")),
             ),
@@ -88,7 +90,12 @@ class LoginPage extends StatelessWidget {
                                   backgroundColor: Colors.blue, // background
                                 ),
                                 onPressed: () {
-
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: const CreateAccount(),
+                                      ));
                                 },
                                 child: const Text('Sign Up',
                                     style: TextStyle(color: Colors.black)))))
