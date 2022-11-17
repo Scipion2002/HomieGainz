@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:homiegainz_front_end/Search%20Page/search_page.dart';
+import 'package:homiegainz_front_end/Workout%20Page/workout_plan_page.dart';
 
 class PageNavigation extends StatefulWidget {
   const PageNavigation({Key? key}) : super(key: key);
@@ -31,7 +33,8 @@ class _PageNavigation extends State<PageNavigation> {
             });
           },
           children: const [
-
+            WorkoutPlanPage(),
+            SearchPage()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
