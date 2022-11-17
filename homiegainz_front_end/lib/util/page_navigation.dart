@@ -35,25 +35,23 @@ class _PageNavigation extends State<PageNavigation> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              label: 'Chat',
+              icon: Icon(FontAwesomeIcons.dumbbell),
+              label: 'Workouts',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.abc),
-              label: 'Pantry'
+              icon: Icon(FontAwesomeIcons.carrot),
+              label: 'Meals'
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
+              icon: Icon(Icons.account_circle),
               label: 'Account',
             ),
           ],

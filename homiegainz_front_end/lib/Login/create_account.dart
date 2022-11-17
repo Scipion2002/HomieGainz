@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/Login/questionaire_page.dart';
 import 'alert_pop_up.dart';
 import '../util/to_prev_page.dart';
 import 'login_page.dart';
@@ -74,8 +75,8 @@ class CreateAccount extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey)),
-                  hintText: 'yyyy/mm/dd...',
-                  labelText: 'Enter Birthday (yyyy/mm/dd)',
+                  hintText: 'Enter Age...',
+                  labelText: 'Enter Age',
                   labelStyle: TextStyle(color: Colors.grey)),
             )),
         Container(
@@ -149,7 +150,7 @@ class CreateAccount extends StatelessWidget {
                     else{
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const LoginPage()),
+                              builder: (context) => const QuestionnairePage()),
                               (Route<dynamic> route) => false);
                     }
                   }

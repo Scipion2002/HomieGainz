@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/util/page_navigation.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'create_account.dart';
@@ -77,7 +78,12 @@ class LoginPage extends StatelessWidget {
                                   backgroundColor: Colors.blue, // background
                                 ),
                                 onPressed: () {
-
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: const PageNavigation(),
+                                      ));
                                 },
                                 child: const Text('Log In',
                                     style: TextStyle(color: Colors.black))))),
