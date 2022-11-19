@@ -17,12 +17,8 @@ class _SearchBarState extends State<SearchBar>
     return Row(
       children: [
         if (!_isActive)
-          Text(
-              "Search Page",
-              style: Theme
-                  .of(context)
-                  .appBarTheme
-                  .titleTextStyle),
+          Text("Search Page",
+              style: Theme.of(context).appBarTheme.titleTextStyle),
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
@@ -30,34 +26,38 @@ class _SearchBarState extends State<SearchBar>
               duration: const Duration(milliseconds: 250),
               child: _isActive
                   ? Container(
-                width: double.infinity,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: Colors.white12,
-                    borderRadius: BorderRadius.circular(4.0)),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                      hintText: 'Search for something',
-                      prefixIcon: const Icon(Icons.search),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isActive = false;
-                              _searchController.text = '';
-                            });
-                          },
-                          icon: const Icon(Icons.close))),
-                ),
-              )
-                  : IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isActive = true;
+                      width: double.infinity,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.white12,
+                          borderRadius: BorderRadius.circular(4.0)),
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: InputDecoration(
+                            hintText: 'Search for something',
+                            prefixIcon: IconButton(
+                              onPressed: () {
+                                print(_searchController.text);
+                              },
+                              icon: const Icon(Icons.search),
+                            ),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isActive = false;
 
-                    });
-                  },
-                  icon: const Icon(Icons.search)),
+                                  });
+                                },
+                                icon: const Icon(Icons.close))),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isActive = true;
+                        });
+                      },
+                      icon: const Icon(Icons.search)),
             ),
           ),
         ),
