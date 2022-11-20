@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homiegainz_front_end/Workout%20Page/Back/exercise_list.dart';
+import 'package:homiegainz_front_end/Exercise%20Page/Front/exercise_card_list.dart';
 import 'package:homiegainz_front_end/util/to_prev_page.dart';
 
 class WorkoutInfo extends StatelessWidget {
@@ -43,7 +43,7 @@ class WorkoutInfo extends StatelessWidget {
                 ),
               ),
             ),
-            ExerciseList(
+            ExerciseCardList(
               exercises: exercises,
             ),
           ],

@@ -11,6 +11,9 @@ class WorkoutPlanPage extends StatelessWidget {
       child: Scaffold(
           body: Column(
         children: [
+          const Text("Your Workout Plan",
+              style:
+              TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
           WorkoutCard(
             workoutID: 1,
             workoutName: "upper body",

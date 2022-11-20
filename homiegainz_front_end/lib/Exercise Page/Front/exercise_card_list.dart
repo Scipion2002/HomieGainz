@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'exercise.dart';
+import 'exercise_card.dart';
 
-class ExerciseList extends StatelessWidget {
+class ExerciseCardList extends StatelessWidget {
   List<dynamic> exercises;
 
-  ExerciseList({Key? key, this.exercises = const []}) : super(key: key);
+  ExerciseCardList({Key? key, this.exercises = const []}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class ExerciseList extends StatelessWidget {
 
     for (var exercise in exercises) {
       print(exercise);
-      exerciseList.add(Exercise(
-          workoutName: exercise['Name'],
+      exerciseList.add(ExerciseCard(
+          exerciseName: exercise['Name'],
           targetMuscle: exercise['TargetMuscle'],
           setAmt: exercise['SetAmt'],
           repAmt: exercise['RepAmt'],
