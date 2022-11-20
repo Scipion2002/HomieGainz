@@ -26,7 +26,7 @@ class WorkoutInfo extends StatelessWidget {
             const ToPrevPage(),
             Text(workoutName,
                 style:
-                const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                    const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
             Card(
               margin: const EdgeInsets.all(10),
               elevation: 2,

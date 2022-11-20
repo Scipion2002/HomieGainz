@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../Edit_pages/edit_meal_page.dart';
+import '../Back/meal_info.dart';
+
 class MealCard extends StatefulWidget {
   MealCard(
       {Key? key,
@@ -40,17 +43,17 @@ class _MealCardState extends State<MealCard> {
             context,
             MaterialPageRoute<void>(
               builder: (BuildContext context) => !widget.beingEdited
-                  ? mealInfo(
+                  ? MealInfo(
                 mealName: widget.mealName,
                 description: widget.description,
-                imgUrl: widget.imageUrl,
+                imageUrl: widget.imageUrl,
                 ingredients: widget.ingredients,
                 directions: widget.directions
               )
                   : EditMealPage(
                   mealName: widget.mealName,
                   description: widget.description,
-                  imgUrl: widget.imageUrl,
+                  imageUrl: widget.imageUrl,
                   ingredients: widget.ingredients,
                   directions: widget.directions
               ),
