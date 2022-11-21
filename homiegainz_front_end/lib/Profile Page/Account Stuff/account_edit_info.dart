@@ -6,8 +6,8 @@ import '../../Edit_pages/edit_info_page.dart';
 class AccountEditInfo extends StatefulWidget {
   const AccountEditInfo(
       {Key? key,
-      this.accountInfo = "peepee",
-      this.editProfileInfo = "cool peepee"})
+      this.accountInfo = "",
+      this.editProfileInfo = ""})
       : super(key: key);
 
   final String accountInfo;
@@ -46,7 +46,10 @@ class _AccountEditInfoState extends State<AccountEditInfo> {
               context,
               PageTransition(
                   type: PageTransitionType.rightToLeft,
-                  child: EditInfoPage(editProfileInfo: widget.editProfileInfo, accountInfo: widget.accountInfo,)),
+                  child: EditInfoPage(
+                    editProfileInfo: widget.editProfileInfo,
+                    accountInfo: widget.accountInfo,
+                  )),
             );
           },
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../util/requests.dart';
 import '../../../util/to_prev_page.dart';
-import '../Profile Page/Account Stuff/globals.dart' as globals;
+import '../util/globals.dart' as globals;
 
 class EditInfoPagePassword extends StatelessWidget {
   const EditInfoPagePassword({Key? key}) : super(key: key);

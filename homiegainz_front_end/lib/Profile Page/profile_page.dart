@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/Profile%20Page/Account%20Stuff/friends_tab_bar.dart';
 import 'package:page_transition/page_transition.dart';
 import 'Account Stuff/account_header.dart';
 import 'settings_page.dart';
+import '../util/globals.dart' as globals;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -32,9 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         AccountHeader(
-          username: 'Scipion2002',
+          username: globals.username,
         ),
-        //const MealAppBar(),
+        const FriendAppBar(),
       ]),
     );
   }

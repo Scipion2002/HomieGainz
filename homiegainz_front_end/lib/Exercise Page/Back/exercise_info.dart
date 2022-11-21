@@ -22,18 +22,26 @@ class ExerciseInfo extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-        child: Column(children: [
-          const ToPrevPage(),
-          Text(exerciseName,
-              style:
-              const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-
-          Text(description, style: const TextStyle(fontSize: 15),),
-          Text("Muscle Targeted: $targetMuscle", style: const TextStyle(fontSize: 20),),
-          Text("Amount of sets: $setAmt", style: const TextStyle(fontSize: 20)),
-          Text("Amount of repetitions: $repAmt", style: const TextStyle(fontSize: 20)),
-
-        ],),
+        child: Column(
+          children: [
+            const ToPrevPage(),
+            Text(exerciseName,
+                style:
+                    const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+            Text(
+              description,
+              style: const TextStyle(fontSize: 15),
+            ),
+            Text(
+              "Muscle Targeted: $targetMuscle",
+              style: const TextStyle(fontSize: 20),
+            ),
+            Text("Amount of sets: $setAmt",
+                style: const TextStyle(fontSize: 20)),
+            Text("Amount of repetitions: $repAmt",
+                style: const TextStyle(fontSize: 20)),
+          ],
+        ),
       ),
     ));
   }

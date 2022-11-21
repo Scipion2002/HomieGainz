@@ -3,7 +3,7 @@ import '../../../util/requests.dart';
 import '../../Login/login_page.dart';
 import '../../../util/to_prev_page.dart';
 import 'Account Stuff/account_edit_info.dart';
-import 'Account Stuff/globals.dart' as globals;
+import '../util/globals.dart' as globals;
 import 'dart:math';
 import 'package:page_transition/page_transition.dart';
 
@@ -56,13 +56,13 @@ class _SettingsPage extends State<SettingsPage> {
                 Container(
                   margin: const EdgeInsets.only(top: 13),
                   child: const Text(
-                    "Age",
+                    "Email",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ),
                 AccountEditInfo(
-                    accountInfo: globals.email, editProfileInfo: "Age"),
+                    accountInfo: globals.email, editProfileInfo: "Email"),
               ],
             ),
             Column(
@@ -113,9 +113,8 @@ class _SettingsPage extends State<SettingsPage> {
                         int authenticationCode =
                             random.nextInt(900000) + 100000;
                         requests.makePostRequest(
-                            "http://10.0.2.2:8888/users/forgotPassword/", {
-                          "authCode": authenticationCode
-                        }).then((value) {
+                            "http://10.0.2.2:8888/users/forgotPassword/",
+                            {"authCode": authenticationCode}).then((value) {
                           Navigator.push(
                               context,
                               PageTransition(

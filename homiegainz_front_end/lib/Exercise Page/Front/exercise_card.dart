@@ -75,17 +75,17 @@ class _ExerciseCardState extends State<ExerciseCard> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 20),
+                            margin: const EdgeInsets.only(left: 20),
                             child: Text(
-                          "Reps: ${widget.repAmt}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+                              "Reps: ${widget.repAmt}",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(left: 20),
-                        child: Text(
+                          child: Text(
                             "Sets: ${widget.setAmt}",
                             style: const TextStyle(
                               fontSize: 20,
@@ -93,7 +93,6 @@ class _ExerciseCardState extends State<ExerciseCard> {
                             ),
                           ),
                         )
-
                       ],
                     )),
               ],

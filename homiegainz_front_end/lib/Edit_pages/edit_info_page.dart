@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../util/requests.dart';
 import '../../../util/to_prev_page.dart';
-import '../Profile Page/Account Stuff/globals.dart' as globals;
+import '../util/globals.dart' as globals;
 import 'dart:convert';
 
 import 'edit_info_page_password.dart';
@@ -70,8 +70,8 @@ class _EditInfoPageState extends State<EditInfoPage> {
                           case "Username":
                             requestBody["Username"] = messageController.text;
                             break;
-                          case "Age":
-                            requestBody["Age"] = messageController.text;
+                          case "Email":
+                            requestBody["Email"] = messageController.text;
                             break;
                         }
                         // requests.makePutRequest(

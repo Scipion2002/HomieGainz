@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../Edit_pages/edit_workout_page.dart';
-import '../../Profile Page/Account Stuff/globals.dart' as globals;
+import '../../util/globals.dart' as globals;
 import '../Back/workout_info.dart';
 
 class WorkoutCard extends StatefulWidget {
