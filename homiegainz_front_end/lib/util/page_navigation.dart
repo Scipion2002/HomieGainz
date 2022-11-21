@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:homiegainz_front_end/Profile%20Page/profile_page.dart';
 import '../Meal Plan Page/meal_plan_page.dart';
 import '../Search Page/search_page.dart';
 import '../Workout Plan Page/workout_plan_page.dart';
@@ -37,7 +38,8 @@ class _PageNavigation extends State<PageNavigation> {
           children: const [
             WorkoutPlanPage(),
             SearchPage(),
-            MealPlanPage()
+            MealPlanPage(),
+            ProfilePage()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
