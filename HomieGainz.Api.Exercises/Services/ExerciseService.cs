@@ -61,7 +61,7 @@ namespace HomieGainz.Api.Exercises.Services
             try
             {
                 logger?.LogInformation("Querying exercise");
-                var exercise = await dbContext.Exercises.FirstOrDefaultAsync(x => x.Name == name);
+                var exercise = await dbContext.Exercises.FirstOrDefaultAsync(x => x.ExerciseName == name);
                 if (exercise != null)
                 {
                     logger?.LogInformation("exercise found!");
@@ -107,7 +107,7 @@ namespace HomieGainz.Api.Exercises.Services
                 if (oldExercise.IsSuccess && oldExercise.Exercise != null)
                 {
                     logger?.LogInformation("found exercise, updating now");
-                    oldExercise.Exercise.Name = updatedExercise.Name;
+                    oldExercise.Exercise.ExerciseName = updatedExercise.ExerciseName;
                     oldExercise.Exercise.TargetMuscle = updatedExercise.TargetMuscle;
                     oldExercise.Exercise.Video = updatedExercise.Video;
                     oldExercise.Exercise.SetAmt = updatedExercise.SetAmt;

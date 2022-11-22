@@ -17,8 +17,8 @@ class _MealAppBar extends State<FriendAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    Future<String> getFriendList = requests
-        .makeGetRequest("http://localhost:9000/friendships/${globals.userID}");
+    // Future<String> getFriendList = requests
+    //     .makeGetRequest("http://localhost:9000/friendships/${globals.userID}");
 
     return Expanded(
       child: Container(
@@ -46,44 +46,44 @@ class _MealAppBar extends State<FriendAppBar> {
                         FriendCard(
                           username: 'Dragonliver',
                         )
+                        // Container(
+                        //   margin: const EdgeInsets.only(top: 15),
+                        //   child: SingleChildScrollView(
+                        //     child: FutureBuilder<String>(
+                        //         future: getFriendList,
+                        //         builder: (context, snapshot) {
+                        //           if (snapshot.hasData) {
+                        //             userFriendList.clear();
+                        //             List<dynamic> friends =
+                        //                 json.decode(snapshot.data!)["results"];
+                        //
+                        //             for (var friend in friends) {
+                        //               userFriendList.add(FriendCard(
+                        //                 userId: friend['Id'],
+                        //                 username: friend['Username']
+                        //               ));
+                        //             }
+                        //
+                        //             return Column(
+                        //               children: userFriendList,
+                        //             );
+                        //           } else if (snapshot.hasError) {
+                        //             return Text('${snapshot.error}');
+                        //           }
+                        //
+                        //           return Center(
+                        //               heightFactor: 20,
+                        //               child: Container(
+                        //                 alignment: Alignment.center,
+                        //                 child: const CircularProgressIndicator(
+                        //                   color: Colors.tealAccent,
+                        //                 ),
+                        //               ));
+                        //         }),
+                        //   ),
+                        // ),
                       ],
                     )))
-                // Container(
-                //   margin: const EdgeInsets.only(top: 15),
-                //   child: SingleChildScrollView(
-                //     child: FutureBuilder<String>(
-                //         future: getFriendList,
-                //         builder: (context, snapshot) {
-                //           if (snapshot.hasData) {
-                //             userFriendList.clear();
-                //             List<dynamic> friends =
-                //                 json.decode(snapshot.data!)["results"];
-                //
-                //             for (var friend in friends) {
-                //               userFriendList.add(FriendCard(
-                //                 userId: friend['Id'],
-                //                 username: friend['Username']
-                //               ));
-                //             }
-                //
-                //             return Column(
-                //               children: userFriendList,
-                //             );
-                //           } else if (snapshot.hasError) {
-                //             return Text('${snapshot.error}');
-                //           }
-                //
-                //           return Center(
-                //               heightFactor: 20,
-                //               child: Container(
-                //                 alignment: Alignment.center,
-                //                 child: const CircularProgressIndicator(
-                //                   color: Colors.tealAccent,
-                //                 ),
-                //               ));
-                //         }),
-                //   ),
-                // ),
               ],
             ),
           ),

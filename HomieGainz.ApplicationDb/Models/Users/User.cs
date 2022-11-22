@@ -14,6 +14,9 @@ namespace HomieGainz.ApplicationDb.Db.UserDb
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public string Email { get; set; }
         [Required]
         [Range(0,125)]
         public int Age { get; set; }

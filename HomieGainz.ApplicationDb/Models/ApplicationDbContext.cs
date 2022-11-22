@@ -73,7 +73,7 @@ namespace HomieGainz.ApplicationDb.Db
                new Exercise
             {
                 Id = 1,
-                Name = "Push ups",
+                ExerciseName = "Push ups",
                 TargetMuscle = "biceps/triceps",
                 SetAmt = 3,
                 RepAmt = 10,
@@ -81,7 +81,7 @@ namespace HomieGainz.ApplicationDb.Db
             }, new Exercise 
             {
                 Id = 2,
-                Name = "Push ups",
+                ExerciseName = "Push ups",
                 TargetMuscle = "biceps/triceps",
                 SetAmt = 3,
                 RepAmt = 10,

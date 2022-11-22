@@ -10,7 +10,7 @@ namespace HomieGainz.ApplicationDb.Db.WorkoutDb
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string ExerciseName { get; set; }
         [MaxLength(300)]
         public string TargetMuscle { get; set; }
         public string Video { get; set; }
