@@ -10,14 +10,52 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  String filter = "workout";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: const SearchBar(),
-      ),
-      body: const Center(child: Text("Search for workout, meal or friend! Use the filter above to specify"),),
-    ));
+            appBar: AppBar(
+              title: const SearchBar(),
+            ),
+            body: Column(
+              children: [
+                 RadioListTile(
+                    title: const Text("Workout"),
+                    value: "workout",
+                    groupValue: filter,
+                    onChanged: (value) {
+                      setState(() {
+                        filter = value.toString();
+                        print(filter);
+                      });
+                    },
+                  ),
+                RadioListTile(
+                  title: const Text("Meal"),
+                  value: "meal",
+                  groupValue: filter,
+                  onChanged: (value) {
+                    setState(() {
+                      filter = value.toString();
+                      print(filter);
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: const Text("User"),
+                  value: "user",
+                  groupValue: filter,
+                  onChanged: (value) {
+                    setState(() {
+                      filter = value.toString();
+                      print(filter);
+                    });
+                  },
+                ),
+                const Divider(),
+              ],
+            )));
   }
 }
