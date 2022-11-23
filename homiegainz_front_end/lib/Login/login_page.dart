@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homiegainz_front_end/util/page_navigation.dart';
 import 'package:page_transition/page_transition.dart';
-
+import '../../util/globals.dart' as globals;
+import '../../util/requests.dart';
+import 'alert_pop_up.dart';
 import 'create_account.dart';
 
 class LoginPage extends StatelessWidget {
@@ -11,6 +13,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _usernameController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
+    Requests requests = Requests();
 
     return SafeArea(
       child: Scaffold(
@@ -78,12 +81,44 @@ class LoginPage extends StatelessWidget {
                                   backgroundColor: Colors.blue, // background
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: const PageNavigation(),
-                                      ));
+                                  if (_usernameController.text.isEmpty ||
+                                      _passwordController.text.isEmpty) {
+                                    showDialog<void>(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertPopUp(
+                                            title: 'Login Fields Empty',
+                                            content:
+                                            'Login Form is not filled out completely',
+                                          );
+                                        });
+                                  } else {
+                                    requests
+                                        .makeGetRequest(
+                                        "http://10.0.2.2:9000/users/login/${_usernameController.text}/${_passwordController.text}")
+                                        .then((value){
+                                          try{
+                                            print(value);
+                                          }catch (e){
+                                            showDialog<void>(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertPopUp(
+                                                    title: 'Login Failed',
+                                                    content:
+                                                    'Login Information was incorrect try again',
+                                                  );
+                                                });
+                                          }
+                                    });
+
+                                  }
+                                  // Navigator.push(
+                                  //     context,
+                                  //     PageTransition(
+                                  //       type: PageTransitionType.bottomToTop,
+                                  //       child: const PageNavigation(),
+                                  //     ));
                                 },
                                 child: const Text('Log In',
                                     style: TextStyle(color: Colors.black))))),

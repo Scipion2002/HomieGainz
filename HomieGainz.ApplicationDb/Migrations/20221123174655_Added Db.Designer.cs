@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomieGainz.ApplicationDb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221115234041_Added Db")]
+    [Migration("20221123174655_Added Db")]
     partial class AddedDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,6 +135,10 @@ namespace HomieGainz.ApplicationDb.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Height")
                         .HasColumnType("float");
 
@@ -173,6 +177,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         {
                             Id = 1,
                             Age = 19,
+                            Email = "aturro@student.neumont.edu",
                             Height = 6.0999999999999996,
                             Password = "TestPass",
                             Username = "Scipion2002",
@@ -182,6 +187,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         {
                             Id = 2,
                             Age = 20,
+                            Email = "aturro@student.neumont.edu",
                             Height = 6.0,
                             Password = "DavidPass",
                             Username = "DNgo-Neumont",
@@ -191,6 +197,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         {
                             Id = 3,
                             Age = 21,
+                            Email = "rbrunney@student.neumont.edu",
                             Height = 6.0,
                             Password = "RobPass",
                             Username = "Rxittles",
@@ -210,7 +217,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ExerciseName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -237,7 +244,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         {
                             Id = 1,
                             Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!",
-                            Name = "Push ups",
+                            ExerciseName = "Push ups",
                             RepAmt = 10,
                             SetAmt = 3,
                             TargetMuscle = "biceps/triceps"
@@ -246,7 +253,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         {
                             Id = 2,
                             Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!",
-                            Name = "Push ups",
+                            ExerciseName = "Push ups",
                             RepAmt = 10,
                             SetAmt = 3,
                             TargetMuscle = "biceps/triceps"
@@ -260,6 +267,9 @@ namespace HomieGainz.ApplicationDb.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

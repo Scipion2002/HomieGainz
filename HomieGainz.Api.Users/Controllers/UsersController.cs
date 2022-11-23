@@ -37,7 +37,6 @@ namespace HomieGainz.Api.Application.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
-        [Authorize]
         [HttpGet("login/{username}/{password}")]
         public async Task<IActionResult> Login(string username, string password)
         {

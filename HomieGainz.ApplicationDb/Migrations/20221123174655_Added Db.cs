@@ -14,7 +14,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ExerciseName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TargetMuscle = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SetAmt = table.Column<int>(type: "int", nullable: false),
@@ -77,7 +77,8 @@ namespace HomieGainz.ApplicationDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,6 +117,7 @@ namespace HomieGainz.ApplicationDb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Height = table.Column<double>(type: "float", nullable: false),
@@ -249,7 +251,7 @@ namespace HomieGainz.ApplicationDb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Exercises",
-                columns: new[] { "Id", "Description", "Name", "RepAmt", "SetAmt", "TargetMuscle", "Video" },
+                columns: new[] { "Id", "Description", "ExerciseName", "RepAmt", "SetAmt", "TargetMuscle", "Video" },
                 values: new object[,]
                 {
                     { 1, "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!", "Push ups", 10, 3, "biceps/triceps", null },
@@ -276,12 +278,12 @@ namespace HomieGainz.ApplicationDb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Age", "Height", "MealPlanId", "Password", "UserId", "Username", "Weight", "WorkoutPlanId" },
+                columns: new[] { "Id", "Age", "Email", "Height", "MealPlanId", "Password", "UserId", "Username", "Weight", "WorkoutPlanId" },
                 values: new object[,]
                 {
-                    { 1, 19, 6.0999999999999996, null, "TestPass", null, "Scipion2002", 164, null },
-                    { 2, 20, 6.0, null, "DavidPass", null, "DNgo-Neumont", 156, null },
-                    { 3, 21, 6.0, null, "RobPass", null, "Rxittles", 135, null }
+                    { 1, 19, "aturro@student.neumont.edu", 6.0999999999999996, null, "TestPass", null, "Scipion2002", 164, null },
+                    { 2, 20, "aturro@student.neumont.edu", 6.0, null, "DavidPass", null, "DNgo-Neumont", 156, null },
+                    { 3, 21, "rbrunney@student.neumont.edu", 6.0, null, "RobPass", null, "Rxittles", 135, null }
                 });
 
             migrationBuilder.InsertData(
@@ -295,11 +297,11 @@ namespace HomieGainz.ApplicationDb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Workouts",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Upper Body" },
-                    { 2, "Lower Body" }
+                    { 1, null, "Upper Body" },
+                    { 2, null, "Lower Body" }
                 });
 
             migrationBuilder.CreateIndex(
