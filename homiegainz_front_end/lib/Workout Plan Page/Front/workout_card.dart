@@ -71,15 +71,14 @@ class _WorkoutCardState extends State<WorkoutCard> {
               ),
             ),
             Container(
-              alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-              child: Text(
-                widget.workoutName,
+              child: Center(child: Text(
+                "Workout: ${widget.workoutName}",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
+              ),)
             ),
             Container(
               alignment: Alignment.center,

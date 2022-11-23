@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:homiegainz_front_end/Friend%20Card%20Page/friend_request_card.dart';
 import '../../../util/requests.dart';
 import '../../../util/globals.dart' as globals;
 
@@ -32,6 +34,8 @@ class _MealAppBar extends State<FriendAppBar> {
               bottom: const TabBar(
                 tabs: [
                   Tab(icon: Icon(Icons.people_alt_rounded)),
+                  Tab(icon: Icon(Icons.person_add_alt_1),),
+                  Tab(icon: Icon(FontAwesomeIcons.dumbbell),)
                 ],
               ),
             ),
@@ -83,7 +87,9 @@ class _MealAppBar extends State<FriendAppBar> {
                         //   ),
                         // ),
                       ],
-                    )))
+                    ))),
+                Container(margin: const EdgeInsets.only(top: 10),child: SingleChildScrollView(child: Column( children: [FriendRequestCard()],),),),
+                Container(margin: const EdgeInsets.only(top: 10),child: const Text('Challenges'),)
               ],
             ),
           ),

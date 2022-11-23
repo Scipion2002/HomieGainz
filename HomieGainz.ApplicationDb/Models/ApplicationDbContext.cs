@@ -94,6 +94,7 @@ namespace HomieGainz.ApplicationDb.Db
                 Id = 1,
                 Username = "Scipion2002", 
                 Password = "TestPass", 
+                Email = "aturro@student.neumont.edu",
                 Age = 19, 
                 Weight = 164, 
                 Height = 6.1
@@ -102,7 +103,8 @@ namespace HomieGainz.ApplicationDb.Db
             {
                 Id = 2,
                 Username = "DNgo-Neumont", 
-                Password = "DavidPass", 
+                Password = "DavidPass",
+                Email = "aturro@student.neumont.edu",
                 Age = 20, 
                 Weight = 156, 
                 Height = 6 
@@ -111,7 +113,8 @@ namespace HomieGainz.ApplicationDb.Db
             {
                 Id = 3,
                 Username = "Rxittles", 
-                Password = "RobPass", 
+                Password = "RobPass",
+                Email = "rbrunney@student.neumont.edu",
                 Age = 21, 
                 Weight = 135, 
                 Height = 6 

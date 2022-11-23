@@ -22,6 +22,7 @@ class _CreateWorkoutState extends State<CreateWorkout> {
   TextEditingController setAmtController = TextEditingController();
   Requests request = Requests();
 
+  List<Widget> exercises = [];
   List<dynamic> ingredients = [];
   Map<String, dynamic> recipe = {};
 
@@ -59,6 +60,19 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                 child: const Text(
                   'Add Exercises',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: ListView.separated(
+                  itemCount: exercises.length,
+                  itemBuilder: (context, index) {
+
+                      return Text("Here's some cool stuff ${exercises[index]}");
+
+                  },
+                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+
                 ),
               ),
               Container(
@@ -141,6 +155,17 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                         border: OutlineInputBorder(),
                         hintText: "Enter Set Amt...",
                         labelText: 'Enter Set Amount')),
+              ),
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                child: ElevatedButton(
+                  onPressed: () async {},
+                  child: const Text(
+                    'Add Exercise',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
               ),
               Container(
                 alignment: Alignment.center,
