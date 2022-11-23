@@ -15,7 +15,7 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
   Widget build(BuildContext context) {
     return ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: 350,
+          maxWidth: 400,
         ),
         child: Card(
           margin: const EdgeInsets.all(10),
