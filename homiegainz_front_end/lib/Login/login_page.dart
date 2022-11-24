@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:homiegainz_front_end/util/page_navigation.dart';
 import 'package:page_transition/page_transition.dart';
@@ -98,10 +100,26 @@ class LoginPage extends StatelessWidget {
                                         "http://10.0.2.2:9000/users/login/${_usernameController.text}/${_passwordController.text}")
                                         .then((value){
                                           try{
-                                            print(value);
+                                            print(json.decode(value));
                                             if(value.contains("true")){
                                               globals.isLoggedIn = true;
-                                              requests.makeGetRequest("http://10.0.2.2:9000/users/");
+                                              requests
+                                                  .makeGetRequest("http://10.0.2.2:9000/users/GetUser/${_usernameController.text}")
+                                                  .then((value) {
+                                                print(json.decode(value));
+                                                globals.username = json.decode(value)['username'];
+                                                globals.password = json.decode(value)['password'];
+                                                globals.email = json.decode(value)['email'];
+                                                globals.age = json.decode(value)['age'];
+                                                _usernameController.text = "";
+                                                _passwordController.text = "";
+                                                Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType.bottomToTop,
+                                                      child: const PageNavigation(),
+                                                    ));
+                                              });
                                             }
                                           }catch (e){
                                             showDialog<void>(
@@ -117,12 +135,6 @@ class LoginPage extends StatelessWidget {
                                     });
 
                                   }
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: const PageNavigation(),
-                                      ));
                                 },
                                 child: const Text('Log In',
                                     style: TextStyle(color: Colors.black))))),
