@@ -99,6 +99,10 @@ class LoginPage extends StatelessWidget {
                                         .then((value){
                                           try{
                                             print(value);
+                                            if(value.contains("true")){
+                                              globals.isLoggedIn = true;
+                                              requests.makeGetRequest("http://10.0.2.2:9000/users/");
+                                            }
                                           }catch (e){
                                             showDialog<void>(
                                                 context: context,
@@ -113,12 +117,12 @@ class LoginPage extends StatelessWidget {
                                     });
 
                                   }
-                                  // Navigator.push(
-                                  //     context,
-                                  //     PageTransition(
-                                  //       type: PageTransitionType.bottomToTop,
-                                  //       child: const PageNavigation(),
-                                  //     ));
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: const PageNavigation(),
+                                      ));
                                 },
                                 child: const Text('Log In',
                                     style: TextStyle(color: Colors.black))))),

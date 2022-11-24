@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/Exercise%20Page/Front/exercise_card.dart';
+import 'package:homiegainz_front_end/Exercise%20Page/Front/exercise_card_list.dart';
 import '../../util/to_prev_page.dart';
 import '../../util/requests.dart';
 import '../../util/globals.dart' as globals;
@@ -22,9 +24,7 @@ class _CreateWorkoutState extends State<CreateWorkout> {
   TextEditingController setAmtController = TextEditingController();
   Requests request = Requests();
 
-  List<Widget> exercises = [];
-  List<dynamic> ingredients = [];
-  Map<String, dynamic> recipe = {};
+  List<dynamic> exercises = [];
 
   @override
   Widget build(BuildContext context) {
@@ -55,26 +55,13 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                         hintText: "Enter Workout Name...",
                         labelText: 'Enter Workout Name')),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: const Text(
-                  'Add Exercises',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: ListView.separated(
-                  itemCount: exercises.length,
-                  itemBuilder: (context, index) {
-
-                      return Text("Here's some cool stuff ${exercises[index]}");
-
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+              if (exercises.isNotEmpty)
+                SizedBox(
+                  height: 150,
+                  width: MediaQuery.of(context).size.width - 15,
+                  child: SingleChildScrollView(child: ExerciseCardList(exercises: exercises,),)
 
                 ),
-              ),
               Container(
                 margin: const EdgeInsets.only(top: 25, bottom: 15),
                 child: const Text(
@@ -160,7 +147,19 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
                 child: ElevatedButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    Map<String, dynamic> newExercise = {
+                      "Name": nameOfExerciseController.text,
+                      "TargetMuscle": targetMuscleController.text,
+                      "Description": descriptionOfExerciseController.text,
+                      "SetAmt": int.parse(setAmtController.text),
+                      "RepAmt": int.parse(repAmtController.text)
+                    };
+                    setState(() {
+                      exercises.add(newExercise);
+                    });
+                    print(exercises);
+                  },
                   child: const Text(
                     'Add Exercise',
                     style: TextStyle(color: Colors.black),
@@ -179,18 +178,14 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                           targetMuscleController.text.isNotEmpty) {
                         Map<String, dynamic> newWorkout = {
                           "Name": nameOfWorkoutController.text,
-                          "ExerciseName": nameOfExerciseController.text,
-                          "TargetMuscle": targetMuscleController.text,
-                          "Description": descriptionOfExerciseController.text,
-                          "SetAmt": setAmtController.text,
-                          "RepAmt": repAmtController.text
+                          "Exercises": exercises,
                         };
 
                         request
-                            .makePostRequest(
-                                "http://localhost:9000/workouts", newWorkout)
+                            .makePostRequestWithAuth(
+                                "http://10.0.2.2:9000/workouts", newWorkout, globals.username, globals.password)
                             .then((value) {
-                          print(value);
+                          // print(value);
                         });
                         Navigator.of(context).pop();
                       } else {
