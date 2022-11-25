@@ -27,34 +27,46 @@ namespace HomieGainz.ApplicationDb.Db
 
             modelBuilder.Entity<MealPlan>().HasData(
                new MealPlan
-            {
-                Id = 1,
-                Name = "Low Calories",
-                Description = "This Meal plan will have a lot of veggies and will have a tons of low calorie food",
+               {
+                   Id = 1,
+                   Name = "Low Calories",
+                   Description = "This Meal plan will have a lot of veggies and will have a tons of low calorie food",
 
-            }, new MealPlan
-            {
-                Id = 2,
-                Name = "High Calories",
-                Description = "This mealplan is to bulk up and also be in shape"
-            });
+               }, new MealPlan
+               {
+                   Id = 2,
+                   Name = "High Calories",
+                   Description = "This mealplan is to bulk up and also be in shape"
+               }, new MealPlan
+               {
+                   Id = 3,
+                   Name = "Medium Calories",
+                   Description = "This mealplan is to give you a nice and balanced calorie burn, while giving you enough to build up."
+               });
 
             var meals = modelBuilder.Entity<Meal>().HasData(
                new Meal
-            {
-                Id = 1,
-                Name = "Salmon",
-                Description = "This is a simple meal that will give you enough proteins to hit that gym hard!",
-                IngredientList = "Salmon, spices",
-                Directions = "First, get that salmon going, add a little of lemon pepper and that is all you need"
-            }, new Meal
-            {
-                Id= 2,
-                Name = "Salad",
-                Description = "Nice and easy salad that will make you want to have every day",
-                IngredientList = "Lettuce, Tomato, Broccoli, Carrot",
-                Directions = "First, cut those veggies and then finish it up with putting everything together"
-            });
+               {
+                   Id = 1,
+                   Name = "Salmon",
+                   Description = "This is a simple meal that will give you enough proteins to hit that gym hard!",
+                   IngredientList = "Salmon, spices",
+                   Directions = "First, get that salmon going, add a little of lemon pepper and that is all you need"
+               }, new Meal
+               {
+                   Id = 2,
+                   Name = "Salad",
+                   Description = "Nice and easy salad that will make you want to have every day",
+                   IngredientList = "Lettuce, Tomato, Broccoli, Carrot",
+                   Directions = "First, cut those veggies and then finish it up with putting everything together"
+               }, new Meal
+               {
+                   Id = 3,
+                   Name = "Chicken Pesto & Rice",
+                   Description = "Easy and fast to make meal :)",
+                   IngredientList = "Chicken, pesto sauce, Rice",
+                   Directions = "Get that rice started and while that is happening, cook the chicken. Once everything is done, add the pesto sauce and you're done!"
+               });
 
             modelBuilder.Entity<WorkoutPlan>().HasData(
                new WorkoutPlan 
@@ -67,6 +79,11 @@ namespace HomieGainz.ApplicationDb.Db
                 Id = 2,
                 Name = "Tune up",
                 Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
+            }, new WorkoutPlan
+            {
+                Id = 3,
+                Name = "Slim Down",
+                Description = "This plan is made to make you lower your weight, get ready for some cardio workouts!"
             });
 
             modelBuilder.Entity<Exercise>().HasData(
@@ -81,11 +98,11 @@ namespace HomieGainz.ApplicationDb.Db
             }, new Exercise 
             {
                 Id = 2,
-                Name = "Push ups",
-                TargetMuscle = "biceps/triceps",
+                Name = "Jumping Jacks",
+                TargetMuscle = "Legs",
                 SetAmt = 3,
-                RepAmt = 10,
-                Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
+                RepAmt = 35,
+                Description = "This exercise gives you the feeling of running but without it!"
             });
 
             modelBuilder.Entity<User>().HasData(
@@ -130,6 +147,11 @@ namespace HomieGainz.ApplicationDb.Db
             {
                 Id = 2,
                 Name = "Lower Body" 
+            },
+            new Workout()
+            {
+                Id = 3,
+                Name = "Cardio"
             });
             modelBuilder.Entity<User>().HasMany(u => u.Friends);
         }

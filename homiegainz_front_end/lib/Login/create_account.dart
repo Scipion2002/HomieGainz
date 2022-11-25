@@ -206,6 +206,11 @@ class CreateAccount extends StatelessWidget {
                       .then((value) {
                         print(json.decode(value));
                         globals.userID = json.decode(value)['id'];
+                        globals.username = json.decode(value)['username'];
+                        globals.password = json.decode(value)['password'];
+                        print(globals.userID);
+                        print(globals.username);
+                        print(globals.password);
                       });
 
                       Navigator.of(context).pushAndRemoveUntil(

@@ -54,9 +54,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/users/questionareTotal/{id}/{total}",
+      "UpstreamPathTemplate": "/users/questionaireTotal/{id}/{total}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/users/questionareTotal/{id}/{total}",
+      "DownstreamPathTemplate": "/users/questionaireTotal/{id}/{total}",
       "DownstreamScheme": "http",
       "UseServiceDiscovery": true,
       "ServiceName": "user-service",

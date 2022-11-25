@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import '../../util/globals.dart' as globals;
+import '../../util/requests.dart';
 import 'package:survey_kit/survey_kit.dart';
 
 class QuestionnairePage extends StatefulWidget {
@@ -16,6 +17,9 @@ class QuestionnairePage extends StatefulWidget {
 class _QuestionnairePageState extends State<QuestionnairePage> {
   @override
   Widget build(BuildContext context) {
+    
+    Requests requests = Requests();
+    
     return Scaffold(
         body: Container(
             color: Colors.black,
@@ -28,16 +32,16 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
                     for (var stepResult in result.results) {
                       for (var questionResult in stepResult.results) {
                         score += int.tryParse(questionResult.valueIdentifier ?? "0") ?? 0;
-                        print(questionResult.result.toString());
                       }
                     }
                     print("final Score is $score");
+                    requests
+                        .makeGetRequestWithAuth("http://10.0.2.2:9000/users/questionaireTotal/${globals.userID}/$score", globals.username, globals.password);
                     Navigator.pushNamed(context, '/');
                   },
                   task: getSampleTask(),
                   showProgress: true,
                   localizations: const {
-                    'cancel': 'Cancel',
                     'next': 'Next',
                   },
                   themeData: Theme.of(context).copyWith(
