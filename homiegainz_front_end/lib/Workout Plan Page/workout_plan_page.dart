@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:homiegainz_front_end/Workout%20Plan%20Page/create_workout_page.dart';
 import 'package:homiegainz_front_end/util/add_floating_button.dart';
-
+import '../../util/globals.dart' as globals;
+import '../util/requests.dart';
 import 'Front/workout_card.dart';
 
 class WorkoutPlanPage extends StatelessWidget {
@@ -9,6 +10,10 @@ class WorkoutPlanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Requests requests = Requests();
+    Future<String> getUserWorkouts = requests.makeGetRequestWithAuth("http://10.0.2.2:9000/workoutPlans/${globals.workoutPlanID}", globals.username, globals.password);
+
     return SafeArea(
       child: Scaffold(
         floatingActionButton: const AddFloatingButton(widgetPage: CreateWorkout()),

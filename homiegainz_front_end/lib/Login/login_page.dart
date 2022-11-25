@@ -112,6 +112,8 @@ class LoginPage extends StatelessWidget {
                                                 globals.password = json.decode(value)['password'];
                                                 globals.email = json.decode(value)['email'];
                                                 globals.age = json.decode(value)['age'];
+                                                globals.workoutPlanID = json.decode(value)["workoutPlan"];
+                                                globals.mealPlanID = json.decode(value)["mealPlan"];
                                                 _usernameController.text = "";
                                                 _passwordController.text = "";
                                                 Navigator.push(

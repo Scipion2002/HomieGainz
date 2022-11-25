@@ -36,7 +36,14 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
                     }
                     print("final Score is $score");
                     requests
-                        .makeGetRequestWithAuth("http://10.0.2.2:9000/users/questionaireTotal/${globals.userID}/$score", globals.username, globals.password);
+                        .makeGetRequestWithAuth("http://10.0.2.2:9000/users/questionaireTotal/${globals.userID}/$score", globals.username, globals.password)
+                    .then((value) {
+                      print(json.decode(value));
+                      globals.workoutPlanID = json.decode(value)["workoutPlan"]["id"];
+                      print(globals.workoutPlanID);
+                      globals.mealPlanID = json.decode(value)["mealPlan"]["id"];
+                      print(globals.mealPlanID);
+                    });
                     Navigator.pushNamed(context, '/');
                   },
                   task: getSampleTask(),
