@@ -66,44 +66,96 @@ namespace HomieGainz.ApplicationDb.Db
                    Description = "Easy and fast to make meal :)",
                    IngredientList = "Chicken, pesto sauce, Rice",
                    Directions = "Get that rice started and while that is happening, cook the chicken. Once everything is done, add the pesto sauce and you're done!"
+               }, new Meal
+               {
+                   Id = 4,
+                   Name = "Chicken breast & Egg",
+                   Description = "Super fast meal to make that will give you the carbohydrates and protein you need",
+                   IngredientList = "Chicken Breast, egg",
+                   Directions = "Start preparing the chicken and in another pan, cook that egg. Put it together and enjoy! (give the chicken a spice of your choice to make it better!)"
+               }, new Meal
+               {
+                   Id = 5,
+                   Name = "Tuna Sandwich",
+                   Description = "fast meal that can be to go!",
+                   IngredientList = "Tuna, Sandwich bread, mayonaise",
+                   Directions = "Put bread on plate, open can of tuna, apply mayo to the bread and put the tuna. Done!"
+               }, new Meal
+               {
+                   Id = 6,
+                   Name = "Chicken Chipotle Salad",
+                   Description = "Chicken breast, Chipotle sauce, Salad",
+                   Directions = "cook that chicken while putting the salad on a bowl, add the sauce. After all that, cut the chicken breast into square pieces and place them on top of the salad. Done!"
                });
 
             modelBuilder.Entity<WorkoutPlan>().HasData(
-               new WorkoutPlan 
-            { 
-                Id = 1, 
-                Name = "Bulk up",
-                Description = "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them"
-            }, new WorkoutPlan 
-            { 
-                Id = 2,
-                Name = "Tune up",
-                Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
-            }, new WorkoutPlan
-            {
-                Id = 3,
-                Name = "Slim Down",
-                Description = "This plan is made to make you lower your weight, get ready for some cardio workouts!"
-            });
+               new WorkoutPlan
+               {
+                   Id = 1,
+                   Name = "Bulk up",
+                   Description = "This plan is to help you bulk those muscles and make them bigger! The workouts will mostly be using heavy weights and doing exercises with them"
+               }, new WorkoutPlan
+               {
+                   Id = 2,
+                   Name = "Tune up",
+                   Description = "This plan is filled with workouts that will make your muscles go in shock and it will also have mostly body-weight exercises"
+               }, new WorkoutPlan
+               {
+                   Id = 3,
+                   Name = "Slim Down",
+                   Description = "This plan is made to make you lower your weight, get ready for some cardio workouts!"
+               });
 
             modelBuilder.Entity<Exercise>().HasData(
                new Exercise
-            {
-                Id = 1,
-                Name = "Push ups",
-                TargetMuscle = "biceps/triceps",
-                SetAmt = 3,
-                RepAmt = 10,
-                Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
-            }, new Exercise 
-            {
-                Id = 2,
-                Name = "Jumping Jacks",
-                TargetMuscle = "Legs",
-                SetAmt = 3,
-                RepAmt = 35,
-                Description = "This exercise gives you the feeling of running but without it!"
-            });
+               {
+                   Id = 1,
+                   Name = "Push ups",
+                   TargetMuscle = "biceps/triceps",
+                   SetAmt = 3,
+                   RepAmt = 10,
+                   Description = "This exercise is one of the essentials, it will help you have a better control of your own weight and it will tune you up too!"
+               }, new Exercise
+               {
+                   Id = 2,
+                   Name = "Jumping Jacks",
+                   TargetMuscle = "Legs",
+                   SetAmt = 3,
+                   RepAmt = 35,
+                   Description = "This exercise gives you the feeling of running but without it!"
+               }, new Exercise
+               {
+                   Id = 3,
+                   Name = "Sit-ups",
+                   TargetMuscle = "bottom abdominals",
+                   SetAmt = 3,
+                   RepAmt = 15,
+                   Description = "This exercise helps your bottom abs"
+               }, new Exercise
+               {
+                   Id = 4,
+                   Name = "pull-ups",
+                   TargetMuscle = "back",
+                   SetAmt = 3,
+                   RepAmt = 5,
+                   Description = "This exercise helps your back get stronger and more defined"
+               }, new Exercise
+               {
+                   Id = 5,
+                   Name = "curls",
+                   TargetMuscle = "biceps",
+                   SetAmt = 3,
+                   RepAmt = 12,
+                   Description = "This exercise helps your biceps break down and re-build stronger"
+               }, new Exercise
+               {
+                   Id = 6,
+                   Name = "Leg Press",
+                   TargetMuscle = "legs",
+                   SetAmt = 3,
+                   RepAmt = 12,
+                   Description = "This exercise helps your biceps break down and re-build stronger, it's on you the weight of the plates"
+               });
 
             modelBuilder.Entity<User>().HasData(
             new User() 

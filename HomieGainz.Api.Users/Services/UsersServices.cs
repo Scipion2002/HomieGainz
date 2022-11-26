@@ -75,7 +75,7 @@ namespace HomieGainz.Api.Users.Services
             try
             {
                 logger?.LogInformation("Querying user");
-                var user = await this.dbContext.Users.Where(u => username == u.Username).FirstOrDefaultAsync();
+                var user = await this.dbContext.Users.Where(u => username == u.Username).Include(m => m.MealPlan).Include(w => w.WorkoutPlan).Include(f => f.Friends).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     logger?.LogInformation("User found");
