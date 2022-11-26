@@ -42,7 +42,7 @@ namespace HomieGainz.Api.Workouts.Services
             try
             {
                 logger?.LogInformation("Querying workout");
-                var workout = await dbContext.Workouts.FirstOrDefaultAsync(x => x.Id == id);
+                var workout = await dbContext.Workouts.Include(e => e.Exercises).FirstOrDefaultAsync(x => x.Id == id);
                 if(workout != null)
                 {
                     logger?.LogInformation("workout found!");

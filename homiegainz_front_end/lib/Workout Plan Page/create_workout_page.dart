@@ -186,6 +186,9 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                                 "http://10.0.2.2:9000/workouts", newWorkout, globals.username, globals.password)
                             .then((value) {
                           // print(value);
+                          request
+                            .makeGetRequestWithAuth(
+                              "addWorkoutToPlan/${json.decode(value)["id"]}/${globals.workoutPlanID}", globals.username, globals.password);
                         });
                         Navigator.of(context).pop();
                       } else {

@@ -41,7 +41,7 @@ namespace HomieGainz.Api.MealPan.Services
             try
             {
                 logger?.LogInformation("Querying mealPlan");
-                var mealPlan = await dbContext.MealPlans.FirstOrDefaultAsync(x => x.Id == id);
+                var mealPlan = await dbContext.MealPlans.Include(m => m.Meals).FirstOrDefaultAsync(x => x.Id == id);
                 if (mealPlan != null)
                 {
                     logger?.LogInformation("mealPlan found!");

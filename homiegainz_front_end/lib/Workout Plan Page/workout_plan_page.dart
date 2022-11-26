@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -34,25 +35,36 @@ class _WorkoutPlanPageState extends State<WorkoutPlanPage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     userWorkouts.clear();
-                  }
-                  List<dynamic> workoutInformation =
-                      json.decode(snapshot.data!);
-                  print(workoutInformation.toString());
 
-                  for (var workout in workoutInformation) {
-                    userWorkouts.add(WorkoutCard(
-                      workoutID: workout["id"],
-                      workoutName: workout["name"],
-                      description: workout["description"],
-                      exercises: workout["exercises"],
-                    ));
-                  }
+                    LinkedHashMap<String, dynamic> workoutInformation =
+                    json.decode(snapshot.data!);
 
-                  return Column(children: [
-                    const Text("Your Workout Plan",
-                        style: TextStyle(
-                            fontSize: 35, fontWeight: FontWeight.bold)),
-                  ]);
+
+                    List<dynamic> workouts = workoutInformation["workouts"]["\$values"];
+                    for (var workout in workouts) {
+                      requests.makeGetRequestWithAuth("http://10.0.2.2:9000/workouts/${workout["id"]}", globals.username, globals.password)
+                      userWorkouts.add(WorkoutCard(
+                        workoutID: workout["id"],
+                        workoutName: workout["name"],
+                        description: workout["description"],
+                        exercises: workout["exercises"],
+                      ));
+                    }
+
+                    return Column(children:
+                      userWorkouts
+                    );
+                  } else if (snapshot.hasError){
+                    return Text('${snapshot.error}');
+                  }
+                  return Center(
+                      heightFactor: 20,
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator(
+                          color: Colors.tealAccent,
+                        ),
+                      ));
                 })));
   }
 }
