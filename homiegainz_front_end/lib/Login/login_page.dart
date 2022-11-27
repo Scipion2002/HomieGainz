@@ -106,7 +106,6 @@ class LoginPage extends StatelessWidget {
                                               requests
                                                   .makeGetRequest("http://10.0.2.2:9000/users/GetUser/${_usernameController.text}")
                                                   .then((value) {
-                                                print(json.decode(value));
                                                 globals.userID = json.decode(value)['id'];
                                                 globals.username = json.decode(value)['username'];
                                                 globals.password = json.decode(value)['password'];

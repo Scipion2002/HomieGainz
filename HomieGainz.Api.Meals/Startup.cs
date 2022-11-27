@@ -33,7 +33,7 @@ namespace HomieGainz.Api.Meals
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

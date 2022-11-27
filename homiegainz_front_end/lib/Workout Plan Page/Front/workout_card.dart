@@ -8,7 +8,6 @@ class WorkoutCard extends StatefulWidget {
    WorkoutCard({Key? key,
     this.imageUrl = "https://i.pinimg.com/736x/ba/92/7f/ba927ff34cd961ce2c184d47e8ead9f6.jpg",
     this.workoutName = "",
-    this.description = "",
     this.workoutID = 0,
     this.exercises = const [],
     this.beingEdited = false,
@@ -16,7 +15,6 @@ class WorkoutCard extends StatefulWidget {
 
   final String imageUrl;
   final String workoutName;
-  final String description;
   final int workoutID;
   final List<dynamic> exercises;
   final bool beingEdited;
@@ -39,13 +37,11 @@ class _WorkoutCardState extends State<WorkoutCard> {
                 builder: (BuildContext context) => !widget.beingEdited
                     ? WorkoutInfo(
                   workoutName: widget.workoutName,
-                  description: widget.description,
                   imgUrl: widget.imageUrl,
                   exercises: widget.exercises,
                 )
                     : EditWorkoutPage(
                   workoutName: widget.workoutName,
-                  description: widget.description,
                   exercises: widget.exercises,
                   imgUrl: widget.imageUrl,
                 ),

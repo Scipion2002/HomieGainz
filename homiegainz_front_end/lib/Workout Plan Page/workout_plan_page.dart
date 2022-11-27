@@ -30,41 +30,40 @@ class _WorkoutPlanPageState extends State<WorkoutPlanPage> {
         child: Scaffold(
             floatingActionButton:
                 const AddFloatingButton(widgetPage: CreateWorkout()),
-            body: FutureBuilder<String>(
-                future: getUserWorkouts,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    userWorkouts.clear();
+            body: SingleChildScrollView(
+              child: FutureBuilder<String>(
+                  future: getUserWorkouts,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      userWorkouts.clear();
 
-                    LinkedHashMap<String, dynamic> workoutInformation =
-                    json.decode(snapshot.data!);
+                      LinkedHashMap<String, dynamic> workoutInformation =
+                          json.decode(snapshot.data!);
 
+                      List<dynamic> workouts =
+                          workoutInformation["workouts"];
 
-                    List<dynamic> workouts = workoutInformation["workouts"]["\$values"];
-                    for (var workout in workouts) {
-                      requests.makeGetRequestWithAuth("http://10.0.2.2:9000/workouts/${workout["id"]}", globals.username, globals.password)
-                      userWorkouts.add(WorkoutCard(
-                        workoutID: workout["id"],
-                        workoutName: workout["name"],
-                        description: workout["description"],
-                        exercises: workout["exercises"],
-                      ));
+                      for (var workout in workouts) {
+
+                            userWorkouts.add(WorkoutCard(
+                              workoutID: workout["id"],
+                              workoutName: workout["name"],
+                              exercises: workout["exercises"],
+                            ));
+                      }
+                      return Column(children: userWorkouts);
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
                     }
-
-                    return Column(children:
-                      userWorkouts
-                    );
-                  } else if (snapshot.hasError){
-                    return Text('${snapshot.error}');
-                  }
-                  return Center(
-                      heightFactor: 20,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator(
-                          color: Colors.tealAccent,
-                        ),
-                      ));
-                })));
+                    return Center(
+                        heightFactor: 20,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const CircularProgressIndicator(
+                            color: Colors.tealAccent,
+                          ),
+                        ));
+                  }),
+            )));
   }
 }

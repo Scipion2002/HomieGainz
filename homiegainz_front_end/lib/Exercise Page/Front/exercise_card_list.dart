@@ -17,11 +17,11 @@ class ExerciseCardList extends StatelessWidget {
     for (var exercise in exercises) {
       print(exercise);
       exerciseList.add(ExerciseCard(
-          exerciseName: exercise['Name'],
-          targetMuscle: exercise['TargetMuscle'],
-          setAmt: exercise['SetAmt'],
-          repAmt: exercise['RepAmt'],
-          description: exercise['Description']));
+          exerciseName: exercise['name'],
+          targetMuscle: exercise['targetMuscle'],
+          setAmt: exercise['setAmt'],
+          repAmt: exercise['repAmt'],
+          description: exercise['description']));
     }
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),

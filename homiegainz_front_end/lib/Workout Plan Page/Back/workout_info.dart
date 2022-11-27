@@ -4,14 +4,12 @@ import 'package:homiegainz_front_end/util/to_prev_page.dart';
 
 class WorkoutInfo extends StatelessWidget {
   final String workoutName;
-  final String description;
   final String imgUrl;
   final List<dynamic> exercises;
 
   const WorkoutInfo({
     Key? key,
     this.workoutName = "",
-    this.description = "",
     this.imgUrl = "",
     this.exercises = const [],
   }) : super(key: key);
