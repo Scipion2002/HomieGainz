@@ -49,6 +49,7 @@ class _WorkoutPlanPageState extends State<WorkoutPlanPage> {
                               workoutID: workout["id"],
                               workoutName: workout["name"],
                               exercises: workout["exercises"],
+                              isAdded: true,
                             ));
                       }
                       return Column(children: userWorkouts);

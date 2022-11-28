@@ -1,7 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/Workout%20Plan%20Page/Front/workout_card.dart';
+import '../../util/globals.dart' as globals;
+import '../util/requests.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+
+
+  SearchBar({Key? key, this.filter = "", this.futureSearchInfo})
+      : super(key: key);
+
+  String filter;
+  Future<String>? futureSearchInfo;
 
   @override
   State<SearchBar> createState() => _SearchBarState();
@@ -9,6 +20,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar>
     with SingleTickerProviderStateMixin {
+  Requests requests = Requests();
   bool _isActive = false;
 
   @override
@@ -38,6 +50,15 @@ class _SearchBarState extends State<SearchBar>
                             prefixIcon: IconButton(
                               onPressed: () {
                                 print(_searchController.text);
+                                print(widget.filter);
+                                if (widget.filter == "workout") {
+                                    widget.futureSearchInfo = requests
+                                        .makeGetRequest(
+                                            "http://10.0.2.2:9000/workouts/ByName/${_searchController.text}")
+                                        .then((value) {
+                                      return value;
+                                    });
+                                }
                               },
                               icon: const Icon(Icons.search),
                             ),
@@ -45,7 +66,6 @@ class _SearchBarState extends State<SearchBar>
                                 onPressed: () {
                                   setState(() {
                                     _isActive = false;
-
                                   });
                                 },
                                 icon: const Icon(Icons.close))),

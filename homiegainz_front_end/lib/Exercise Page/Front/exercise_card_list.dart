@@ -15,7 +15,6 @@ class ExerciseCardList extends StatelessWidget {
     ];
 
     for (var exercise in exercises) {
-      print(exercise);
       exerciseList.add(ExerciseCard(
           exerciseName: exercise['name'],
           targetMuscle: exercise['targetMuscle'],
