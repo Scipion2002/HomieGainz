@@ -114,8 +114,7 @@ class _MealAppBar extends State<FriendAppBar> {
                             for (var request in requests) {
                               userFriendRequests.add(FriendRequestCard(
                                   userId: request['fromUser']['id'],
-                                  username: request['fromUser']['username'],
-                                  
+                                  username: request['fromUser']['username']
                               ));
                             }
 

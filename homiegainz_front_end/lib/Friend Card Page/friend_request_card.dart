@@ -45,7 +45,12 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
                         icon: const Icon(Icons.check_circle),
                         alignment: Alignment.centerLeft,
                         onPressed: () {
-                          requests.makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/sendFriendRequest/${fromUserId}/{toUserId}", globals.username, globals.password);
+                          setState(() {
+                            requests.makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/acceptRequest/${globals.userID}/${widget.userId}", globals.username, globals.password).then((value) {setState(() {
+
+                            });});
+
+                          });
                         },
                       ),
                       const Divider(),
@@ -53,12 +58,12 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
                         icon: const Icon(Icons.cancel),
                         alignment: Alignment.centerLeft,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   PageTransition(
-                          //       type: PageTransitionType.rightToLeft,
-                          //       child: EditInfoPage(editProfileInfo: widget.editProfileInfo, accountInfo: widget.accountInfo,)),
-                          // );
+                          setState(() {
+
+                          });
+                          requests.makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/acceptRequest/${globals.userID}/${widget.userId}", globals.username, globals.password).then((value) {setState(() {
+
+                          });});
                         },
                       ),
                     ],

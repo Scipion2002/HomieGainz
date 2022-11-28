@@ -149,16 +149,20 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                 child: ElevatedButton(
                   onPressed: () async {
                     Map<String, dynamic> newExercise = {
-                      "Name": nameOfExerciseController.text,
-                      "TargetMuscle": targetMuscleController.text,
-                      "Description": descriptionOfExerciseController.text,
-                      "SetAmt": int.parse(setAmtController.text),
-                      "RepAmt": int.parse(repAmtController.text)
+                      "name": nameOfExerciseController.text,
+                      "targetMuscle": targetMuscleController.text,
+                      "description": descriptionOfExerciseController.text,
+                      "setAmt": int.parse(setAmtController.text),
+                      "repAmt": int.parse(repAmtController.text)
                     };
                     setState(() {
                       exercises.add(newExercise);
                     });
-                    print(exercises);
+                    nameOfExerciseController.text = "";
+                    targetMuscleController.text = "";
+                    descriptionOfExerciseController.text = "";
+                    setAmtController.text = "";
+                    repAmtController.text = "";
                   },
                   child: const Text(
                     'Add Exercise',
@@ -172,10 +176,7 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                 child: ElevatedButton(
                     onPressed: () async {
                       if (nameOfWorkoutController.text.isNotEmpty &&
-                          descriptionOfExerciseController.text.isNotEmpty &&
-                          repAmtController.text.isNotEmpty &&
-                          setAmtController.text.isNotEmpty &&
-                          targetMuscleController.text.isNotEmpty) {
+                          exercises.isNotEmpty) {
                         Map<String, dynamic> newWorkout = {
                           "Name": nameOfWorkoutController.text,
                           "Exercises": exercises,
@@ -188,8 +189,11 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                           // print(value);
                           request
                             .makeGetRequestWithAuth(
-                              "addWorkoutToPlan/${json.decode(value)["id"]}/${globals.workoutPlanID}", globals.username, globals.password);
+                              "http://10.0.2.2:9000/workoutPlans/addWorkoutToPlan/${json.decode(value)["id"]}/${globals.workoutPlanID}", globals.username, globals.password);
                         });
+
+
+
                         Navigator.of(context).pop();
                       } else {
                         await showDialog<void>(
