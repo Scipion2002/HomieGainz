@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../../util/requests.dart';
+import '../../../util/globals.dart' as globals;
 
 class ChallengeRequestCard extends StatefulWidget {
-  ChallengeRequestCard({Key? key, this.userId = 0, this.username = 'Rxittles', this.workoutId = 0, this.workoutName = 'Killer Push-ups'}) : super(key: key);
+  ChallengeRequestCard(
+      {Key? key,
+      this.userId = 0,
+      this.username = 'Rxittles',
+      this.workoutId = 0,
+      this.workoutName = 'Killer Push-ups'})
+      : super(key: key);
 
   int userId;
   String username;
@@ -13,6 +21,8 @@ class ChallengeRequestCard extends StatefulWidget {
 }
 
 class _ChallengeRequestCardState extends State<ChallengeRequestCard> {
+  Requests requests = Requests();
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -44,24 +54,21 @@ class _ChallengeRequestCardState extends State<ChallengeRequestCard> {
                         icon: const Icon(Icons.check_circle),
                         alignment: Alignment.centerLeft,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   PageTransition(
-                          //       type: PageTransitionType.rightToLeft,
-                          //       child: EditInfoPage(editProfileInfo: widget.editProfileInfo, accountInfo: widget.accountInfo,)),
-                          // );
+                          requests.makeGetRequestWithAuth(
+                              "http://10.0.2.2:9000/challenges/acceptRequest/${globals.userID}/${widget.userId}/${widget.workoutId}",
+                              globals.username,
+                              globals.password);
                         },
                       ),
                       IconButton(
                         icon: const Icon(Icons.cancel),
                         alignment: Alignment.centerLeft,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   PageTransition(
-                          //       type: PageTransitionType.rightToLeft,
-                          //       child: EditInfoPage(editProfileInfo: widget.editProfileInfo, accountInfo: widget.accountInfo,)),
-                          // );
+                          requests
+                              .makeGetRequestWithAuth(
+                              "http://10.0.2.2:9000/challenges/rejectRequest/${globals.userID}/${widget.userId}/${widget.workoutId}",
+                              globals.username,
+                              globals.password);
                         },
                       ),
                     ],
