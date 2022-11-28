@@ -48,7 +48,7 @@ namespace HomieGainz.Api.Challenges.Services
                 if (user.User != null)
                 {
                     logger?.LogInformation("User found, getting friendship requests");
-                    var challengeRequests = await dbContext.Challenges.Where(t => t.ToUser.Id == userId && !t.Accepted).Include(f => f.FromUser).ToListAsync();
+                    var challengeRequests = await dbContext.Challenges.Where(t => t.ToUser.Id == userId && !t.Accepted).Include(f => f.FromUser).Include(w => w.Workout).ToListAsync();
                     if (challengeRequests != null && challengeRequests.Any())
                     {
                         logger?.LogInformation($"{challengeRequests.Count} request(s) found");

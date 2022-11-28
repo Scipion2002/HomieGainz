@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../util/requests.dart';
+import '../../../util/globals.dart' as globals;
 
 class FriendRequestCard extends StatefulWidget {
   FriendRequestCard({Key? key, this.userId = 0, this.username = 'Rxittles'}) : super(key: key);
@@ -11,6 +13,7 @@ class FriendRequestCard extends StatefulWidget {
 }
 
 class _FriendRequestCardState extends State<FriendRequestCard> {
+  Requests requests = Requests();
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -42,12 +45,7 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
                         icon: const Icon(Icons.check_circle),
                         alignment: Alignment.centerLeft,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   PageTransition(
-                          //       type: PageTransitionType.rightToLeft,
-                          //       child: EditInfoPage(editProfileInfo: widget.editProfileInfo, accountInfo: widget.accountInfo,)),
-                          // );
+                          requests.makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/sendFriendRequest/${fromUserId}/{toUserId}", globals.username, globals.password);
                         },
                       ),
                       const Divider(),
