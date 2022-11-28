@@ -154,7 +154,7 @@
     {
       "UpstreamPathTemplate": "/mealPlans/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/Mealplans/{id}",
+      "DownstreamPathTemplate": "/mealplans/{id}",
       "UseServiceDiscovery": true,
       "ServiceName": "mealplan-service",
       "DownstreamScheme": "http",
