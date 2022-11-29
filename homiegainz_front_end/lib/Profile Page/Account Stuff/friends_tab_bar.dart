@@ -77,6 +77,7 @@ class _MealAppBar extends State<FriendAppBar> {
                                       userFriendList.add(FriendCard(
                                         userId: friend['id'],
                                         username: friend['username']
+
                                       ));
                                     }
 

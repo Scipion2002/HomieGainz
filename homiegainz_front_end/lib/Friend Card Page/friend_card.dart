@@ -43,7 +43,8 @@ class _FriendCardState extends State<FriendCard> {
                       IconButton(
                         icon: const Icon(Icons.keyboard_double_arrow_right_outlined),
                         alignment: Alignment.centerLeft,
-                        onPressed: () {
+                        onPressed: () async {
+
                           // Navigator.push(
                           //   context,
                           //   PageTransition(
