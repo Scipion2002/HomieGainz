@@ -28,23 +28,17 @@ class _MealAppBar extends State<FriendAppBar> {
     Future<String> getFriendList = requests.makeGetRequestWithAuth(
         "http://10.0.2.2:9000/users/getFriendList/${globals.userID}",
         globals.username,
-        globals.password).then((value) {
-      return Future.value(value);
-    });
+        globals.password);
 
     Future<String> getFriendRequestsList = requests.makeGetRequestWithAuth(
         "http://10.0.2.2:9000/friendships/${globals.userID}",
         globals.username,
-        globals.password).then((value) {
-          return Future.value(value);
-    });
+        globals.password);
 
     Future<String> getChallengeRequestsList = requests.makeGetRequestWithAuth(
         "http://10.0.2.2:9000/challenges/${globals.userID}",
         globals.username,
-        globals.password).then((value) {
-      return Future.value(value);
-    });
+        globals.password);
 
     return Expanded(
       child: Container(
@@ -80,6 +74,7 @@ class _MealAppBar extends State<FriendAppBar> {
                             child: FutureBuilder<String>(
                                 future: getFriendList,
                                 builder: (context, snapshot) {
+                                  print(snapshot.data);
                                   if (snapshot.hasData) {
                                     userFriendList.clear();
                                     List<dynamic> friends =
@@ -122,6 +117,9 @@ class _MealAppBar extends State<FriendAppBar> {
                             child: FutureBuilder<String>(
                                 future: getFriendRequestsList,
                                 builder: (context, snapshot) {
+                                  if(snapshot.data == ""){
+                                    return const Text('you have no Friendships :(');
+                                  }
                                   if (snapshot.hasData) {
                                     userFriendRequests.clear();
                                     List<dynamic> requests =
@@ -138,7 +136,7 @@ class _MealAppBar extends State<FriendAppBar> {
                                       children: userFriendRequests,
                                     );
                                   } else if (snapshot.hasError) {
-                                    return const Text('');
+                                    return Text('');
                                   }
 
                                   return Center(
@@ -160,6 +158,9 @@ class _MealAppBar extends State<FriendAppBar> {
                     child: FutureBuilder<String>(
                         future: getChallengeRequestsList,
                         builder: (context, snapshot) {
+                          if(snapshot.data == ""){
+                            return const Text('you have no Challenges :(');
+                          }
                           if (snapshot.hasData) {
                             userChallengeRequests.clear();
                             List<dynamic> challenges =
@@ -177,6 +178,7 @@ class _MealAppBar extends State<FriendAppBar> {
                               children: userChallengeRequests,
                             );
                           } else if (snapshot.hasError) {
+
                             return Text('');
                           }
 
