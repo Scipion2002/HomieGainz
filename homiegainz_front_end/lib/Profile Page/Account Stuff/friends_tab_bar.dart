@@ -25,14 +25,26 @@ class _MealAppBar extends State<FriendAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    Future<String> getFriendList = requests
-        .makeGetRequestWithAuth("http://10.0.2.2:9000/users/getFriendList/${globals.userID}", globals.username, globals.password);
+    Future<String> getFriendList = requests.makeGetRequestWithAuth(
+        "http://10.0.2.2:9000/users/getFriendList/${globals.userID}",
+        globals.username,
+        globals.password).then((value) {
+      return Future.value(value);
+    });
 
-    Future<String> getFriendRequestsList = requests
-        .makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/${globals.userID}", globals.username, globals.password);
+    Future<String> getFriendRequestsList = requests.makeGetRequestWithAuth(
+        "http://10.0.2.2:9000/friendships/${globals.userID}",
+        globals.username,
+        globals.password).then((value) {
+          return Future.value(value);
+    });
 
-    Future<String> getChallengeRequestsList = requests
-        .makeGetRequestWithAuth("http://10.0.2.2:9000/challenges/${globals.userID}", globals.username, globals.password);
+    Future<String> getChallengeRequestsList = requests.makeGetRequestWithAuth(
+        "http://10.0.2.2:9000/challenges/${globals.userID}",
+        globals.username,
+        globals.password).then((value) {
+      return Future.value(value);
+    });
 
     return Expanded(
       child: Container(
@@ -75,10 +87,8 @@ class _MealAppBar extends State<FriendAppBar> {
 
                                     for (var friend in friends) {
                                       userFriendList.add(FriendCard(
-                                        userId: friend['id'],
-                                        username: friend['username']
-
-                                      ));
+                                          userId: friend['id'],
+                                          username: friend['username']));
                                     }
 
                                     return Column(
@@ -104,38 +114,45 @@ class _MealAppBar extends State<FriendAppBar> {
                 Container(
                   margin: const EdgeInsets.only(top: 15),
                   child: SingleChildScrollView(
-                    child: FutureBuilder<String>(
-                        future: getFriendRequestsList,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            userFriendRequests.clear();
-                            List<dynamic> requests =
-                            json.decode(snapshot.data!);
+                      child: Column(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          child: SingleChildScrollView(
+                            child: FutureBuilder<String>(
+                                future: getFriendRequestsList,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    userFriendRequests.clear();
+                                    List<dynamic> requests =
+                                        json.decode(snapshot.data!);
 
-                            for (var request in requests) {
-                              userFriendRequests.add(FriendRequestCard(
-                                  userId: request['fromUser']['id'],
-                                  username: request['fromUser']['username']
-                              ));
-                            }
+                                    for (var request in requests) {
+                                      userFriendRequests.add(FriendRequestCard(
+                                          userId: request['fromUser']['id'],
+                                          username: request['fromUser']
+                                              ['username']));
+                                    }
 
-                            return Column(
-                              children: userFriendRequests,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          }
+                                    return Column(
+                                      children: userFriendRequests,
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return const Text('');
+                                  }
 
-                          return Center(
-                              heightFactor: 20,
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: const CircularProgressIndicator(
-                                  color: Colors.tealAccent,
-                                ),
-                              ));
-                        }),
-                  ),
+                                  return Center(
+                                      heightFactor: 20,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: const CircularProgressIndicator(
+                                          color: Colors.tealAccent,
+                                        ),
+                                      ));
+                                }),
+                          ))
+                    ],
+                  )),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 15),
@@ -146,22 +163,21 @@ class _MealAppBar extends State<FriendAppBar> {
                           if (snapshot.hasData) {
                             userChallengeRequests.clear();
                             List<dynamic> challenges =
-                            json.decode(snapshot.data!);
+                                json.decode(snapshot.data!);
 
                             for (var challenge in challenges) {
                               userChallengeRequests.add(ChallengeRequestCard(
-                                userId: challenge['fromUser']['id'],
-                                username: challenge['fromUser']['username'],
-                                workoutId: challenge['workout']['id'],
-                                workoutName: challenge['workout']['name']
-                              ));
+                                  userId: challenge['fromUser']['id'],
+                                  username: challenge['fromUser']['username'],
+                                  workoutId: challenge['workout']['id'],
+                                  workoutName: challenge['workout']['name']));
                             }
 
                             return Column(
                               children: userChallengeRequests,
                             );
                           } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
+                            return Text('');
                           }
 
                           return Center(

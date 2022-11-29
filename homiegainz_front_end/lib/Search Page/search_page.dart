@@ -2,6 +2,8 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:homiegainz_front_end/Friend%20Card%20Page/add_friend_card.dart';
+import 'package:homiegainz_front_end/Meal%20Plan%20Page/Front/meal_card.dart';
 import '../Workout Plan Page/Front/workout_card.dart';
 import '../../util/globals.dart' as globals;
 import '../util/requests.dart';
@@ -51,17 +53,36 @@ class _SearchPageState extends State<SearchPage>
                                 hintText: 'Search for something',
                                 prefixIcon: IconButton(
                                   onPressed: () {
-                                    print(_searchController.text);
-                                    print(filter);
+                                    setState(() {
+                                      userSearch.clear();
+                                    });
+
                                     if (filter == "workout") {
                                       // futureSearchInfo =
                                       requests
                                           .makeGetRequest(
                                           "http://10.0.2.2:9000/workouts/ByName/${_searchController.text}")
                                           .then((value){
-                                            showData(value);
+                                            showData(filter, value);
                                         //
                                         // return value;
+                                      });
+                                    }
+                                    if (filter == "meal") {
+                                      requests
+                                          .makeGetRequest(
+                                          "http://10.0.2.2:9000/meals/ByName/${_searchController.text}")
+                                          .then((value){
+                                        showData(filter, value);
+                                        //
+                                        // return value;
+                                      });
+                                    }
+                                    if(filter == "user") {
+                                      requests
+                                          .makeGetRequest("http://10.0.2.2:9000/users/GetUser/${_searchController.text}")
+                                          .then((value) {
+                                        showData(filter, value);
                                       });
                                     }
                                   },
@@ -127,56 +148,48 @@ class _SearchPageState extends State<SearchPage>
                   ),
                   const Divider(),
                   Column(children: userSearch,)
-                //   FutureBuilder<String>(
-                //       future: futureSearchInfo,
-                //       builder: (context, snapshot) {
-                //         switch (snapshot.connectionState) {
-                //           case ConnectionState.waiting:
-                //             return const Text(
-                //               "Search for something!",
-                //               style: TextStyle(fontSize: 15),
-                //             );
-                //           default:
-                //             if (snapshot.hasData) {
-                //               LinkedHashMap information =
-                //                   json.decode(snapshot.data!);
-                //               print(information);
-                //               userSearch.clear();
-                //               if (filter.contains("workout")) {
-                //                 userSearch.add(WorkoutCard(
-                //                   workoutID: information["id"],
-                //                   workoutName: information["name"],
-                //                   exercises: information["exercises"],
-                //                 ));
-                //               }
-                //               return Column(
-                //                 children: userSearch,
-                //               );
-                //             } else if (snapshot.hasError) {
-                //               return Text('${snapshot.error}');
-                //             }
-                //             return const Text(
-                //               "Im cool lol",
-                //               style: TextStyle(fontSize: 15),
-                //             );
-                //         }
-                //       })
                 ],
               ),
             )));
   }
 
-  void showData(vale) {
-    LinkedHashMap<String, dynamic> data = json.decode(vale);
+  void showData(filter, value) {
+    LinkedHashMap<String, dynamic> data = json.decode(value);
 
     print(data);
 
-      setState(() {
+    switch(filter){
+      case "workout":
+        setState(() {
         userSearch.add(WorkoutCard(
           workoutID: data["id"],
           workoutName: data["name"],
           exercises: data["exercises"],
         ));
       });
+      break;
+
+      case "meal":
+        setState(() {
+          userSearch.add(MealCard(
+            mealID: data["id"],
+            mealName: data["name"],
+            description: data["description"],
+            ingredients: data["ingredientList"],
+            directions: data["directions"],
+          ));
+        });
+      break;
+
+      case "user":
+        setState(() {
+          userSearch.add(AddFriendCard(
+            userId: data["id"],
+            username: data["username"],
+          ));
+        });
+    }
+
+
   }
 }

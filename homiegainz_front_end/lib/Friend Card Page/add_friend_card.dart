@@ -1,28 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import '../../../util/requests.dart';
 import '../../../util/globals.dart' as globals;
-import '../Profile Page/profile_page.dart';
 
-class FriendRequestCard extends StatefulWidget {
-  FriendRequestCard({Key? key, this.userId = 0, this.username = 'Rxittles'})
+class AddFriendCard extends StatefulWidget {
+  AddFriendCard({Key? key, this.userId = 0, this.username = 'Rxittles'})
       : super(key: key);
 
   int userId;
   String username;
 
   @override
-  State<FriendRequestCard> createState() => _FriendRequestCardState();
+  State<AddFriendCard> createState() => _AddFriendCardState();
 }
 
-class _FriendRequestCardState extends State<FriendRequestCard> {
+class _AddFriendCardState extends State<AddFriendCard> {
   Requests requests = Requests();
-
+  
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: 400,
+          maxWidth: 350,
         ),
         child: Card(
           margin: const EdgeInsets.all(10),
@@ -46,26 +46,10 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
                       ),
                       const Spacer(),
                       IconButton(
-                        icon: const Icon(Icons.check_circle),
+                        icon: const Icon(Icons.add),
                         alignment: Alignment.centerLeft,
                         onPressed: () async {
-                          requests
-                              .makeGetRequestWithAuth(
-                                  "http://10.0.2.2:9000/friendships/acceptRequest/${globals.userID}/${widget.userId}",
-                                  globals.username,
-                                  globals.password);
-                        },
-                      ),
-                      const Divider(),
-                      IconButton(
-                        icon: const Icon(Icons.cancel),
-                        alignment: Alignment.centerLeft,
-                        onPressed: () async {
-                          requests
-                              .makeGetRequestWithAuth(
-                                  "http://10.0.2.2:9000/friendships/rejectRequest/${globals.userID}/${widget.userId}",
-                                  globals.username,
-                                  globals.password);
+                          requests.makeGetRequestWithAuth("http://10.0.2.2:9000/friendships/sendFriendRequest/${globals.userID}/${widget.userId}", globals.username, globals.password);
                         },
                       ),
                     ],

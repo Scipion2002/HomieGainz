@@ -163,9 +163,9 @@ namespace HomieGainz.Api.Friendships.Services
                         logger?.LogInformation($"{friendshipRequests.Count} request(s) found");
                         return (true, friendshipRequests, null);
                     }
-                    return (false, null, "Not Found");
+                    return (false, null, null);
                 }
-                return (false, null, "Not found");
+                return (false, null, null);
             }
             catch (Exception ex)
             {

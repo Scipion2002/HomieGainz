@@ -54,9 +54,9 @@ namespace HomieGainz.Api.Challenges.Services
                         logger?.LogInformation($"{challengeRequests.Count} request(s) found");
                         return (true, challengeRequests, null);
                     }
-                    return (false, null, "Not Found");
+                    return (false, null, null);
                 }
-                return (false, null, "Not found");
+                return (false, null, null);
             }
             catch (Exception ex)
             {
