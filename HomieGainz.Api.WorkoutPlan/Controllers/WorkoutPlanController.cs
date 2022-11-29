@@ -63,6 +63,18 @@ namespace HomieGainz.Api.WorkoutPlans.Controllers
         }
 
         [Authorize]
+        [HttpGet("deleteWorkoutFromPlan/{workoutId}/{workoutPlanId}")]
+        public async Task<IActionResult> DeleteWorkoutFromWorkoutPlanAsync(int workoutId, int workoutPlanId)
+        {
+            var result = await workoutPlanService.DeleteWorkoutFromWorkoutPlanAsync(workoutId, workoutPlanId);
+            if (result.IsSuccess)
+            {
+                return Ok(result.WorkoutPlan);
+            }
+            return NotFound();
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateWorkoutPlanAsync(WorkoutPlan newWorkoutPlan)
         {

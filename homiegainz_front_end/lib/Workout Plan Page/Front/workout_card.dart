@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../Edit_pages/edit_workout_page.dart';
 import '../../util/globals.dart' as globals;
+import '../../util/requests.dart';
 import '../Back/workout_info.dart';
 
 class WorkoutCard extends StatefulWidget {
@@ -24,6 +27,7 @@ class WorkoutCard extends StatefulWidget {
 }
 
 class _WorkoutCardState extends State<WorkoutCard> {
+  Requests requests = Requests();
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -90,19 +94,21 @@ class _WorkoutCardState extends State<WorkoutCard> {
                         widget.isAdded = !widget.isAdded;
                       });
 
-                      // if (widget.isAdded) {
-                      //   requests
-                      //       .makeGetRequest(
-                      //       "http://10.0.2.2:8888/meal/save/${widget.mealID}/${globals.username}")
-                      //       .then((value) {
-                      //   });
-                      // } else {
-                      //   requests
-                      //       .makeGetRequest(
-                      //       "http://10.0.2.2:8888/meal/unsave/${widget.mealID}/${globals.username}")
-                      //       .then((value) {
-                      //   });
-                      // }
+                      if (widget.isAdded) {
+                        requests
+                            .makeGetRequestWithAuth(
+                            "http://10.0.2.2:9000/workoutPlans/addWorkoutToPlan/${widget.workoutID}/${globals.workoutPlanID}", globals.username, globals.password)
+                            .then((value) {
+                              print(json.decode(value));
+                        });
+                      } else {
+                        requests
+                            .makeGetRequestWithAuth(
+                            "http://10.0.2.2:9000/workoutPlans/deleteWorkoutFromPlan/${widget.workoutID}/${globals.workoutPlanID}", globals.username, globals.password)
+                            .then((value) {
+                          print(json.decode(value));
+                        });
+                      }
                     },
                   ),
                 ),

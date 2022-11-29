@@ -85,6 +85,35 @@ namespace HomieGainz.Api.WorkoutPlans.Services
             }
         }
 
+        public async Task<(bool IsSuccess, WorkoutPlan? WorkoutPlan, string? ErrorMessage)> DeleteWorkoutFromWorkoutPlanAsync(int workoutId, int workoutPlanId)
+        {
+            try
+            {
+                logger?.LogInformation("Querying workoutPlan");
+                var workoutPlan = await dbContext.WorkoutPlans.Include(w => w.Workouts).FirstOrDefaultAsync(x => x.Id == workoutPlanId);
+                if (workoutPlan != null)
+                {
+                    logger?.LogInformation("found workoutPlan, getting workout to delete");
+                    var workout = await dbContext.Workouts.Where(x => x.Id == workoutId).FirstOrDefaultAsync();
+                    if (workout != null)
+                    {
+                        logger?.LogInformation("found workout, deleting workout from workout plan");
+                        workoutPlan.Workouts.Remove(workout);
+                        dbContext.SaveChanges();
+                        logger?.LogInformation("Done");
+                        return (true, workoutPlan, null);
+                    }
+                    return (false, null, "workout not found");
+                }
+                return (false, null, "workout plan not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
+        }
+
         public async Task<(bool IsSuccess, WorkoutPlan? WorkoutPlan, string? ErrorMessage)> GetWorkoutPlanByNameAsync(string name)
         {
             try

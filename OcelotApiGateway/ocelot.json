@@ -9,7 +9,7 @@
       // ////////////////////////////////////////////////
       //  USER
       // ////////////////////////////////////////////////
-      
+
       "UpstreamPathTemplate": "/users",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamPathTemplate": "/users",
@@ -101,7 +101,7 @@
     // ////////////////////////////////////////////////
     //  EXERCISE
     // ////////////////////////////////////////////////
-    
+
     {
       "UpstreamPathTemplate": "/exercises",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
@@ -309,6 +309,18 @@
         "Type": "LeastConnection"
       }
     },
+    {
+      "UpstreamPathTemplate": "/workoutPlans/deleteWorkoutFromPlan/{workoutId}/{workoutPlanId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/workoutPlans/deleteWorkoutFromPlan/{workoutId}/{workoutPlanId}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "workoutplan-service",
+      "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+
 
     // ////////////////////////////////////////////////
     //  CHALLENGE

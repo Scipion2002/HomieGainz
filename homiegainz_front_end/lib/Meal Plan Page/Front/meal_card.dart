@@ -79,8 +79,8 @@ class _MealCardState extends State<MealCard> {
               ),
             ),
             Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
               child: Text(
                 widget.mealName,
                 style: const TextStyle(
@@ -91,34 +91,12 @@ class _MealCardState extends State<MealCard> {
             ),
             Container(
               alignment: Alignment.center,
-              child: Row(children: [
+                margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
+              child: Row(children: const [
                 Expanded(
                   flex: 1,
-                  child: IconButton(
-                    icon: Icon(!widget.isAdded
-                        ? Icons.add
-                        : FontAwesomeIcons.minus),
-                    onPressed: () {
-                      setState(() {
-                        widget.isAdded = !widget.isAdded;
-                      });
-
-                      // if (widget.isAdded) {
-                      //   requests
-                      //       .makeGetRequest(
-                      //       "http://10.0.2.2:8888/meal/save/${widget.mealID}/${globals.username}")
-                      //       .then((value) {
-                      //   });
-                      // } else {
-                      //   requests
-                      //       .makeGetRequest(
-                      //       "http://10.0.2.2:8888/meal/unsave/${widget.mealID}/${globals.username}")
-                      //       .then((value) {
-                      //   });
-                      // }
-                    },
-                  ),
-                ),
+                  child: Text("", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
+                )
               ]),
             ),
           ],
