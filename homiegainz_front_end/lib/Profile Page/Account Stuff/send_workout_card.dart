@@ -1,19 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:homiegainz_front_end/Profile%20Page/Account%20Stuff/send_challenge_page.dart';
-import 'package:page_transition/page_transition.dart';
+import 'dart:convert';
 
-class FriendCard extends StatefulWidget {
-  FriendCard({Key? key, this.userId = 0, this.username = 'Rxittles'})
+import 'package:flutter/material.dart';
+import '../../../util/requests.dart';
+import '../../../util/globals.dart' as globals;
+
+class SendWorkoutCard extends StatefulWidget {
+  SendWorkoutCard({Key? key, this.userId = 0, this.workoutId = 0, this.workoutName = ""})
       : super(key: key);
 
   int userId;
-  String username;
+  int workoutId;
+  String workoutName;
 
   @override
-  State<FriendCard> createState() => _FriendCardState();
+  State<SendWorkoutCard> createState() => _SendWorkoutCardState();
 }
 
-class _FriendCardState extends State<FriendCard> {
+class _SendWorkoutCardState extends State<SendWorkoutCard> {
+  Requests requests = Requests();
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -34,7 +39,7 @@ class _FriendCardState extends State<FriendCard> {
                   child: Row(
                     children: [
                       Text(
-                        widget.username,
+                        widget.workoutName,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -42,16 +47,10 @@ class _FriendCardState extends State<FriendCard> {
                       ),
                       const Spacer(),
                       IconButton(
-                        icon: const Icon(Icons.keyboard_double_arrow_right_outlined),
+                        icon: const Icon(Icons.send),
                         alignment: Alignment.centerLeft,
                         onPressed: () async {
-
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: SendChallengePage(userId: widget.userId,)),
-                          );
+                          requests.makeGetRequestWithAuth("http://10.0.2.2:9000/challenges/sendChallengeRequest/${globals.userID}/${widget.userId}/${widget.workoutId}", globals.username, globals.password);
                         },
                       ),
                     ],

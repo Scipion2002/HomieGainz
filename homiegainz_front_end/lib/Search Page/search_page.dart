@@ -156,8 +156,6 @@ class _SearchPageState extends State<SearchPage>
   void showData(filter, value) {
     LinkedHashMap<String, dynamic> data = json.decode(value);
 
-    print(data);
-
     switch(filter){
       case "workout":
         setState(() {
