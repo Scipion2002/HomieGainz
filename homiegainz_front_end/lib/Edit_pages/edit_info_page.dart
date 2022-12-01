@@ -62,6 +62,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
                           "id": globals.userID,
                           "username": globals.username,
                           "email": globals.email,
+                          "password": globals.password
                         };
                         print(requestBody);
                         switch (widget.editProfileInfo) {
