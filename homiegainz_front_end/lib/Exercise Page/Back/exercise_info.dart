@@ -25,21 +25,36 @@ class ExerciseInfo extends StatelessWidget {
         child: Column(
           children: [
             const ToPrevPage(),
-            Text(exerciseName,
-                style:
-                    const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-            Text(
-              description,
-              style: const TextStyle(fontSize: 15),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(exerciseName,
+                  style: const TextStyle(
+                      fontSize: 35, fontWeight: FontWeight.bold)),
             ),
-            Text(
-              "Muscle Targeted: $targetMuscle",
-              style: const TextStyle(fontSize: 20),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(
+                description,
+                style: const TextStyle(fontSize: 15),
+              ),
             ),
-            Text("Amount of sets: $setAmt",
-                style: const TextStyle(fontSize: 20)),
-            Text("Amount of repetitions: $repAmt",
-                style: const TextStyle(fontSize: 20)),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(
+                "Muscle Targeted: $targetMuscle",
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text("Amount of sets: $setAmt",
+                  style: const TextStyle(fontSize: 20)),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text("Amount of repetitions: $repAmt",
+                  style: const TextStyle(fontSize: 20)),
+            ),
           ],
         ),
       ),

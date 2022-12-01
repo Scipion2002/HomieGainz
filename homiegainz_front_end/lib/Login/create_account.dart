@@ -49,10 +49,10 @@ class CreateAccount extends StatelessWidget {
                   prefixIcon:
                       Icon(Icons.account_circle_outlined, color: Colors.grey),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.tealAccent),
+                    borderSide: BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   hintText: 'Enter Username...',
                   labelText: 'Enter Username',
                   labelStyle: TextStyle(color: Colors.grey)),
@@ -64,10 +64,10 @@ class CreateAccount extends StatelessWidget {
               decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email, color: Colors.grey),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.tealAccent),
+                    borderSide: BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   hintText: 'Enter Email...',
                   labelText: 'Enter Email',
                   labelStyle: TextStyle(color: Colors.grey)),
@@ -80,10 +80,10 @@ class CreateAccount extends StatelessWidget {
                             prefixIcon:
                             Icon(FontAwesomeIcons.weightScale, color: Colors.grey),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.tealAccent),
+                              borderSide: BorderSide(color: Colors.green),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+                                borderSide: BorderSide(color: Colors.blue)),
                             hintText: 'Enter Weight...',
                             labelText: 'Enter Weight',
                             labelStyle: TextStyle(color: Colors.grey)),
@@ -96,10 +96,10 @@ class CreateAccount extends StatelessWidget {
                             prefixIcon:
                             Icon(FontAwesomeIcons.ruler, color: Colors.grey),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.tealAccent),
+                              borderSide: BorderSide(color: Colors.green),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey)),
+                                borderSide: BorderSide(color: Colors.blue)),
                             hintText: 'Enter Height...',
                             labelText: 'Enter Height',
                             labelStyle: TextStyle(color: Colors.grey)),
@@ -112,10 +112,10 @@ class CreateAccount extends StatelessWidget {
                   prefixIcon:
                       Icon(Icons.calendar_today_outlined, color: Colors.grey),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.tealAccent),
+                    borderSide: BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   hintText: 'Enter Age...',
                   labelText: 'Enter Age',
                   labelStyle: TextStyle(color: Colors.grey)),
@@ -127,10 +127,10 @@ class CreateAccount extends StatelessWidget {
               obscureText: true,
               decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.tealAccent),
+                    borderSide: BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
                   hintText: 'Enter Password...',
                   labelText: 'Enter Password',
@@ -143,10 +143,10 @@ class CreateAccount extends StatelessWidget {
               controller: _confirmPasswordController,
               decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.tealAccent),
+                    borderSide: BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
                   hintText: 'Confirm Password...',
                   labelText: 'Confirm Password',
@@ -157,7 +157,7 @@ class CreateAccount extends StatelessWidget {
             alignment: Alignment.center,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.tealAccent, // background
+                  backgroundColor: Colors.blue, // background
                 ),
                 onPressed: () {
                   // Checking to see if form is complete
