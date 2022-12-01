@@ -81,7 +81,7 @@ class Requests {
   }
 
   Future<String> makeDeleteRequestWithAuth(
-      String url, Map<String, dynamic> requestBody, String username,
+      String url, String username,
       String password) async {
         String basicAuth =
         'Basic ${base64.encode(utf8.encode('$username:$password'))}';
@@ -92,7 +92,7 @@ class Requests {
       HttpHeaders.authorizationHeader: basicAuth
     };
     Response response = await delete(requestLink,
-        headers: headers, body: json.encode(requestBody));
+        headers: headers);
 
     return response.body;
   }

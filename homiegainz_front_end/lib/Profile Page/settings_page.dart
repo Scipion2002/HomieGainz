@@ -109,12 +109,9 @@ class _SettingsPage extends State<SettingsPage> {
                         style: TextStyle(fontSize: 15, color: Colors.black),
                       ),
                       onPressed: () {
-                        Random random = Random();
-                        int authenticationCode =
-                            random.nextInt(900000) + 100000;
-                        requests.makePostRequest(
-                            "http://10.0.2.2:8888/users/forgotPassword/",
-                            {"authCode": authenticationCode}).then((value) {
+
+                        requests.makeDeleteRequestWithAuth( "http://10.0.2.2:9000/users/${globals.userID}", globals.username, globals.password)
+                            .then((value) {
                           Navigator.push(
                               context,
                               PageTransition(

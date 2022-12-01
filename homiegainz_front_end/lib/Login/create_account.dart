@@ -204,13 +204,9 @@ class CreateAccount extends StatelessWidget {
                       requests
                           .makePostRequest("http://10.0.2.2:9000/users", newUser)
                       .then((value) {
-                        print(json.decode(value));
                         globals.userID = json.decode(value)['id'];
                         globals.username = json.decode(value)['username'];
                         globals.password = json.decode(value)['password'];
-                        print(globals.userID);
-                        print(globals.username);
-                        print(globals.password);
                       });
 
                       Navigator.of(context).pushAndRemoveUntil(
