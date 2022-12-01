@@ -122,13 +122,10 @@ namespace HomieGainz.Api.Users.Services
                     logger?.LogInformation("Found User, updating now");
                     oldUser.User.Username = updatedUser.Username;
                     oldUser.User.Password = updatedUser.Password;
-                    oldUser.User.Weight = updatedUser.Weight;
-                    oldUser.User.Height = updatedUser.Height;
-                    oldUser.User.MealPlan = updatedUser.MealPlan;
-                    oldUser.User.WorkoutPlan = updatedUser.WorkoutPlan;
+                    oldUser.User.Email = updatedUser.Email;
                     dbContext?.SaveChanges();
                     logger?.LogInformation("User updated");
-                    return (true, updatedUser, null);
+                    return (true, oldUser.User, null);
                 }
                 return (false, null, "User not Found");
             }

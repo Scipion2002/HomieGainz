@@ -74,7 +74,9 @@ class _MealAppBar extends State<FriendAppBar> {
                             child: FutureBuilder<String>(
                                 future: getFriendList,
                                 builder: (context, snapshot) {
-                                  print(snapshot.data);
+                                  if(snapshot.data == "Not Found"){
+                                    return const Text('You have no friends at the moment, go to the search page and send a friend request to someone! :)');
+                                  }
                                   if (snapshot.hasData) {
                                     userFriendList.clear();
                                     List<dynamic> friends =

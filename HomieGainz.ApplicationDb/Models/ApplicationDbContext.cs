@@ -84,7 +84,8 @@ namespace HomieGainz.ApplicationDb.Db
                {
                    Id = 6,
                    Name = "Chicken Chipotle Salad",
-                   Description = "Chicken breast, Chipotle sauce, Salad",
+                   Description = "Cool chicken Chipotle salad that is nice and easy to make", 
+                   IngredientList = "Chicken breast, Chipotle sauce, Salad",
                    Directions = "cook that chicken while putting the salad on a bowl, add the sauce. After all that, cut the chicken breast into square pieces and place them on top of the salad. Done!"
                });
 

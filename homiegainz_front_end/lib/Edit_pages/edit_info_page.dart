@@ -59,39 +59,27 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     onPressed: () async {
                       if (messageController.text != '') {
                         Map<String, dynamic> requestBody = {
-                          "Id": globals.userID,
-                          "Username": globals.username,
-                          "Password": globals.password,
-                          "Age": globals.age,
-                          "email": globals.email
+                          "id": globals.userID,
+                          "username": globals.username,
+                          "email": globals.email,
                         };
                         print(requestBody);
                         switch (widget.editProfileInfo) {
                           case "Username":
-                            requestBody["Username"] = messageController.text;
+                            requestBody["username"] = messageController.text;
                             break;
                           case "Email":
-                            requestBody["Email"] = messageController.text;
+                            requestBody["email"] = messageController.text;
                             break;
                         }
-                        // requests.makePutRequest(
-                        //     "http://10.0.2.2:8888/users/updateUser/", {
-                        //   "email": globals.email,
-                        //   "updateFields": requestBody
-                        // }).then((value) {
-                        //   print(value);
-                        //     requests
-                        //       .makeGetRequest(
-                        //           "http://10.0.2.2:8888/users/getUser/${json.decode(value)["result"]["Id"]}")
-                        //       .then((value) {
-                        //     globals.username =
-                        //         json.decode(value)["name"];
-                        //     globals.email =
-                        //         json.decode(value)["email"];
-                        //     globals.age =
-                        //         json.decode(value)["Age"];
-                        //   });
-                        // });
+                        requests.makePutRequestWithAuth(
+                            "http://10.0.2.2:9000/users", requestBody, globals.username, globals.password).then((value) {
+
+                            globals.username =
+                                json.decode(value)["username"];
+                            globals.email =
+                                json.decode(value)["email"];
+                          });
                         Navigator.of(context).pop();
                         await showDialog<void>(
                             context: context,

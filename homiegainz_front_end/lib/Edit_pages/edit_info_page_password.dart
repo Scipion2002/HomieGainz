@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../../../util/requests.dart';
 import '../../../util/to_prev_page.dart';
@@ -15,7 +17,7 @@ class EditInfoPagePassword extends StatelessWidget {
     Requests requests = Requests();
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: SingleChildScrollView(child: Column(
           children: [
             const ToPrevPage(),
             const Center(
@@ -73,7 +75,7 @@ class EditInfoPagePassword extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Old password was not correct'),
                               content:
-                                  const Text('Your old password did not match'),
+                              const Text('Your old password did not match'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -107,28 +109,23 @@ class EditInfoPagePassword extends StatelessWidget {
                         );
                       } else {
                         Map<String, dynamic> requestBody = {
-                          "updateFields": {
-                            "Id": globals.userID,
-                            "Username": globals.username,
-                            "Password": newPasswordController.text,
-                            "Age": globals.age
-                          }
+                          "id": globals.userID,
+                          "username": globals.username,
+                          "email": globals.email,
+                          "password": newPasswordController.text,
                         };
-                        print(requestBody);
-                        // requests
-                        //     .makePutRequest(
-                        //         "http://10.0.2.2:8888/users/updateUser/",
-                        //         requestBody)
-                        //     .then((value) {
-                        //   print(value);
-                        // });
+                        requests.makePutRequestWithAuth(
+                            "http://10.0.2.2:9000/users", requestBody, globals.username, globals.password).then((value) {
+                          globals.password =
+                          json.decode(value)["password"];
+                        });
                         await showDialog<void>(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: const Text('Password has been Edited'),
                               content:
-                                  const Text('Your password has been changed'),
+                              const Text('Your password has been changed'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -173,7 +170,7 @@ class EditInfoPagePassword extends StatelessWidget {
                   )),
             ),
           ],
-        ),
+        ),)
       ),
     );
   }
