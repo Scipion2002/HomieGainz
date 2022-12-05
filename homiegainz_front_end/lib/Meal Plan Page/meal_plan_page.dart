@@ -34,7 +34,6 @@ class _MealPlanPageState extends State<MealPlanPage> {
                 userMeals.clear();
 
                 LinkedHashMap<String, dynamic> mealInformation = json.decode(snapshot.data!);
-                print(mealInformation);
 
                 List<dynamic> meals = mealInformation["meals"];
 
@@ -42,6 +41,7 @@ class _MealPlanPageState extends State<MealPlanPage> {
                   userMeals.add(MealCard(
                     mealID: meal["id"],
                     mealName: meal["name"],
+                    imageUrl: meal["imgLink"],
                     description: meal["description"],
                     ingredients: meal["ingredientList"],
                     directions: meal["directions"],

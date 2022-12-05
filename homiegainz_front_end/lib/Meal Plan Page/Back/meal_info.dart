@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../util/to_prev_page.dart';
 
-class MealInfo extends StatelessWidget {
+class MealInfo extends StatefulWidget {
   const MealInfo({
     Key? key,
     this.imageUrl =
@@ -14,7 +14,7 @@ class MealInfo extends StatelessWidget {
     this.directions = "",
   }) : super(key: key);
 
-  final String imageUrl;
+  final String? imageUrl;
   final String mealName;
   final String description;
   final int mealID;
@@ -22,41 +22,89 @@ class MealInfo extends StatelessWidget {
   final String directions;
 
   @override
+  State<MealInfo> createState() => _MealInfoState();
+}
+
+class _MealInfoState extends State<MealInfo> {
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const ToPrevPage(),
-                Text(mealName,
-                    style:
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const ToPrevPage(),
+            Text(widget.mealName,
+                style:
                     const TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-                Card(
-                  margin: const EdgeInsets.all(10),
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    child: Image.network(
-                      imageUrl,
-                      width: 350,
-                      height: 275,
-                      fit: BoxFit.cover,
-                    ),
+            if (widget.imageUrl != null)
+              Card(
+                margin: const EdgeInsets.all(10),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Image.network(
+                    widget.imageUrl!,
+                    width: 350,
+                    height: 275,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Description", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
-                Container(margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), child: Text(description, style: const TextStyle(fontSize: 15)),),
-                Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Ingredients", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
-                Container(margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), child: Text(ingredients, style: const TextStyle(fontSize: 15)),),
-                Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Directions", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
-                Container(margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), child: Text(directions, style: const TextStyle(fontSize: 15)),),
-              ],
+              ),
+
+            if (widget.imageUrl == null)
+              Card(
+                margin: const EdgeInsets.all(10),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: Image(
+                    image: AssetImage("assets/images/HomieGainzImg.png"),
+                    width: 350,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: const Text("Description",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
-          ),
-        ));
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(widget.description, style: const TextStyle(fontSize: 15)),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: const Text("Ingredients",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(widget.ingredients, style: const TextStyle(fontSize: 15)),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: const Text("Directions",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: Text(widget.directions, style: const TextStyle(fontSize: 15)),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }

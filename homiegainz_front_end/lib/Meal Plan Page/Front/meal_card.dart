@@ -18,7 +18,7 @@ class MealCard extends StatefulWidget {
       this.isAdded = false})
       : super(key: key);
 
-  final String imageUrl;
+  final String? imageUrl;
   final String mealName;
   final String description;
   final int mealID;
@@ -53,7 +53,7 @@ class _MealCardState extends State<MealCard> {
                   : EditMealPage(
                   mealName: widget.mealName,
                   description: widget.description,
-                  imageUrl: widget.imageUrl,
+                  imageUrl: widget.imageUrl!,
                   ingredients: widget.ingredients,
                   directions: widget.directions
               ),
@@ -67,17 +67,31 @@ class _MealCardState extends State<MealCard> {
         ),
         child: Column(
           children: [
+            if(widget.imageUrl != null)
             ClipRRect(
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10)),
               child: Image.network(
-                widget.imageUrl,
+                widget.imageUrl!,
                 width: 350,
                 height: 150,
                 fit: BoxFit.cover,
               ),
             ),
+
+            if(widget.imageUrl == null)
+              const ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: Image(
+                  image: AssetImage("assets/images/HomieGainzImg.png"),
+                  width: 350,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 5, bottom: 5),
