@@ -74,8 +74,8 @@ class _MealAppBar extends State<FriendAppBar> {
                             child: FutureBuilder<String>(
                                 future: getFriendList,
                                 builder: (context, snapshot) {
-                                  if(snapshot.data == "Not Found"){
-                                    return const Text('You have no friends at the moment, go to the search page and send a friend request to someone! :)');
+                                  if (snapshot.data == "Not Found") {
+                                    return Container(alignment: Alignment.center, margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text('You have no friends at the moment, go to the search page and send a friend request to someone! :)', style: TextStyle(fontSize: 15),),);
                                   }
                                   if (snapshot.hasData) {
                                     userFriendList.clear();
@@ -119,8 +119,16 @@ class _MealAppBar extends State<FriendAppBar> {
                             child: FutureBuilder<String>(
                                 future: getFriendRequestsList,
                                 builder: (context, snapshot) {
-                                  if(snapshot.data == ""){
-                                    return const Text('you have no Friendships :(');
+                                  if (snapshot.data == "") {
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      child: const Text(
+                                        "You have no friend requests",
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                    );
                                   }
                                   if (snapshot.hasData) {
                                     userFriendRequests.clear();
@@ -160,8 +168,16 @@ class _MealAppBar extends State<FriendAppBar> {
                     child: FutureBuilder<String>(
                         future: getChallengeRequestsList,
                         builder: (context, snapshot) {
-                          if(snapshot.data == ""){
-                            return const Text('you have no Challenges :(');
+                          if (snapshot.data == "") {
+                            return Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              child: const Text(
+                                "You have no challenge requests",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            );
                           }
                           if (snapshot.hasData) {
                             userChallengeRequests.clear();
@@ -180,7 +196,6 @@ class _MealAppBar extends State<FriendAppBar> {
                               children: userChallengeRequests,
                             );
                           } else if (snapshot.hasError) {
-
                             return Text('');
                           }
 

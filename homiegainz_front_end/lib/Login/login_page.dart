@@ -101,7 +101,6 @@ class LoginPage extends StatelessWidget {
                                         "http://10.0.2.2:9000/users/login/${_usernameController.text}/${_passwordController.text}")
                                         .then((value){
                                           try{
-                                            print(json.decode(value));
                                             if(value.contains("true")){
                                               globals.isLoggedIn = true;
                                               requests
