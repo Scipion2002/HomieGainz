@@ -40,17 +40,16 @@ class _WorkoutPlanPageState extends State<WorkoutPlanPage> {
                       LinkedHashMap<String, dynamic> workoutInformation =
                           json.decode(snapshot.data!);
 
-                      List<dynamic> workouts =
-                          workoutInformation["workouts"];
+                      List<dynamic> workouts = workoutInformation["workouts"];
 
                       for (var workout in workouts) {
-
-                            userWorkouts.add(WorkoutCard(
-                              workoutID: workout["id"],
-                              workoutName: workout["name"],
-                              exercises: workout["exercises"],
-                              isAdded: true,
-                            ));
+                        userWorkouts.add(WorkoutCard(
+                          workoutID: workout["id"],
+                          imageUrl: workout["imageUrl"],
+                          workoutName: workout["name"],
+                          exercises: workout["exercises"],
+                          isAdded: true,
+                        ));
                       }
                       return Column(children: userWorkouts);
                     } else if (snapshot.hasError) {

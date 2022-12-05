@@ -32,27 +32,35 @@ class ExerciseInfo extends StatelessWidget {
                       fontSize: 35, fontWeight: FontWeight.bold)),
             ),
             Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: const Text("Description",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
+            Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: Text(
                 description,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
+            Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Muscle Targeted", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: Text(
-                "Muscle Targeted: $targetMuscle",
+                targetMuscle,
                 style: const TextStyle(fontSize: 20),
               ),
             ),
+            Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Amount of sets", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              child: Text("Amount of sets: $setAmt",
+              child: Text("$setAmt",
                   style: const TextStyle(fontSize: 20)),
             ),
+            Container(margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10), child: const Text("Amount of repetitions", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              child: Text("Amount of repetitions: $repAmt",
+              child: Text("$repAmt",
                   style: const TextStyle(fontSize: 20)),
             ),
           ],

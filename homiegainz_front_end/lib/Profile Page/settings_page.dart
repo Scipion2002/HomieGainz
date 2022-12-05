@@ -109,7 +109,6 @@ class _SettingsPage extends State<SettingsPage> {
                         style: TextStyle(fontSize: 15, color: Colors.black),
                       ),
                       onPressed: () {
-
                         requests.makeDeleteRequestWithAuth( "http://10.0.2.2:9000/users/${globals.userID}", globals.username, globals.password)
                             .then((value) {
                           Navigator.push(

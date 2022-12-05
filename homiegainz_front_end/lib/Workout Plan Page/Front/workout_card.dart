@@ -16,7 +16,7 @@ class WorkoutCard extends StatefulWidget {
     this.beingEdited = false,
     this.isAdded = false}) : super(key: key);
 
-  final String imageUrl;
+   String? imageUrl;
   final String workoutName;
   final int workoutID;
   final List<dynamic> exercises;
@@ -47,7 +47,7 @@ class _WorkoutCardState extends State<WorkoutCard> {
                     : EditWorkoutPage(
                   workoutName: widget.workoutName,
                   exercises: widget.exercises,
-                  imgUrl: widget.imageUrl,
+                  imgUrl: widget.imageUrl!,
                 ),
             ));
       },
@@ -59,17 +59,32 @@ class _WorkoutCardState extends State<WorkoutCard> {
         ),
         child: Column(
           children: [
+            if(widget.imageUrl != null)
             ClipRRect(
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10)),
               child: Image.network(
-                widget.imageUrl,
+                widget.imageUrl!,
                 width: 350,
                 height: 150,
                 fit: BoxFit.cover,
               ),
             ),
+
+            if(widget.imageUrl == null)
+              const ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: Image(
+                  image: AssetImage("assets/images/HomieGainzImg.png"),
+                  width: 350,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
             Container(
               margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
               child: Center(child: Text(
